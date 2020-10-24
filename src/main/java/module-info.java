@@ -1,8 +1,8 @@
 module main {
-  requires javafx.controls;
+    requires javafx.controls;
 
-  opens cz.vse.java.cutm01.adventure.main to
-      javafx.fxml;
+    opens cz.vse.java.cutm01.adventure.main to
+        javafx.fxml;
 
-  exports cz.vse.java.cutm01.adventure.main;
+    exports cz.vse.java.cutm01.adventure.main;
 }

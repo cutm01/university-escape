@@ -9,26 +9,26 @@ package cz.vse.java.cutm01.adventure.gamelogic;
  */
 interface Command {
 
-  /**
-   * Metoda vrací název příkazu (slovo které používá hráč pro jeho vyvolání)
-   *
-   * @return nazev prikazu
-   */
-  String getCommandName();
+    /**
+     * Metoda vrací název příkazu (slovo které používá hráč pro jeho vyvolání)
+     *
+     * @return nazev prikazu
+     */
+    String getCommandName();
 
-  /**
-   * Method is used to show proper usage of command, i.e which and how many parameters it takes
-   *
-   * @return description with proper usage of command
-   */
-  String getCommandDescription();
+    /**
+     * Method is used to show proper usage of command, i.e which and how many parameters it takes
+     *
+     * @return description with proper usage of command
+     */
+    String getCommandDescription();
 
-  /**
-   * Metoda pro provedení příkazu ve hře. Počet parametrů je závislý na konkrétním příkazu, např.
-   * příkazy konec a napoveda nemají parametry příkazy jdi, seber, polož mají jeden parametr příkaz
-   * pouzij může mít dva parametry.
-   *
-   * @param commandParameters počet parametrů závisí na konkrétním příkazu.
-   */
-  String executeCommand(String... commandParameters);
+    /**
+     * Metoda pro provedení příkazu ve hře. Počet parametrů je závislý na konkrétním příkazu, např.
+     * příkazy konec a napoveda nemají parametry příkazy jdi, seber, polož mají jeden parametr
+     * příkaz pouzij může mít dva parametry.
+     *
+     * @param commandParameters počet parametrů závisí na konkrétním příkazu.
+     */
+    String executeCommand(String... commandParameters);
 }

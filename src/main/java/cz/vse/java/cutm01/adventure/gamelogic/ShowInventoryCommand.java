@@ -9,33 +9,34 @@ package cz.vse.java.cutm01.adventure.gamelogic;
  * @version spring semester 2019/2020
  */
 class ShowInventoryCommand implements Command {
-  private static final String NAME = CommandName.SHOW_INVENTORY.getCommandName();
-  private static final String DESCRIPTION =
-      CommandDescription.SHOW_INVENTORY.getCommandDescription();
-  private final GamePlan gamePlan;
 
-  public ShowInventoryCommand(GamePlan gamePlan) {
-    this.gamePlan = gamePlan;
-  }
+    private static final String NAME = CommandName.SHOW_INVENTORY.getCommandName();
+    private static final String DESCRIPTION =
+        CommandDescription.SHOW_INVENTORY.getCommandDescription();
+    private final GamePlan gamePlan;
 
-  @Override
-  public String getCommandName() {
-    return NAME;
-  }
-
-  @Override
-  public String getCommandDescription() {
-    return DESCRIPTION;
-  }
-
-  @Override
-  public String executeCommand(String... commandParameters) {
-    if (commandParameters.length > 0) {
-      return "Chceš ukázať obsah batohu, pochopil som to správne? Nech sa ti páči,\n"
-          + "a nabudúce to skús, prosím ťa, bez tých zbytočných rečí okolo:\n"
-          + gamePlan.getPlayer().getInventory().getInventoryContent();
+    public ShowInventoryCommand(GamePlan gamePlan) {
+        this.gamePlan = gamePlan;
     }
 
-    return gamePlan.getPlayer().getInventory().getInventoryContent();
-  }
+    @Override
+    public String getCommandName() {
+        return NAME;
+    }
+
+    @Override
+    public String getCommandDescription() {
+        return DESCRIPTION;
+    }
+
+    @Override
+    public String executeCommand(String... commandParameters) {
+        if (commandParameters.length > 0) {
+            return "Chceš ukázať obsah batohu, pochopil som to správne? Nech sa ti páči,\n"
+                   + "a nabudúce to skús, prosím ťa, bez tých zbytočných rečí okolo:\n"
+                   + gamePlan.getPlayer().getInventory().getInventoryContent();
+        }
+
+        return gamePlan.getPlayer().getInventory().getInventoryContent();
+    }
 }

@@ -8,19 +8,20 @@ package cz.vse.java.cutm01.adventure.gamelogic;
  * @version spring semester 2019/2020
  */
 class NonPlayerCharacter extends InteractableObject {
-  private final String name;
-  private final String speech;
 
-  public NonPlayerCharacter(String nameDefinedInEnum) {
-    this.name = NonPlayerCharacterName.getNonPlayerCharacterName(nameDefinedInEnum);
-    this.speech = NonPlayerCharacterSpeech.getNonPlayerCharacterSpeech(nameDefinedInEnum);
-  }
+    private final String name;
+    private final String speech;
 
-  public String getName() {
-    return name;
-  }
+    public NonPlayerCharacter(String nameDefinedInEnum) {
+        this.name = NonPlayerCharacterName.getNonPlayerCharacterName(nameDefinedInEnum);
+        this.speech = NonPlayerCharacterSpeech.getNonPlayerCharacterSpeech(nameDefinedInEnum);
+    }
 
-  public String getSpeech() {
-    return speech;
-  }
+    public String getName() {
+        return name;
+    }
+
+    public String getSpeech() {
+        return speech;
+    }
 }

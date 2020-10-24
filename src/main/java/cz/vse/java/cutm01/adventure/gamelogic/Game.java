@@ -9,50 +9,51 @@ package cz.vse.java.cutm01.adventure.gamelogic;
  * @version pro školní rok 2016/2017
  */
 public interface Game {
-  // == VEŘEJNÉ KONSTANTY =====================================================
-  // == DEKLAROVANÉ METODY ====================================================
+    // == VEŘEJNÉ KONSTANTY =====================================================
+    // == DEKLAROVANÉ METODY ====================================================
 
-  /**
-   * Vrátí úvodní zprávu pro hráče.
-   *
-   * @return vrací se řetězec, který se má vypsat na obrazovku
-   */
-  String getPrologue();
+    /**
+     * Vrátí úvodní zprávu pro hráče.
+     *
+     * @return vrací se řetězec, který se má vypsat na obrazovku
+     */
+    String getPrologue();
 
-  /**
-   * Vrátí závěrečnou zprávu pro hráče.
-   *
-   * @return vrací se řetězec, který se má vypsat na obrazovku
-   */
-  String getGameEnding();
+    /**
+     * Vrátí závěrečnou zprávu pro hráče.
+     *
+     * @return vrací se řetězec, který se má vypsat na obrazovku
+     */
+    String getGameEnding();
 
-  /**
-   * Vrací informaci o tom, zda hra již skončila, je jedno zda výhrou, prohrou nebo příkazem konec.
-   *
-   * @return vrací true, pokud hra skončila
-   */
-  boolean isGameOver();
+    /**
+     * Vrací informaci o tom, zda hra již skončila, je jedno zda výhrou, prohrou nebo příkazem
+     * konec.
+     *
+     * @return vrací true, pokud hra skončila
+     */
+    boolean isGameOver();
 
-  /**
-   * Metoda zpracuje řetězec uvedený jako parametr, rozdělí ho na slovo příkazu a další parametry.
-   * Pak otestuje zda příkaz je klíčovým slovem např. jdi. Pokud ano spustí samotné provádění
-   * příkazu.
-   *
-   * @param userInput text, který zadal uživatel jako příkaz do hry.
-   * @return vrací se řetězec, který se má vypsat na obrazovku
-   */
-  String parseUserInput(String userInput);
+    /**
+     * Metoda zpracuje řetězec uvedený jako parametr, rozdělí ho na slovo příkazu a další parametry.
+     * Pak otestuje zda příkaz je klíčovým slovem např. jdi. Pokud ano spustí samotné provádění
+     * příkazu.
+     *
+     * @param userInput text, který zadal uživatel jako příkaz do hry.
+     * @return vrací se řetězec, který se má vypsat na obrazovku
+     */
+    String parseUserInput(String userInput);
 
-  /**
-   * Metoda vrátí odkaz na herní plán, je využita hlavně v testech, kde se jejím prostřednictvím
-   * získává aktualní místnost hry.
-   *
-   * @return odkaz na herní plán
-   */
-  GamePlan getGamePlan();
+    /**
+     * Metoda vrátí odkaz na herní plán, je využita hlavně v testech, kde se jejím prostřednictvím
+     * získává aktualní místnost hry.
+     *
+     * @return odkaz na herní plán
+     */
+    GamePlan getGamePlan();
 
-  boolean getWasGameTerminatedUsingEndGameCommand();
+    boolean getWasGameTerminatedUsingEndGameCommand();
 
-  // == ZDĚDĚNÉ METODY ========================================================
-  // == INTERNÍ DATOVÉ TYPY ===================================================
+    // == ZDĚDĚNÉ METODY ========================================================
+    // == INTERNÍ DATOVÉ TYPY ===================================================
 }

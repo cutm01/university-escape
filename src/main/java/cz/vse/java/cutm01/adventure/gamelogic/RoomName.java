@@ -10,35 +10,35 @@ import java.util.Map;
  * @version spring semester 2019/2020
  */
 public enum RoomName {
-  RB_201("RB_201"),
-  RB_202("RB_202"),
-  FIRST_FLOOR_HALL("chodba_na_I._poschodi"),
-  SECOND_FLOOR_HALL("chodba_na_II._poschodi"),
-  TOILETS("toalety"),
-  OFFICE("kancelaria"),
-  DRESSING_ROOM("satna"),
-  NEW_BUILDING("Nova_budova"),
-  OLD_BUILDING("Stara_budova"),
-  CONNECTING_CORRIDOR("spojovacia_chodba"),
-  LIBRARY("kniznica"),
-  COURTYARD("dvor"),
-  LECTURE_ROOM("Vencovskeho_aula"),
-  STREET("ulica");
+    RB_201("RB_201"),
+    RB_202("RB_202"),
+    FIRST_FLOOR_HALL("chodba_na_I._poschodi"),
+    SECOND_FLOOR_HALL("chodba_na_II._poschodi"),
+    TOILETS("toalety"),
+    OFFICE("kancelaria"),
+    DRESSING_ROOM("satna"),
+    NEW_BUILDING("Nova_budova"),
+    OLD_BUILDING("Stara_budova"),
+    CONNECTING_CORRIDOR("spojovacia_chodba"),
+    LIBRARY("kniznica"),
+    COURTYARD("dvor"),
+    LECTURE_ROOM("Vencovskeho_aula"),
+    STREET("ulica");
 
-  private final String roomName;
-  private static final Map<String, String> ROOM_NAMES = new HashMap<>();
+    private final String roomName;
+    private static final Map<String, String> ROOM_NAMES = new HashMap<>();
 
-  static {
-    for (RoomName r : values()) {
-      ROOM_NAMES.put(r.toString(), r.roomName);
+    static {
+        for (RoomName r : values()) {
+            ROOM_NAMES.put(r.toString(), r.roomName);
+        }
     }
-  }
 
-  RoomName(final String roomName) {
-    this.roomName = roomName;
-  }
+    RoomName(final String roomName) {
+        this.roomName = roomName;
+    }
 
-  public static String getRoomName(String roomName) {
-    return ROOM_NAMES.get(roomName);
-  }
+    public static String getRoomName(String roomName) {
+        return ROOM_NAMES.get(roomName);
+    }
 }

@@ -11,25 +11,25 @@ import java.util.Map;
  * @version spring semester 2019/2020
  */
 public enum NonPlayerCharacterName {
-  CLEANING_LADY("upratovacka"),
-  COUGHING_TEACHER("podozrivo_kaslajuci_profesor"),
-  IT_ADMIN("IT_admin"),
-  DOOR_KEEPER("vratnik");
+    CLEANING_LADY("upratovacka"),
+    COUGHING_TEACHER("podozrivo_kaslajuci_profesor"),
+    IT_ADMIN("IT_admin"),
+    DOOR_KEEPER("vratnik");
 
-  private final String nonPlayerCharacterName;
-  private static final Map<String, String> NPC_NAMES = new HashMap<>();
+    private final String nonPlayerCharacterName;
+    private static final Map<String, String> NPC_NAMES = new HashMap<>();
 
-  static {
-    for (NonPlayerCharacterName npc : values()) {
-      NPC_NAMES.put(npc.toString(), npc.nonPlayerCharacterName);
+    static {
+        for (NonPlayerCharacterName npc : values()) {
+            NPC_NAMES.put(npc.toString(), npc.nonPlayerCharacterName);
+        }
     }
-  }
 
-  NonPlayerCharacterName(final String nonPlayerCharacterName) {
-    this.nonPlayerCharacterName = nonPlayerCharacterName;
-  }
+    NonPlayerCharacterName(final String nonPlayerCharacterName) {
+        this.nonPlayerCharacterName = nonPlayerCharacterName;
+    }
 
-  public static String getNonPlayerCharacterName(String characterName) {
-    return NPC_NAMES.get(characterName);
-  }
+    public static String getNonPlayerCharacterName(String characterName) {
+        return NPC_NAMES.get(characterName);
+    }
 }

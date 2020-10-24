@@ -11,28 +11,28 @@ import java.util.Map;
  * @version spring semester 2019/2020
  */
 public enum InteractableObjectName {
-  BENCH("lavicka"),
-  SNACK_VENDING_MACHINE("automat_s_jedlom"),
-  COAT_HANGER("vesiak"),
-  BOOK_SHELF("policka_s_knihami"),
-  WINDOW("okno"),
-  DESK("stol"),
-  LOCKED_DOOR("zamknute_dvere");
+    BENCH("lavicka"),
+    SNACK_VENDING_MACHINE("automat_s_jedlom"),
+    COAT_HANGER("vesiak"),
+    BOOK_SHELF("policka_s_knihami"),
+    WINDOW("okno"),
+    DESK("stol"),
+    LOCKED_DOOR("zamknute_dvere");
 
-  private final String interactableObjectName;
-  private static final Map<String, String> INTERACTABLE_OBJECTS_NAMES = new HashMap<>();
+    private final String interactableObjectName;
+    private static final Map<String, String> INTERACTABLE_OBJECTS_NAMES = new HashMap<>();
 
-  static {
-    for (InteractableObjectName o : values()) {
-      INTERACTABLE_OBJECTS_NAMES.put(o.toString(), o.interactableObjectName);
+    static {
+        for (InteractableObjectName o : values()) {
+            INTERACTABLE_OBJECTS_NAMES.put(o.toString(), o.interactableObjectName);
+        }
     }
-  }
 
-  InteractableObjectName(final String interactableObjectName) {
-    this.interactableObjectName = interactableObjectName;
-  }
+    InteractableObjectName(final String interactableObjectName) {
+        this.interactableObjectName = interactableObjectName;
+    }
 
-  public static String getInteractableObjectName(String objectName) {
-    return INTERACTABLE_OBJECTS_NAMES.get(objectName);
-  }
+    public static String getInteractableObjectName(String objectName) {
+        return INTERACTABLE_OBJECTS_NAMES.get(objectName);
+    }
 }

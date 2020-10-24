@@ -8,113 +8,114 @@ package cz.vse.java.cutm01.adventure.gamelogic;
  * @version spring semester 2019/2020
  */
 class Player {
-  private final Inventory inventory;
-  // following variables are used to show different endings to player after he reaches final room
-  private boolean isPlayerWearingMedicalMask;
-  private boolean isPlayerWearingMedicalSuit;
-  private boolean hasPlayerEscapedUsingWindow;
-  private boolean hasPlayerEscapedThroughCourtyard;
-  private boolean hasPlayerAttackedCleaningLady;
-  private boolean hasPlayerAttackedITAdmin;
-  private boolean hasPlayerAttackedDoorKeeper;
-  private boolean hasPlayerBribedDoorKeeper;
-  // set to true if player passes by coughing teacher without wearing medical mask or suit
-  private boolean hasPlayerPassedByCoughingTeacher;
 
-  // region Constructors
-  // --------------------------------------------------------------------------------
-  public Player() {
-    this.inventory = new Inventory();
-    this.isPlayerWearingMedicalMask = false;
-    this.isPlayerWearingMedicalSuit = false;
-    this.hasPlayerEscapedUsingWindow = false;
-    this.hasPlayerEscapedThroughCourtyard = false;
-    this.hasPlayerAttackedCleaningLady = false;
-    this.hasPlayerAttackedITAdmin = false;
-    this.hasPlayerAttackedDoorKeeper = false;
-    this.hasPlayerBribedDoorKeeper = false;
-    this.hasPlayerPassedByCoughingTeacher = false;
-  }
-  // --------------------------------------------------------------------------------
-  // endregion Constructors
+    private final Inventory inventory;
+    // following variables are used to show different endings to player after he reaches final room
+    private boolean isPlayerWearingMedicalMask;
+    private boolean isPlayerWearingMedicalSuit;
+    private boolean hasPlayerEscapedUsingWindow;
+    private boolean hasPlayerEscapedThroughCourtyard;
+    private boolean hasPlayerAttackedCleaningLady;
+    private boolean hasPlayerAttackedITAdmin;
+    private boolean hasPlayerAttackedDoorKeeper;
+    private boolean hasPlayerBribedDoorKeeper;
+    // set to true if player passes by coughing teacher without wearing medical mask or suit
+    private boolean hasPlayerPassedByCoughingTeacher;
 
-  public Inventory getInventory() {
-    return inventory;
-  }
+    // region Constructors
+    // --------------------------------------------------------------------------------
+    public Player() {
+        this.inventory = new Inventory();
+        this.isPlayerWearingMedicalMask = false;
+        this.isPlayerWearingMedicalSuit = false;
+        this.hasPlayerEscapedUsingWindow = false;
+        this.hasPlayerEscapedThroughCourtyard = false;
+        this.hasPlayerAttackedCleaningLady = false;
+        this.hasPlayerAttackedITAdmin = false;
+        this.hasPlayerAttackedDoorKeeper = false;
+        this.hasPlayerBribedDoorKeeper = false;
+        this.hasPlayerPassedByCoughingTeacher = false;
+    }
+    // --------------------------------------------------------------------------------
+    // endregion Constructors
 
-  // region Getter and Setters for variable alternating game ending
-  // --------------------------------------------------------------------------------
-  public boolean getIsPlayerWearingMedicalMask() {
-    return isPlayerWearingMedicalMask;
-  }
+    public Inventory getInventory() {
+        return inventory;
+    }
 
-  public void setIsPlayerWearingMedicalMask(boolean playerWearingMedicalMask) {
-    isPlayerWearingMedicalMask = playerWearingMedicalMask;
-  }
+    // region Getter and Setters for variable alternating game ending
+    // --------------------------------------------------------------------------------
+    public boolean getIsPlayerWearingMedicalMask() {
+        return isPlayerWearingMedicalMask;
+    }
 
-  public boolean getIsPlayerWearingMedicalSuit() {
-    return isPlayerWearingMedicalSuit;
-  }
+    public void setIsPlayerWearingMedicalMask(boolean playerWearingMedicalMask) {
+        isPlayerWearingMedicalMask = playerWearingMedicalMask;
+    }
 
-  public void setIsPlayerWearingMedicalSuit(boolean playerWearingMedicalSuit) {
-    isPlayerWearingMedicalSuit = playerWearingMedicalSuit;
-  }
+    public boolean getIsPlayerWearingMedicalSuit() {
+        return isPlayerWearingMedicalSuit;
+    }
 
-  public boolean getHasPlayerEscapedUsingWindow() {
-    return hasPlayerEscapedUsingWindow;
-  }
+    public void setIsPlayerWearingMedicalSuit(boolean playerWearingMedicalSuit) {
+        isPlayerWearingMedicalSuit = playerWearingMedicalSuit;
+    }
 
-  public void setHasPlayerEscapedUsingWindow(boolean hasPlayerEscapedUsingWindow) {
-    this.hasPlayerEscapedUsingWindow = hasPlayerEscapedUsingWindow;
-  }
+    public boolean getHasPlayerEscapedUsingWindow() {
+        return hasPlayerEscapedUsingWindow;
+    }
 
-  public boolean getHasPlayerEscapedThroughCourtyard() {
-    return hasPlayerEscapedThroughCourtyard;
-  }
+    public void setHasPlayerEscapedUsingWindow(boolean hasPlayerEscapedUsingWindow) {
+        this.hasPlayerEscapedUsingWindow = hasPlayerEscapedUsingWindow;
+    }
 
-  public void setHasPlayerEscapedThroughCourtyard(boolean hasPlayerEscapedThroughCourtyard) {
-    this.hasPlayerEscapedThroughCourtyard = hasPlayerEscapedThroughCourtyard;
-  }
+    public boolean getHasPlayerEscapedThroughCourtyard() {
+        return hasPlayerEscapedThroughCourtyard;
+    }
 
-  public boolean getHasPlayerAttackedCleaningLady() {
-    return hasPlayerAttackedCleaningLady;
-  }
+    public void setHasPlayerEscapedThroughCourtyard(boolean hasPlayerEscapedThroughCourtyard) {
+        this.hasPlayerEscapedThroughCourtyard = hasPlayerEscapedThroughCourtyard;
+    }
 
-  public void setHasPlayerAttackedCleaningLady(boolean hasPlayerAttackedCleaningLady) {
-    this.hasPlayerAttackedCleaningLady = hasPlayerAttackedCleaningLady;
-  }
+    public boolean getHasPlayerAttackedCleaningLady() {
+        return hasPlayerAttackedCleaningLady;
+    }
 
-  public boolean getHasPlayerAttackedITAdmin() {
-    return hasPlayerAttackedITAdmin;
-  }
+    public void setHasPlayerAttackedCleaningLady(boolean hasPlayerAttackedCleaningLady) {
+        this.hasPlayerAttackedCleaningLady = hasPlayerAttackedCleaningLady;
+    }
 
-  public void setHasPlayerAttackedITAdmin(boolean hasPlayerAttackedITAdmin) {
-    this.hasPlayerAttackedITAdmin = hasPlayerAttackedITAdmin;
-  }
+    public boolean getHasPlayerAttackedITAdmin() {
+        return hasPlayerAttackedITAdmin;
+    }
 
-  public boolean getHasPlayerAttackedDoorKeeper() {
-    return hasPlayerAttackedDoorKeeper;
-  }
+    public void setHasPlayerAttackedITAdmin(boolean hasPlayerAttackedITAdmin) {
+        this.hasPlayerAttackedITAdmin = hasPlayerAttackedITAdmin;
+    }
 
-  public void setHasPlayerAttackedDoorKeeper(boolean hasPlayerAttackedDoorKeeper) {
-    this.hasPlayerAttackedDoorKeeper = hasPlayerAttackedDoorKeeper;
-  }
+    public boolean getHasPlayerAttackedDoorKeeper() {
+        return hasPlayerAttackedDoorKeeper;
+    }
 
-  public boolean getHasPlayerBribedDoorKeeper() {
-    return hasPlayerBribedDoorKeeper;
-  }
+    public void setHasPlayerAttackedDoorKeeper(boolean hasPlayerAttackedDoorKeeper) {
+        this.hasPlayerAttackedDoorKeeper = hasPlayerAttackedDoorKeeper;
+    }
 
-  public void setHasPlayerBribedDoorKeeper(boolean hasPlayerBribedDoorKeeper) {
-    this.hasPlayerBribedDoorKeeper = hasPlayerBribedDoorKeeper;
-  }
+    public boolean getHasPlayerBribedDoorKeeper() {
+        return hasPlayerBribedDoorKeeper;
+    }
 
-  public boolean getHasPlayerPassedByCoughingTeacher() {
-    return hasPlayerPassedByCoughingTeacher;
-  }
+    public void setHasPlayerBribedDoorKeeper(boolean hasPlayerBribedDoorKeeper) {
+        this.hasPlayerBribedDoorKeeper = hasPlayerBribedDoorKeeper;
+    }
 
-  public void setHasPlayerPassedByCoughingTeacher(boolean hasPlayerPassedByCoughingTeacher) {
-    this.hasPlayerPassedByCoughingTeacher = hasPlayerPassedByCoughingTeacher;
-  }
-  // --------------------------------------------------------------------------------
-  // endregion Getter and Setters for variable alternating game ending
+    public boolean getHasPlayerPassedByCoughingTeacher() {
+        return hasPlayerPassedByCoughingTeacher;
+    }
+
+    public void setHasPlayerPassedByCoughingTeacher(boolean hasPlayerPassedByCoughingTeacher) {
+        this.hasPlayerPassedByCoughingTeacher = hasPlayerPassedByCoughingTeacher;
+    }
+    // --------------------------------------------------------------------------------
+    // endregion Getter and Setters for variable alternating game ending
 }
