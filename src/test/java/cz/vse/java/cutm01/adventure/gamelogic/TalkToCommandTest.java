@@ -2,6 +2,7 @@ package cz.vse.java.cutm01.adventure.gamelogic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -96,7 +97,7 @@ class TalkToCommandTest {
             String expectedOutput =
                 "Skús najprv pristúpiť k osobe, s ktorou sa chceš porozprávať. Aktuálne stojíš pri "
                 + nonPlayerCharacter.getName()
-                + "\n";
+                + SystemInfo.LINE_SEPARATOR;
             String actualOutput =
                 talkToCommand.executeCommand(
                     "neexistujucaOsoba"); // use different NPC name than player is currently standing next

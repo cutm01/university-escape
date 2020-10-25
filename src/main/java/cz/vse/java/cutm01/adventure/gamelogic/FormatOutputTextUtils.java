@@ -1,5 +1,6 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import java.util.Iterator;
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class FormatOutputTextUtils {
             // second condition ensure that empty line will not be printed if
             // there are no more item names to print
             if (itemNamesPerLine == 0 && itemIterator.hasNext()) {
-                outputText.append("\n");
+                outputText.append(SystemInfo.LINE_SEPARATOR);
                 itemNamesPerLine = maxItemNamesPerLine;
             }
         }
@@ -93,7 +94,7 @@ public class FormatOutputTextUtils {
             // second condition ensure that empty line will not be printed if
             // there are no more item names to print
             if (itemNamesPerLine == 0 && itemIterator.hasNext()) {
-                outputText.append("\n");
+                outputText.append(SystemInfo.LINE_SEPARATOR);
                 itemNamesPerLine = maxItemNamesPerLine;
             }
         }
@@ -135,7 +136,7 @@ public class FormatOutputTextUtils {
             // second condition ensure that empty line will not be printed if
             // there are no more item names to print
             if (itemNamesPerLine == 0 && itemIterator.hasNext()) {
-                outputText.append("\n");
+                outputText.append(SystemInfo.LINE_SEPARATOR);
                 itemNamesPerLine = maxItemNamesPerLine;
             }
         }

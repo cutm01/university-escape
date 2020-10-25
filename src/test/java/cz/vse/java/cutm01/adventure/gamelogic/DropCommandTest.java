@@ -2,6 +2,7 @@ package cz.vse.java.cutm01.adventure.gamelogic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -130,12 +131,14 @@ class DropCommandTest {
                 dropCommand.executeCommand(
                     droppedItem.getName()); // executeCommand method takes item name as parameter
             String expectedOutput =
-                "Zo svojho batohu si odhodil nasledovné predmety (váha predmetu):\n"
+                "Zo svojho batohu si odhodil nasledovné predmety (váha predmetu):"
+                + SystemInfo.LINE_SEPARATOR
                 + droppedItem.getName()
                 + "("
                 + droppedItemWeight
                 + ")"
-                + "\nAktuálna kapacita batohu: "
+                + SystemInfo.LINE_SEPARATOR
+                + "Aktuálna kapacita batohu: "
                 + inventory.getInventoryWeight()
                 + "/"
                 + inventory.getInventoryCapacity();
@@ -159,12 +162,14 @@ class DropCommandTest {
                 dropCommand.executeCommand(
                     itemsToDrop); // executeCommand method takes item name as parameter
             String expectedOutput =
-                "Zo svojho batohu si odhodil nasledovné predmety (váha predmetu):\n"
+                "Zo svojho batohu si odhodil nasledovné predmety (váha predmetu):"
++ SystemInfo.LINE_SEPARATOR
                 + droppedItem.getName()
                 + "("
                 + droppedItemWeight
                 + ")"
-                + "\nAktuálna kapacita batohu: "
+                + SystemInfo.LINE_SEPARATOR
+                + "Aktuálna kapacita batohu: "
                 + inventory.getInventoryWeight()
                 + "/"
                 + inventory.getInventoryCapacity();
@@ -190,7 +195,8 @@ class DropCommandTest {
                 dropCommand.executeCommand(
                     itemsToDrop); // executeCommand method takes item name as parameter
             String expectedOutput =
-                "Zo svojho batohu si odhodil nasledovné predmety (váha predmetu):\n"
+                "Zo svojho batohu si odhodil nasledovné predmety (váha predmetu):"
++ SystemInfo.LINE_SEPARATOR
                 + item1.getName()
                 + "("
                 + item1.getWeight()
@@ -199,7 +205,8 @@ class DropCommandTest {
                 + "("
                 + item2.getWeight()
                 + ")"
-                + "\nAktuálna kapacita batohu: "
+                + SystemInfo.LINE_SEPARATOR
+                + "Aktuálna kapacita batohu: "
                 + inventory.getInventoryWeight()
                 + "/"
                 + inventory.getInventoryCapacity();
@@ -221,13 +228,18 @@ class DropCommandTest {
                 dropCommand.executeCommand(
                     invalidItemName); // executeCommand method takes item name as parameter
             String expectedOutput =
-                "Zo svojho batohu si neodhodil žiadnu vec!\n"
-                + "Tieto veci sa mi nepodarilo nájsť v tvojom batohu, nepomýlil si sa náhodou?\n"
+                "Zo svojho batohu si neodhodil žiadnu vec!"
++ SystemInfo.LINE_SEPARATOR
+                + "Tieto veci sa mi nepodarilo nájsť v tvojom batohu, nepomýlil si sa náhodou?"
++ SystemInfo.LINE_SEPARATOR
                 + invalidItemName
-                + "\nStále môžeš použiť príkaz "
+                + SystemInfo.LINE_SEPARATOR
+                + "Stále môžeš použiť príkaz "
                 + CommandName.SHOW_INVENTORY.getCommandName()
-                + " pre zobrazenie vecí, ktoré máš u seba\n"
-                + "\nAktuálna kapacita batohu: "
+                + " pre zobrazenie vecí, ktoré máš u seba"
++ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
+                + "Aktuálna kapacita batohu: "
                 + inventory.getInventoryWeight()
                 + "/"
                 + inventory.getInventoryCapacity();
@@ -247,15 +259,20 @@ class DropCommandTest {
                 dropCommand.executeCommand(
                     invalidItemNames); // executeCommand method takes item name as parameter
             String expectedOutput =
-                "Zo svojho batohu si neodhodil žiadnu vec!\n"
-                + "Tieto veci sa mi nepodarilo nájsť v tvojom batohu, nepomýlil si sa náhodou?\n"
+                "Zo svojho batohu si neodhodil žiadnu vec!"
++ SystemInfo.LINE_SEPARATOR
+                + "Tieto veci sa mi nepodarilo nájsť v tvojom batohu, nepomýlil si sa náhodou?"
++ SystemInfo.LINE_SEPARATOR
                 + invalidItemName
                 + ", "
                 + invalidItemName
-                + "\nStále môžeš použiť príkaz "
+                + SystemInfo.LINE_SEPARATOR
+                + "Stále môžeš použiť príkaz "
                 + CommandName.SHOW_INVENTORY.getCommandName()
-                + " pre zobrazenie vecí, ktoré máš u seba\n"
-                + "\nAktuálna kapacita batohu: "
+                + " pre zobrazenie vecí, ktoré máš u seba"
++ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
+                + "Aktuálna kapacita batohu: "
                 + inventory.getInventoryWeight()
                 + "/"
                 + inventory.getInventoryCapacity();
@@ -279,12 +296,14 @@ class DropCommandTest {
                 dropCommand.executeCommand(
                     itemsToDrop); // executeCommand method takes item name as parameter
             String expectedOutput =
-                "Zo svojho batohu si odhodil nasledovné predmety (váha predmetu):\n"
+                "Zo svojho batohu si odhodil nasledovné predmety (váha predmetu):"
++ SystemInfo.LINE_SEPARATOR
                 + validItemName.getName()
                 + "("
                 + validItemWeight
                 + ")"
-                + "Tieto veci sa mi nepodarilo nájsť v tvojom batohu, nepomýlil si sa náhodou?\n"
+                + "Tieto veci sa mi nepodarilo nájsť v tvojom batohu, nepomýlil si sa náhodou?"
++ SystemInfo.LINE_SEPARATOR
                 + itemsToDrop[1]
                 + ", "
                 + itemsToDrop[2]
@@ -292,10 +311,13 @@ class DropCommandTest {
                 + itemsToDrop[3]
                 + ", "
                 + itemsToDrop[4]
-                + "\nStále môžeš použiť príkaz "
+                + SystemInfo.LINE_SEPARATOR
+                + "Stále môžeš použiť príkaz "
                 + CommandName.SHOW_INVENTORY.getCommandName()
-                + " pre zobrazenie vecí, ktoré máš u seba\n"
-                + "\nAktuálna kapacita batohu: "
+                + " pre zobrazenie vecí, ktoré máš u seba"
++ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
+                + "Aktuálna kapacita batohu: "
                 + inventory.getInventoryWeight()
                 + "/"
                 + inventory.getInventoryCapacity();

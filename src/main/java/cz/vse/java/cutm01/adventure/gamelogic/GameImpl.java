@@ -1,5 +1,7 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
+
 /**
  * Třída GameImpl - třída představující logiku adventury.
  *
@@ -45,16 +47,27 @@ public class GameImpl implements Game {
      * Vrátí úvodní zprávu pro hráče.
      */
     public String getPrologue() {
-        return "Jún 2020, celý svet sa pomaly spamätáva z krízy, ktorú spôsobil koronavírus.\n"
-               + "Od získania vysnívaného titulu ťa delí už iba úspešné zvládnutie štátnic.\n"
-               + "Sedíš v prednáškovej miestnosti pripravený vylosovať si otázky k tvojej ústnej skúške, keď tu zrazu...\n"
-               + "Priestormi budovy sa ozve hlasný výbuch. Vyzerá to, že neznámy bomberman už ďalej nezvládol žiarliť na koronavírus,\n"
-               + "ktorý dokázal zavrieť všetky školy na dobu niekoľkých mesiacov bez jediného anonymného e-mailu\n"
-               + "a tak sa rozhodol dokonať svoje diabolské dielo – v budove školy odpálil bombu.\n"
-               + "V rýchlosti berieš so sebou svoj batoh a snažíš sa dostať von skôr než celá budova skolabuje!\n"
-               + " ________________________________________________________________________\n"
-               + "|Pokiaľ si nevieš rady, môžeš kedykoľvek počas hry použiť príkaz napoveda|\n"
-               + "|________________________________________________________________________|\n\n"
+        return "Jún 2020, celý svet sa pomaly spamätáva z krízy, ktorú spôsobil koronavírus."
+               + SystemInfo.LINE_SEPARATOR
+               + "Od získania vysnívaného titulu ťa delí už iba úspešné zvládnutie štátnic."
+               + SystemInfo.LINE_SEPARATOR
+               + "Sedíš v prednáškovej miestnosti pripravený vylosovať si otázky k tvojej ústnej skúške, keď tu zrazu..."
+               + SystemInfo.LINE_SEPARATOR
+               + "Priestormi budovy sa ozve hlasný výbuch. Vyzerá to, že neznámy bomberman už ďalej nezvládol žiarliť na koronavírus,"
+               + SystemInfo.LINE_SEPARATOR
+               + "ktorý dokázal zavrieť všetky školy na dobu niekoľkých mesiacov bez jediného anonymného e-mailu"
+               + SystemInfo.LINE_SEPARATOR
+               + "a tak sa rozhodol dokonať svoje diabolské dielo – v budove školy odpálil bombu."
+               + SystemInfo.LINE_SEPARATOR
+               + "V rýchlosti berieš so sebou svoj batoh a snažíš sa dostať von skôr než celá budova skolabuje!"
+               + SystemInfo.LINE_SEPARATOR
+               + " ________________________________________________________________________"
+               + SystemInfo.LINE_SEPARATOR
+               + "|Pokiaľ si nevieš rady, môžeš kedykoľvek počas hry použiť príkaz napoveda|"
+               + SystemInfo.LINE_SEPARATOR
+               + "|________________________________________________________________________|"
+               + SystemInfo.LINE_SEPARATOR
+               + SystemInfo.LINE_SEPARATOR
                + gamePlan.getActualRoom().getRoomDescriptionWithExits();
     }
 
@@ -71,15 +84,19 @@ public class GameImpl implements Game {
         if (gamePlan.getPlayer().getHasPlayerEscapedThroughCourtyard()) {
             gameEnding
                 .append(
-                    "Na poslednú chvíľu opúšťaš budovu a na ulici sa pripájaš k ostatným preživším.\n")
-                .append("Gratulujem, úspešne sa ti podarilo dostať von!\n");
+                    "Na poslednú chvíľu opúšťaš budovu a na ulici sa pripájaš k ostatným preživším."
+                    + SystemInfo.LINE_SEPARATOR)
+                .append("Gratulujem, úspešne sa ti podarilo dostať von!")
+                .append(SystemInfo.LINE_SEPARATOR);
         }
         // ...or through window in Old Building using rope
         if (gamePlan.getPlayer().getHasPlayerEscapedUsingWindow()) {
             gameEnding
                 .append(
-                    "Všetci so zatajeným dychom pozorujú ako sa zlaňuješ z okna Starej budovy\n")
-                .append("Gratulujem, úspešne sa ti podarilo dostať von!\n");
+                    "Všetci so zatajeným dychom pozorujú ako sa zlaňuješ z okna Starej budovy")
+                .append(SystemInfo.LINE_SEPARATOR)
+                .append("Gratulujem, úspešne sa ti podarilo dostať von!")
+                .append(SystemInfo.LINE_SEPARATOR);
         }
 
         // add game ending according to actions which player did during game:
@@ -87,52 +104,70 @@ public class GameImpl implements Game {
         if (gamePlan.getPlayer().getHasPlayerPassedByCoughingTeacher()) {
             gameEnding
                 .append(
-                    "Má to však háčik... po 2 týždňoch sa u teba začali prejavovať respiračné problémy\n")
-                .append("a musel si byť hospitalizovaný v Nemocnici Na Bulovce.\n")
+                    "Má to však háčik... po 2 týždňoch sa u teba začali prejavovať respiračné problémy")
+                .append(SystemInfo.LINE_SEPARATOR)
+                .append("a musel si byť hospitalizovaný v Nemocnici Na Bulovce.")
+                .append(SystemInfo.LINE_SEPARATOR)
                 .append(
-                    "Nabudúce si dávaj väčší pozor okolo koho prechádzaš, a zváž či si nenasadiť nejaký ochranný prvok!\n");
+                    "Nabudúce si dávaj väčší pozor okolo koho prechádzaš, a zváž či si nenasadiť nejaký ochranný prvok!")
+                .append(SystemInfo.LINE_SEPARATOR);
 
         }
         // player attacked cleaning lady with pen, rope or fire extinguisher
         else if (gamePlan.getPlayer().getHasPlayerAttackedCleaningLady()) {
             gameEnding
                 .append(
-                    "Má to však háčik...vyzerá to, že si niekto všimol to, čo si urobil tej úbohej pani\n")
+                    "Má to však háčik...vyzerá to, že si niekto všimol to, čo si urobil tej úbohej pani")
+                .append(SystemInfo.LINE_SEPARATOR)
                 .append(
-                    "a rozhodne máš čo vysvetľovať polícii! Jediné šťastie, že sa nakoniec dostala von živá,\n")
-                .append("inak by si z kolabujúcej budovy putoval rovno do väzenia.\n")
+                    "a rozhodne máš čo vysvetľovať polícii! Jediné šťastie, že sa nakoniec dostala von živá,")
+                .append(SystemInfo.LINE_SEPARATOR)
+                .append("inak by si z kolabujúcej budovy putoval rovno do väzenia.")
+                .append(SystemInfo.LINE_SEPARATOR)
                 .append(
-                    "Zúfalá situácia si vyžaduje zúfale riešenie, ale skús to nabudúce bez tých prejavov násilia!\n");
+                    "Zúfalá situácia si vyžaduje zúfale riešenie, ale skús to nabudúce bez tých prejavov násilia!")
+                .append(SystemInfo.LINE_SEPARATOR);
         }
         // player attacked IT admin with pen, rope or fire extinguisher
         else if (gamePlan.getPlayer().getHasPlayerAttackedITAdmin()) {
             gameEnding
                 .append(
-                    "Má to však háčik...vyzerá to, že si niekto všimol to, čo si urobil tomu úbohému IT adminovi\n")
+                    "Má to však háčik...vyzerá to, že si niekto všimol to, čo si urobil tomu úbohému IT adminovi")
+                .append(SystemInfo.LINE_SEPARATOR)
                 .append(
-                    "a rozhodne máš čo vysvetľovať polícii! Jediné šťastie, že sa nakoniec dostal von živý,\n")
-                .append("inak by si z kolabujúcej budovy putoval rovno do väzenia.\n")
+                    "a rozhodne máš čo vysvetľovať polícii! Jediné šťastie, že sa nakoniec dostal von živý,")
+                .append(SystemInfo.LINE_SEPARATOR)
+                .append("inak by si z kolabujúcej budovy putoval rovno do väzenia.")
+                .append(SystemInfo.LINE_SEPARATOR)
                 .append(
-                    "Zúfalá situácia si vyžaduje zúfale riešenie, ale skús to nabudúce bez tých prejavov násilia!\n");
+                    "Zúfalá situácia si vyžaduje zúfale riešenie, ale skús to nabudúce bez tých prejavov násilia!")
+                .append(SystemInfo.LINE_SEPARATOR);
         }
         // player attacked door keeper with pen, rope or fire extinguisher
         else if (gamePlan.getPlayer().getHasPlayerAttackedDoorKeeper()) {
             gameEnding
                 .append(
-                    "Avšak...to si si naozaj myslel, že potom čo si urobil tomu vrátnikovi si iba tak spokojne odkráčaš domov?\n")
-                .append("Z budovy si sa síce dostal, ale ešte máš čo vysvetľovať polícii\n")
+                    "Avšak...to si si naozaj myslel, že potom čo si urobil tomu vrátnikovi si iba tak spokojne odkráčaš domov?")
+                .append(SystemInfo.LINE_SEPARATOR)
+                .append("Z budovy si sa síce dostal, ale ešte máš čo vysvetľovať polícii")
+                .append(SystemInfo.LINE_SEPARATOR)
                 .append(
-                    "Zúfalá situácia si vyžaduje zúfale riešenie, ale skús to nabudúce bez tých prejavov násilia\n");
+                    "Zúfalá situácia si vyžaduje zúfale riešenie, ale skús to nabudúce bez tých prejavov násilia")
+                .append(SystemInfo.LINE_SEPARATOR);
         }
         // player tried to bribe door keeper with stolen money
         else if (gamePlan.getPlayer().getHasPlayerBribedDoorKeeper()) {
             gameEnding
                 .append(
-                    "Vyzerá to, že si ťa niekto všimol pri tvojom pokuse uplatiť vrátnika, ba čo viac, peniaze, ktorými\n")
+                    "Vyzerá to, že si ťa niekto všimol pri tvojom pokuse uplatiť vrátnika, ba čo viac, peniaze, ktorými")
+                .append(SystemInfo.LINE_SEPARATOR)
                 .append(
-                    "si sa pokúšal podplatiť vrátnika, zrejme patrili práve tejto osobe a ty tak ihneď po uniknutí\n")
-                .append("z budovy školy putuješ na políciu, kde budeš mať čo vysvetľovať.\n")
-                .append("Do budúcna by sa určite šlo dostať von aj iným spôsobom!\n");
+                    "si sa pokúšal podplatiť vrátnika, zrejme patrili práve tejto osobe a ty tak ihneď po uniknutí")
+                .append(SystemInfo.LINE_SEPARATOR)
+                .append("z budovy školy putuješ na políciu, kde budeš mať čo vysvetľovať.")
+                .append(SystemInfo.LINE_SEPARATOR)
+                .append("Do budúcna by sa určite šlo dostať von aj iným spôsobom!")
+                .append(SystemInfo.LINE_SEPARATOR);
         }
 
         return gameEnding.toString();

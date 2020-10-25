@@ -17,11 +17,13 @@ import java.util.Map;
 public class GamePlan {
 
     private Room actualRoom;
-    private InteractableObject
-        actualInteractableObject; // InteractableObject which the player is standing nearby
-    private NonPlayerCharacter actualNonPlayerCharacter; // NPC who the player is standing next to
+    // InteractableObject which the player is standing nearby
+    private InteractableObject actualInteractableObject;
+    // NPC who the player is standing next to
+    private NonPlayerCharacter actualNonPlayerCharacter;
     private final Player player;
-    private boolean hasPlayerReachedFinalRoom; // game ends after player reaches room Street
+    // game ends after player reaches room Street
+    private boolean hasPlayerReachedFinalRoom;
 
     // region Constructor
     // --------------------------------------------------------------------------------

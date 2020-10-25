@@ -3,6 +3,7 @@ package cz.vse.java.cutm01.adventure.gamelogic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -161,7 +162,8 @@ class ExamineItemCommandTest {
             String expectedOutput =
                 "S trasúcimi rukami si prezeráš predmet "
                 + item.getName()
-                + " a podarilo sa ti nájsť nasledovné veci (váha predmetu):\n"
+                + " a podarilo sa ti nájsť nasledovné veci (váha predmetu):"
+                + SystemInfo.LINE_SEPARATOR
                 + hiddenItem1.getName()
                 + "("
                 + hiddenItem1.getWeight()
@@ -174,7 +176,9 @@ class ExamineItemCommandTest {
                 + "("
                 + hiddenItem3.getWeight()
                 + ")"
-                + "\nAle nie! Vyzeráš byť z toho všetkého v značnom strese a veci, ktoré si práve našiel, ti popadali na zem\n"
+                + SystemInfo.LINE_SEPARATOR
+                + "Ale nie! Vyzeráš byť z toho všetkého v značnom strese a veci, ktoré si práve našiel, ti popadali na zem"
+                + SystemInfo.LINE_SEPARATOR
                 + "a teraz sa povaľujú všade po miestnosti";
             String actualOutput = examineItemCommand.executeCommand(item.getName());
 
@@ -257,7 +261,8 @@ class ExamineItemCommandTest {
             String expectedOutput =
                 "S trasúcimi rukami si prezeráš predmet "
                 + item.getName()
-                + " a podarilo sa ti nájsť nasledovné veci (váha predmetu):\n"
+                + " a podarilo sa ti nájsť nasledovné veci (váha predmetu):"
+                + SystemInfo.LINE_SEPARATOR
                 + hiddenItem1.getName()
                 + "("
                 + hiddenItem1.getWeight()
@@ -270,7 +275,9 @@ class ExamineItemCommandTest {
                 + "("
                 + hiddenItem3.getWeight()
                 + ")"
-                + "\nAle nie! Vyzeráš byť z toho všetkého v značnom strese a veci, ktoré si práve našiel, ti popadali na zem\n"
+                + SystemInfo.LINE_SEPARATOR
+                + "Ale nie! Vyzeráš byť z toho všetkého v značnom strese a veci, ktoré si práve našiel, ti popadali na zem"
+                + SystemInfo.LINE_SEPARATOR
                 + "a teraz sa povaľujú všade po miestnosti";
             String actualOutput = examineItemCommand.executeCommand(item.getName());
 

@@ -1,5 +1,7 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
+
 /**
  * Approach command implementation, player can use this command to approach interactable object or
  * non-player characters in room where he is currently standing
@@ -47,7 +49,8 @@ class ApproachCommand implements Command {
 
         if (commandParameters.length > 1) {
             return
-                "No tak, spomaľ trochu, a vyber si iba jednu osobu alebo objekt, ku ktorému chceš pristúpiť!\n"
+                "No tak, spomaľ trochu, a vyber si iba jednu osobu alebo objekt, ku ktorému chceš pristúpiť!"
+                + SystemInfo.LINE_SEPARATOR
                 + "Nie si predsa elektrón vo svete kvantovej mechaniky a nemôžeš byť naraz na dvoch rôznych miestach";
         }
 

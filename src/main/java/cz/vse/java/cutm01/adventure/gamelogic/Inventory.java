@@ -1,5 +1,6 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -101,9 +102,10 @@ class Inventory {
             return "V batohu sa aktuálne nič nenachádza";
         }
 
-        return "V batohu máš nasledovné predmety (váha predmetu):\n"
+        return "V batohu máš nasledovné predmety (váha predmetu):"
++ SystemInfo.LINE_SEPARATOR
                + getItemNamesAndWeights()
-               + "\n"
+               + SystemInfo.LINE_SEPARATOR
                + "Aktuálna váha batohu je "
                + inventoryWeight
                + ", maximálna kapacita je "
@@ -135,7 +137,7 @@ class Inventory {
 
             // max. number of words per line of text reached
             if (itemsPerLine == 0) {
-                text.append("\n");
+                text.append(SystemInfo.LINE_SEPARATOR);
                 itemsPerLine = 4;
             }
             itemsPerLine--;

@@ -3,6 +3,7 @@ package cz.vse.java.cutm01.adventure.gamelogic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -90,7 +91,7 @@ class RoomTest {
                 + RoomName.getRoomName(roomEnumConstant)
                 + ", "
                 + RoomDescription.getRoomDescription(roomEnumConstant)
-                + "\n"
+                + SystemInfo.LINE_SEPARATOR
                 + "Východy: "
                 + room.getNeighboringRoomNames();
             String actualOutput = room.getRoomDescriptionWithExits();

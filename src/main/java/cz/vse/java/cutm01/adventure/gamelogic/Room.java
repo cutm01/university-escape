@@ -1,5 +1,6 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -27,15 +28,14 @@ class Room {
     private final String name;
     private final String description;
     private final Set<Room> neighboringRooms;
-    private final Map<String, Item>
-        items; // contains also interactableObject's hidden items which are added to room after player
-    // examines it
+    // contains also interactableObject's hidden items which are added to room after player examines it
+    private final Map<String, Item> items;
     private final Map<String, InteractableObject> interactableObjects;
     private final Map<String, NonPlayerCharacter> nonPlayerCharacters;
     private boolean wasRoomAlreadyExamined;
     private boolean isRoomLocked;
-    private final String
-        lockedRoomDescription; // is shown to player when he tries to enter locked room
+    // is shown to player when he tries to enter locked room
+    private final String lockedRoomDescription;
 
     // region Constructors
     // --------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ class Room {
             .append(name)
             .append(", ")
             .append(description)
-            .append("\n");
+            .append(SystemInfo.LINE_SEPARATOR);
         if (getNeighboringRoomNames().length() > 0) {
             textToReturn.append("Východy: ").append(getNeighboringRoomNames());
         }

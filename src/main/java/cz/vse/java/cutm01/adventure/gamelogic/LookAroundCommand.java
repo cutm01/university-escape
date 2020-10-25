@@ -1,5 +1,6 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -14,14 +15,11 @@ import java.util.Map;
 class LookAroundCommand implements Command {
 
     private static final String NAME = CommandName.LOOK_AROUND.getCommandName();
-    private static final String DESCRIPTION = CommandDescription.LOOK_AROUND
-        .getCommandDescription();
+    private static final String DESCRIPTION = CommandDescription.LOOK_AROUND.getCommandDescription();
     private final GamePlan gamePlan;
     private final Map<String, String> textToDisplay;
-    private static final String ITEMS_IN_ROOM_TEXT =
-        "V miestnosti si si všimol nasledovné predmety: ";
-    private static final String OBJECTS_IN_ROOM_TEXT =
-        "Dobre sa rozhliadneš a uvidíš nasledovné objekty: ";
+    private static final String ITEMS_IN_ROOM_TEXT = "V miestnosti si si všimol nasledovné predmety: ";
+    private static final String OBJECTS_IN_ROOM_TEXT = "Dobre sa rozhliadneš a uvidíš nasledovné objekty: ";
     private static final String NPC_IN_ROOM_TEXT = "Nie si tu sám, okrem teba je tu ešte ";
     private static final String EXITS = "Východy: ";
 
@@ -99,7 +97,7 @@ class LookAroundCommand implements Command {
 
             text.append(entry.getKey()).append(entry.getValue());
             if (entryIterator.hasNext()) {
-                text.append("\n");
+                text.append(SystemInfo.LINE_SEPARATOR);
             }
         }
 

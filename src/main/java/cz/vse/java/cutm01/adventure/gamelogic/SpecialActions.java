@@ -306,8 +306,7 @@ public enum SpecialActions {
         });
 
     // each item performs different special action type when used while standing next to interactable
-    // object
-    // these actions are specified in SpecialActions enum and later used in InteractableObject class
+    // object, these actions are specified in SpecialActions enum and later used in InteractableObject class
     static final String UNLOCK_DOOR_TO_ROOM_ACTION_TYPE = "UNLOCK_DOOR_TO_ROOM";
     static final String ADD_ITEMS_TO_ROOM_ACTION_TYPE = "ADD_ITEMS_TO_ROOM";
     static final String USELESS_ACTION_TYPE = "USELESS_ACTION";

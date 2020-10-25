@@ -2,6 +2,7 @@ package cz.vse.java.cutm01.adventure.ui;
 
 import cz.vse.java.cutm01.adventure.gamelogic.CommandName;
 import cz.vse.java.cutm01.adventure.gamelogic.Game;
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import java.util.Scanner;
 
 /**
@@ -47,7 +48,7 @@ public class GameTextInterface {
 
         if (game.getWasGameTerminatedUsingEndGameCommand()) {
             System.out.println(
-                "Hra bola ukončená príkazom " + CommandName.END_GAME.getCommandName() + "\n");
+                "Hra bola ukončená príkazom " + CommandName.END_GAME.getCommandName() + SystemInfo.LINE_SEPARATOR);
         } else {
             System.out.println(game.getGameEnding());
         }

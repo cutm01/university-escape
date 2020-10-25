@@ -1,5 +1,6 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -127,7 +128,7 @@ class HiddenItems {
 
             // max. number of words per line of text reached
             if (itemsPerLine == 0) {
-                text.append("\n");
+                text.append(SystemInfo.LINE_SEPARATOR);
                 itemsPerLine = 4;
             }
             itemsPerLine--;

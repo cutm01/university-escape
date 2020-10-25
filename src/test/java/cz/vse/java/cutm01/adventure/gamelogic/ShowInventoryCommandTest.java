@@ -2,6 +2,7 @@ package cz.vse.java.cutm01.adventure.gamelogic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -47,8 +48,10 @@ class ShowInventoryCommandTest {
         @DisplayName("show EMPTY inventory content with MORE THAN ZERO PARAMETERS")
         void showEmptyInventoryContentWithMoreThanZeroParameters(String parameter) {
             String expectedOutput =
-                "Chceš ukázať obsah batohu, pochopil som to správne? Nech sa ti páči,\n"
-                + "a nabudúce to skús, prosím ťa, bez tých zbytočných rečí okolo:\n"
+                "Chceš ukázať obsah batohu, pochopil som to správne? Nech sa ti páči,"
+                + SystemInfo.LINE_SEPARATOR
+                + "a nabudúce to skús, prosím ťa, bez tých zbytočných rečí okolo:"
+                + SystemInfo.LINE_SEPARATOR
                 + "V batohu sa aktuálne nič nenachádza";
             String actualOutput = showInventoryCommand.executeCommand(parameter);
 
@@ -64,13 +67,17 @@ class ShowInventoryCommandTest {
             inventory.addItemToInventory(testItem);
 
             String expectedOutput =
-                "Chceš ukázať obsah batohu, pochopil som to správne? Nech sa ti páči,\n"
-                + "a nabudúce to skús, prosím ťa, bez tých zbytočných rečí okolo:\n"
-                + "V batohu máš nasledovné predmety (váha predmetu):\n"
+                "Chceš ukázať obsah batohu, pochopil som to správne? Nech sa ti páči,"
++ SystemInfo.LINE_SEPARATOR
+                + "a nabudúce to skús, prosím ťa, bez tých zbytočných rečí okolo:"
++ SystemInfo.LINE_SEPARATOR
+                + "V batohu máš nasledovné predmety (váha predmetu):"
++ SystemInfo.LINE_SEPARATOR
                 + testItem.getName()
                 + "("
                 + testItem.getWeight()
-                + ")\n"
+                + ")"
++ SystemInfo.LINE_SEPARATOR
                 + "Aktuálna váha batohu je "
                 + inventory.getInventoryWeight()
                 + ", maximálna kapacita je "
@@ -101,11 +108,13 @@ class ShowInventoryCommandTest {
             inventory.addItemToInventory(testItem);
 
             String expectedOutput =
-                "V batohu máš nasledovné predmety (váha predmetu):\n"
+                "V batohu máš nasledovné predmety (váha predmetu):"
++ SystemInfo.LINE_SEPARATOR
                 + testItem.getName()
                 + "("
                 + testItem.getWeight()
-                + ")\n"
+                + ")"
++ SystemInfo.LINE_SEPARATOR
                 + "Aktuálna váha batohu je "
                 + inventory.getInventoryWeight()
                 + ", maximálna kapacita je "

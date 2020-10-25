@@ -12,8 +12,8 @@ class Item {
 
     private final String name;
     private final String description;
-    private HiddenItems
-        hiddenItems; // following items will be revealed when player uses ExamineCommand
+    // following items will be revealed when player uses ExamineCommand
+    private HiddenItems hiddenItems;
     private boolean wasItemAlreadyExamined;
     private final int weight;
 

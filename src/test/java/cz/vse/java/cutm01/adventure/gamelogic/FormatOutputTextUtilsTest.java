@@ -2,6 +2,7 @@ package cz.vse.java.cutm01.adventure.gamelogic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -87,7 +88,7 @@ class FormatOutputTextUtilsTest {
             + "("
             + ((Item) itemInstances.get(3)).getWeight()
             + "), "
-            + "\n"
+            + SystemInfo.LINE_SEPARATOR
             + // max. 4 item names per line +
             ((Item) itemInstances.get(4)).getName()
             + "("
@@ -131,7 +132,7 @@ class FormatOutputTextUtilsTest {
             + "("
             + ((Item) itemInstances.get(3)).getWeight()
             + "), "
-            + "\n"
+            + SystemInfo.LINE_SEPARATOR
             + // max. 4 item names per line +
             ((Item) itemInstances.get(4)).getName()
             + "("
@@ -167,7 +168,7 @@ class FormatOutputTextUtilsTest {
             + ", "
             + ((Item) itemInstances.get(3)).getName()
             + ", "
-            + "\n"
+            + SystemInfo.LINE_SEPARATOR
             + // max. 4 item names per line +
             ((Item) itemInstances.get(4)).getName()
             + ", "

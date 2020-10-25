@@ -1,5 +1,7 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
+
 /**
  * Examine item command implementation, player can use this command to examine interactable object
  * in actual game room in more detail.<br> Player can find hidden items this way
@@ -10,8 +12,7 @@ package cz.vse.java.cutm01.adventure.gamelogic;
 class ExamineObjectCommand implements Command {
 
     private static final String NAME = CommandName.EXAMINE_OBJECT.getCommandName();
-    private static final String DESCRIPTION =
-        CommandDescription.EXAMINE_OBJECT.getCommandDescription();
+    private static final String DESCRIPTION = CommandDescription.EXAMINE_OBJECT.getCommandDescription();
     private final GamePlan gamePlan;
 
     public ExamineObjectCommand(GamePlan gamePlan) {
@@ -65,7 +66,8 @@ class ExamineObjectCommand implements Command {
             gamePlan.getActualInteractableObject() != null
             && gamePlan.getActualInteractableObject().getName().equals(interactableObjectName);
         if (!isPlayerStandingNearby) {
-            return "Myslíš si snáď, že ti ten výbuch priniesol schopnosť telekinézy?\n"
+            return "Myslíš si snáď, že ti ten výbuch priniesol schopnosť telekinézy?"
+                   + SystemInfo.LINE_SEPARATOR
                    + "Takto z diaľky to naozaj preskúmať nepôjde, pristúp, prosím ťa bližšie k objektu";
         }
 
@@ -88,9 +90,12 @@ class ExamineObjectCommand implements Command {
         String foundItemsInfo =
             "Prezeráš "
             + interactableObjectName
-            + " zo všetkých strán a vyzerá to, že niečo skrýva (váha predmetu):\n"
+            + " zo všetkých strán a vyzerá to, že niečo skrýva (váha predmetu):"
++ SystemInfo.LINE_SEPARATOR
             + objectToExamine.getHiddenItems().getHiddenItemsDescription()
-            + "\nRozmýšľaš, ako tieto veci môžeš ďalej využiť, no v tom sa z diaľky ozve hlasný krik a nájdené\n"
+            + SystemInfo.LINE_SEPARATOR
+            + "Rozmýšľaš, ako tieto veci môžeš ďalej využiť, no v tom sa z diaľky ozve hlasný krik a nájdené"
++ SystemInfo.LINE_SEPARATOR
             + "veci ti vypadnú z rúk a povaľujú sa po miestnosti. Vezmi si nejaké! Možno sa ti budú neskôr hodiť";
         objectToExamine
             .getHiddenItems()

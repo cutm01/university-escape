@@ -1,5 +1,6 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -16,10 +17,10 @@ import java.util.Map;
  */
 class CommandsList {
 
-    private final Map<String, Command> commandsMap; // mapa pro uložení přípustných příkazů
-    private int
-        longestCommandNameLength; // used in getCommandsWithTheirUsage for proper formatting of output
-    // text
+    // mapa pro uložení přípustných příkazů
+    private final Map<String, Command> commandsMap;
+    // used in getCommandsWithTheirUsage for proper formatting of output text
+    private int longestCommandNameLength;
 
     /**
      * Konstruktor
@@ -87,7 +88,7 @@ class CommandsList {
             numberOfSpacesForTextDivide = longestCommandNameLength - commandName.length() + 4;
             commandsWithTheirUsage.append(" ".repeat(Math.max(0, numberOfSpacesForTextDivide)));
             commandsWithTheirUsage.append(commandDescription);
-            commandsWithTheirUsage.append("\n");
+            commandsWithTheirUsage.append(SystemInfo.LINE_SEPARATOR);
         }
 
         return commandsWithTheirUsage.toString();

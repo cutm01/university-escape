@@ -72,8 +72,8 @@ class GoCommand implements Command {
         gamePlan.setActualInteractableObject(null);
         gamePlan.setActualNonPlayerCharacter(null);
 
-        // player passes by coughing teacher in CONNECTING_CORRIDOR room without wearing medical mask or
-        // suit
+        // player passes by coughing teacher in CONNECTING_CORRIDOR room
+        // without wearing medical mask or suit
         if (gamePlan.getActualRoom().getName().equals(RoomName.getRoomName("OLD_BUILDING"))
             && !gamePlan.getPlayer().getIsPlayerWearingMedicalSuit()
             && !gamePlan.getPlayer().getIsPlayerWearingMedicalMask()) {

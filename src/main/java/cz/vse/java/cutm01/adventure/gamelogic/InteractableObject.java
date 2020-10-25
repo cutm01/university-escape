@@ -1,5 +1,6 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,13 +18,12 @@ class InteractableObject {
     private String name;
     private HiddenItems hiddenItems;
     private boolean wasInteractableObjectAlreadyExamined;
-    private Map<String, String>
-        itemsWithActionTheyPerform; // each item performs different actions (e.g. unlock game room,
-    // give player extra items, etc.)
+    // each item performs different actions (e.g. unlock game room, give player extra items, etc.)
+    private Map<String, String> itemsWithActionTheyPerform;
     private Map<String, String> roomToUnlockAfterItemUsage;
     private Map<String, List<Item>> itemsToAddToRoomAfterItemUsage;
-    private Map<String, String>
-        outputTextAfterItemUsage; // each item shows different output text after player uses it
+    // each item shows different output text after player uses it
+    private Map<String, String> outputTextAfterItemUsage;
 
     InteractableObject() {
     }
@@ -153,7 +153,9 @@ class InteractableObject {
             gamePlan.getPlayer().getInventory().removeItemFromInventory(itemName);
 
             outputText.append(outputTextAfterItemUsage.get(itemName));
-            outputText.append("\nPrichádzaš síce o predmet ").append(itemName).append(", ");
+            outputText
+                .append(SystemInfo.LINE_SEPARATOR)
+                .append("Prichádzaš síce o predmet ").append(itemName).append(", ");
             outputText
                 .append("avšak teraz ti už nič nebráni prejsť do nasledovnej miestnosti: ")
                 .append(roomToUnlock);
@@ -187,11 +189,14 @@ class InteractableObject {
             }
 
             outputText.append(outputTextAfterItemUsage.get(itemName));
-            outputText.append("\nPrichádzaš síce o predmet ").append(itemName).append(", ");
             outputText
-                .append("no do miestnosti pribudli nasledovné veci:\n")
+                .append(SystemInfo.LINE_SEPARATOR)
+                .append("Prichádzaš síce o predmet ").append(itemName).append(", ");
+            outputText
+                .append("no do miestnosti pribudli nasledovné veci:")
+                .append(SystemInfo.LINE_SEPARATOR)
                 .append(itemNames.toString())
-                .append("\n");
+                .append(SystemInfo.LINE_SEPARATOR);
 
             return outputText.toString();
         }
@@ -212,7 +217,9 @@ class InteractableObject {
         String outputText = outputTextAfterItemUsage.get(itemName);
         if (outputText != null) {
             gamePlan.getPlayer().getInventory().removeItemFromInventory(itemName);
-            outputText += "\nPredmet " + itemName + " bol nenávratne odobraný z tvojho batohu\n";
+            outputText += SystemInfo.LINE_SEPARATOR
+                          + "Predmet " + itemName + " bol nenávratne odobraný z tvojho batohu"
+                          + SystemInfo.LINE_SEPARATOR;
 
             return outputText;
         }

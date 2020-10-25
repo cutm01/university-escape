@@ -3,6 +3,7 @@ package cz.vse.java.cutm01.adventure.gamelogic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -183,12 +184,13 @@ class InventoryTest {
             inventory.addItemToInventory(item);
 
             String expectedOutput =
-                "V batohu máš nasledovné predmety (váha predmetu):\n"
+                "V batohu máš nasledovné predmety (váha predmetu):"
++ SystemInfo.LINE_SEPARATOR
                 + item.getName()
                 + "("
                 + itemWeight
                 + ")"
-                + "\n"
+                + SystemInfo.LINE_SEPARATOR
                 + "Aktuálna váha batohu je "
                 + inventory.getInventoryWeight()
                 + ", "

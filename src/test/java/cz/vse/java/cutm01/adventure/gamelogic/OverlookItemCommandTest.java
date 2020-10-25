@@ -26,8 +26,8 @@ class OverlookItemCommandTest {
 
         // create room which will be used in tests (i.e. it is actual room where player is currently in)
         room = new Room("RB_201", false);
-        room.setWasRoomAlreadyExamined(
-            true); // will be set to false later to test case where room is not examined yet
+        // will be set to false later to test case where room is not examined yet
+        room.setWasRoomAlreadyExamined(true);
         gamePlan.setActualRoom(room);
 
         overlookItemCommand = new OverlookItemCommand(gamePlan);

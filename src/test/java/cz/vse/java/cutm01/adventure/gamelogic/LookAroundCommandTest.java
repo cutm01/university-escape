@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,6 +20,27 @@ class LookAroundCommandTest {
 
     private LookAroundCommand lookAroundCommand;
     private Room room;
+
+    //region STRING CONSTANTS USED IN TEST CASES
+    /*
+     * LookAroundCommand can be used only without parameter,
+     * output depends on whether there are some NPCs, interactable objects
+     * or items in current room and on whether room was already examined
+     * using this command before
+     */
+    private static final String COMMAND_NAME = CommandName.LOOK_AROUND.getCommandName();
+    private static final String COMMAND_DESCRIPTION = CommandDescription.LOOK_AROUND.getCommandDescription();
+
+    //expected outputs after executing command
+    private static final String MORE_THAN_ZERO_PARAMETERS_OUTPUT = "Zbytočne to komplikuješ! Skús zadať ten príkaz ešte raz bez akýchkoľvek parametrov";
+    private static final String EMPTY_ROOM_OUTPUT = "Rozhliadol si sa po miestnosti, no neuvidel si nič, čo by ti pomohlo v tvojej snahe dostať sa von živý";
+    private static final String ROOM_CONTAINING_ONLY_ITEMS_OUTPUT = "V miestnosti si si všimol nasledovné predmety: ";
+    private static final String ROOM_CONTAINING_ONLY_INTERACTABLE_OBJECTS_OUTPUT = "Dobre sa rozhliadneš a uvidíš nasledovné objekty: ";
+    private static final String ROOM_CONTAINING_ONLY_NON_PLAYER_CHARACTERS_OUTPUT = "Nie si tu sám, okrem teba je tu ešte ";
+    private static final String ROOM_CONTAINING_ONLY_EXITS_OUTPUT = "Východy: ";
+
+
+    //endregion STRING CONSTANTS USED IN TEST CASES
 
     @BeforeEach
     void setUp() {
@@ -169,13 +191,13 @@ class LookAroundCommandTest {
             String expectedOutput =
                 "V miestnosti si si všimol nasledovné predmety: "
                 + item.getName()
-                + "\n"
+                + SystemInfo.LINE_SEPARATOR
                 + "Dobre sa rozhliadneš a uvidíš nasledovné objekty: "
                 + object.getName()
-                + "\n"
+                + SystemInfo.LINE_SEPARATOR
                 + "Nie si tu sám, okrem teba je tu ešte "
                 + npc.getName()
-                + "\n"
+                + SystemInfo.LINE_SEPARATOR
                 + "Východy: "
                 + exitRoom.getName();
             String actualOutput = lookAroundCommand.executeCommand();

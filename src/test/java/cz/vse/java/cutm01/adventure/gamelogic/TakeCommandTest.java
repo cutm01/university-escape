@@ -2,6 +2,7 @@ package cz.vse.java.cutm01.adventure.gamelogic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -81,12 +82,14 @@ class TakeCommandTest {
 
             String actualOutput = takeCommand.executeCommand(item.getName());
             String expectedOutput =
-                "Do batohu si vkladáš nasledovné predmety (váha predmetu):\n"
+                "Do batohu si vkladáš nasledovné predmety (váha predmetu):"
+                + SystemInfo.LINE_SEPARATOR
                 + item.getName()
                 + "("
                 + item.getWeight()
                 + ")"
-                + "\nAktuálna kapacita batohu: "
+                + SystemInfo.LINE_SEPARATOR
+                + "Aktuálna kapacita batohu: "
                 + inventory.getInventoryWeight()
                 + "/"
                 + inventory.getInventoryCapacity();
@@ -102,18 +105,24 @@ class TakeCommandTest {
         @DisplayName("take ONE NON-VALID item")
         void takeOneNonValidItem(String itemName) {
             String expectedOutput =
-                "Z miestnosti si si nič nevzal!\n"
-                + "\nTieto veci sa mi v tejto miestnosti nepodarilo nájsť, nepomýlil si sa náhodou?\n"
+                "Z miestnosti si si nič nevzal!"
++ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
+                + "Tieto veci sa mi v tejto miestnosti nepodarilo nájsť, nepomýlil si sa náhodou?"
++ SystemInfo.LINE_SEPARATOR
                 + itemName
-                + "\nStále môžeš použit príkaz "
+                + SystemInfo.LINE_SEPARATOR
+                + "Stále môžeš použit príkaz "
                 + CommandName.LOOK_AROUND.getCommandName()
-                + " pre zobrazenie vecí, ktoré sú aktuálne v miestnosti,\n"
+                + " pre zobrazenie vecí, ktoré sú aktuálne v miestnosti,"
++ SystemInfo.LINE_SEPARATOR
                 + "prípadne jeden z dvojice príkazov "
                 + CommandName.EXAMINE_ITEM.getCommandName()
                 + ", "
                 + CommandName.EXAMINE_OBJECT.getCommandName()
                 + " v snahe nájsť skryté predmety"
-                + "\nAktuálna kapacita batohu: "
+                + SystemInfo.LINE_SEPARATOR
+                + "Aktuálna kapacita batohu: "
                 + inventory.getInventoryWeight()
                 + "/"
                 + inventory.getInventoryCapacity();
@@ -132,22 +141,28 @@ class TakeCommandTest {
 
             String actualOutput = takeCommand.executeCommand(itemsToTake);
             String expectedOutput =
-                "Do batohu si vkladáš nasledovné predmety (váha predmetu):\n"
+                "Do batohu si vkladáš nasledovné predmety (váha predmetu):"
++ SystemInfo.LINE_SEPARATOR
                 + item.getName()
                 + "("
                 + item.getWeight()
                 + ")"
-                + "\nTieto veci sa mi v tejto miestnosti nepodarilo nájsť, nepomýlil si sa náhodou?\n"
+                + SystemInfo.LINE_SEPARATOR
+                + "Tieto veci sa mi v tejto miestnosti nepodarilo nájsť, nepomýlil si sa náhodou?"
++ SystemInfo.LINE_SEPARATOR
                 + item.getName()
-                + "\nStále môžeš použit príkaz "
+                + SystemInfo.LINE_SEPARATOR
+                + "Stále môžeš použit príkaz "
                 + CommandName.LOOK_AROUND.getCommandName()
-                + " pre zobrazenie vecí, ktoré sú aktuálne v miestnosti,\n"
+                + " pre zobrazenie vecí, ktoré sú aktuálne v miestnosti,"
++ SystemInfo.LINE_SEPARATOR
                 + "prípadne jeden z dvojice príkazov "
                 + CommandName.EXAMINE_ITEM.getCommandName()
                 + ", "
                 + CommandName.EXAMINE_OBJECT.getCommandName()
                 + " v snahe nájsť skryté predmety"
-                + "\nAktuálna kapacita batohu: "
+                + SystemInfo.LINE_SEPARATOR
+                + "Aktuálna kapacita batohu: "
                 + inventory.getInventoryWeight()
                 + "/"
                 + inventory.getInventoryCapacity();
@@ -169,7 +184,8 @@ class TakeCommandTest {
 
             String actualOutput = takeCommand.executeCommand(itemsToTake);
             String expectedOutput =
-                "Do batohu si vkladáš nasledovné predmety (váha predmetu):\n"
+                "Do batohu si vkladáš nasledovné predmety (váha predmetu):"
++ SystemInfo.LINE_SEPARATOR
                 + item1.getName()
                 + "("
                 + item1.getWeight()
@@ -178,7 +194,8 @@ class TakeCommandTest {
                 + "("
                 + item2.getWeight()
                 + ")"
-                + "\nAktuálna kapacita batohu: "
+                + SystemInfo.LINE_SEPARATOR
+                + "Aktuálna kapacita batohu: "
                 + inventory.getInventoryWeight()
                 + "/"
                 + inventory.getInventoryCapacity();
@@ -198,20 +215,26 @@ class TakeCommandTest {
 
             String actualOutput = takeCommand.executeCommand(nonValidItemNames);
             String expectedOutput =
-                "Z miestnosti si si nič nevzal!\n"
-                + "\nTieto veci sa mi v tejto miestnosti nepodarilo nájsť, nepomýlil si sa náhodou?\n"
+                "Z miestnosti si si nič nevzal!"
++ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
+                + "Tieto veci sa mi v tejto miestnosti nepodarilo nájsť, nepomýlil si sa náhodou?"
++ SystemInfo.LINE_SEPARATOR
                 + nonValidItemName
                 + ", "
                 + nonValidItemName
-                + "\nStále môžeš použit príkaz "
+                + SystemInfo.LINE_SEPARATOR
+                + "Stále môžeš použit príkaz "
                 + CommandName.LOOK_AROUND.getCommandName()
-                + " pre zobrazenie vecí, ktoré sú aktuálne v miestnosti,\n"
+                + " pre zobrazenie vecí, ktoré sú aktuálne v miestnosti,"
++ SystemInfo.LINE_SEPARATOR
                 + "prípadne jeden z dvojice príkazov "
                 + CommandName.EXAMINE_ITEM.getCommandName()
                 + ", "
                 + CommandName.EXAMINE_OBJECT.getCommandName()
                 + " v snahe nájsť skryté predmety"
-                + "\nAktuálna kapacita batohu: "
+                + SystemInfo.LINE_SEPARATOR
+                + "Aktuálna kapacita batohu: "
                 + inventory.getInventoryWeight()
                 + "/"
                 + inventory.getInventoryCapacity();
@@ -231,12 +254,15 @@ class TakeCommandTest {
 
             String actualOutput = takeCommand.executeCommand(itemsToTake);
             String expectedOutput =
-                "Do batohu si vkladáš nasledovné predmety (váha predmetu):\n"
+                "Do batohu si vkladáš nasledovné predmety (váha predmetu):"
++ SystemInfo.LINE_SEPARATOR
                 + item.getName()
                 + "("
                 + item.getWeight()
                 + ")"
-                + "\nTieto veci sa mi v tejto miestnosti nepodarilo nájsť, nepomýlil si sa náhodou?\n"
+                + SystemInfo.LINE_SEPARATOR
+                + "Tieto veci sa mi v tejto miestnosti nepodarilo nájsť, nepomýlil si sa náhodou?"
++ SystemInfo.LINE_SEPARATOR
                 + itemsToTake[1]
                 + ", "
                 + itemsToTake[2]
@@ -244,15 +270,18 @@ class TakeCommandTest {
                 + itemsToTake[3]
                 + ", "
                 + itemsToTake[4]
-                + "\nStále môžeš použit príkaz "
+                + SystemInfo.LINE_SEPARATOR
+                + "Stále môžeš použit príkaz "
                 + CommandName.LOOK_AROUND.getCommandName()
-                + " pre zobrazenie vecí, ktoré sú aktuálne v miestnosti,\n"
+                + " pre zobrazenie vecí, ktoré sú aktuálne v miestnosti,"
++ SystemInfo.LINE_SEPARATOR
                 + "prípadne jeden z dvojice príkazov "
                 + CommandName.EXAMINE_ITEM.getCommandName()
                 + ", "
                 + CommandName.EXAMINE_OBJECT.getCommandName()
                 + " v snahe nájsť skryté predmety"
-                + "\nAktuálna kapacita batohu: "
+                + SystemInfo.LINE_SEPARATOR
+                + "Aktuálna kapacita batohu: "
                 + inventory.getInventoryWeight()
                 + "/"
                 + inventory.getInventoryCapacity();

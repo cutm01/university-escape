@@ -1,5 +1,7 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
+
 /**
  * Třída HelpCommand implementuje pro hru příkaz napoveda. Tato třída je součástí jednoduché textové
  * hry.
@@ -48,12 +50,16 @@ class HelpCommand implements Command {
     @Override
     public String executeCommand(String... commandParameters) {
         return
-            "Tvojou úlohou je dostať sa z areálu školy von na ulicu a zachrániť si tak život!\n\n"
-            + "K dispozícii máš nasledovné príkazy:\n"
+            "Tvojou úlohou je dostať sa z areálu školy von na ulicu a zachrániť si tak život!"
+            + SystemInfo.LINE_SEPARATOR + SystemInfo.LINE_SEPARATOR
+            + "K dispozícii máš nasledovné príkazy:"
+            + SystemInfo.LINE_SEPARATOR
             + validCommands.getCommandsWithTheirUsage()
-            + "\nAktuálne sa nachádzaš v "
+            + SystemInfo.LINE_SEPARATOR
+            + "Aktuálne sa nachádzaš v "
             + gamePlan.getActualRoom().getName()
-            + ", mapa budovy:\n"
+            + ", mapa budovy:"
+            + SystemInfo.LINE_SEPARATOR
             + getGameMap();
     }
 
@@ -63,27 +69,27 @@ class HelpCommand implements Command {
      * @return String representing game map, i.e game rooms and how they are connected
      */
     private String getGameMap() {
-        return "................................................................................\n"
-               + ".            ________    _______   _____                             ________  .\n"
-               + ".           |        |  |       | |     |                           |        | .\n"
-               + ".           | RB_201 |  |toalety| |satna|                           |kniznica| .\n"
-               + ".           |__   ___|  |__   __| |_   _|                           |___   __| .\n"
-               + ".           ___| |____    _| |_____ | |__                            ___| |___ .\n"
-               + ". ______   |          |  |               |   ________               |         |.\n"
-               + ".|      |__|  chodba_ |__|   chodba_na_  |__|        |______________|         |.\n"
-               + ".|RB_202 __   na_II._  __   I._poschodi   __   Nova_   spojovacia_    Stara_  |.\n"
-               + ".|______|  | poschodi |  |               |  | budova     chodba       budova  |.\n"
-               + ".          |__________|  |______   ______|  |         ______________          |.\n"
-               + ".                            ___| |____     |___   __|              |_________|.\n"
-               + ".                           |          |      __| |__    ___________           .\n"
-               + ".                           |kancelaria|     |       |  |           |          .\n"
-               + ".                           |__________|     |       |__|Vencovskeho|          .\n"
-               + ".                                            | dvor   __    aula    |          .\n"
-               + ".                                            |       |  |___________|          .\n"
-               + ".                                            |__    _|                         .\n"
-               + ".                                            ___|  |___                        .\n"
-               + ".                                           |  ulica   |                       .\n"
-               + ".                                           |__________|                       .\n"
+        return "................................................................................" + SystemInfo.LINE_SEPARATOR
+               + ".            ________    _______   _____                             ________  ." + SystemInfo.LINE_SEPARATOR
+               + ".           |        |  |       | |     |                           |        | ." + SystemInfo.LINE_SEPARATOR
+               + ".           | RB_201 |  |toalety| |satna|                           |kniznica| ." + SystemInfo.LINE_SEPARATOR
+               + ".           |__   ___|  |__   __| |_   _|                           |___   __| ." + SystemInfo.LINE_SEPARATOR
+               + ".           ___| |____    _| |_____ | |__                            ___| |___ ." + SystemInfo.LINE_SEPARATOR
+               + ". ______   |          |  |               |   ________               |         |." + SystemInfo.LINE_SEPARATOR
+               + ".|      |__|  chodba_ |__|   chodba_na_  |__|        |______________|         |." + SystemInfo.LINE_SEPARATOR
+               + ".|RB_202 __   na_II._  __   I._poschodi   __   Nova_   spojovacia_    Stara_  |." + SystemInfo.LINE_SEPARATOR
+               + ".|______|  | poschodi |  |               |  | budova     chodba       budova  |." + SystemInfo.LINE_SEPARATOR
+               + ".          |__________|  |______   ______|  |         ______________          |." + SystemInfo.LINE_SEPARATOR
+               + ".                            ___| |____     |___   __|              |_________|." + SystemInfo.LINE_SEPARATOR
+               + ".                           |          |      __| |__    ___________           ." + SystemInfo.LINE_SEPARATOR
+               + ".                           |kancelaria|     |       |  |           |          ." + SystemInfo.LINE_SEPARATOR
+               + ".                           |__________|     |       |__|Vencovskeho|          ." + SystemInfo.LINE_SEPARATOR
+               + ".                                            | dvor   __    aula    |          ." + SystemInfo.LINE_SEPARATOR
+               + ".                                            |       |  |___________|          ." + SystemInfo.LINE_SEPARATOR
+               + ".                                            |__    _|                         ." + SystemInfo.LINE_SEPARATOR
+               + ".                                            ___|  |___                        ." + SystemInfo.LINE_SEPARATOR
+               + ".                                           |  ulica   |                       ." + SystemInfo.LINE_SEPARATOR
+               + ".                                           |__________|                       ." + SystemInfo.LINE_SEPARATOR
                + "................................................................................";
     }
 }

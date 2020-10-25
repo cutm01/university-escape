@@ -3,6 +3,7 @@ package cz.vse.java.cutm01.adventure.gamelogic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -63,7 +64,8 @@ class ApproachCommandTest {
             String[] parameters = {parameter, parameter};
 
             String expectedOutput =
-                "No tak, spomaľ trochu, a vyber si iba jednu osobu alebo objekt, ku ktorému chceš pristúpiť!\n"
+                "No tak, spomaľ trochu, a vyber si iba jednu osobu alebo objekt, ku ktorému chceš pristúpiť!"
+                + SystemInfo.LINE_SEPARATOR
                 + "Nie si predsa elektrón vo svete kvantovej mechaniky a nemôžeš byť naraz na dvoch rôznych miestach";
             String actualOutput = approachCommand.executeCommand(parameters);
 

@@ -1,5 +1,7 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
+
 /**
  * TalkTo command implementation, player can use this command to talk with non-player characters in
  * game
@@ -53,7 +55,7 @@ class TalkToCommand implements Command {
                 return
                     "Skús najprv pristúpiť k osobe, s ktorou sa chceš porozprávať. Aktuálne stojíš pri "
                     + characterPlayersStandsBy
-                    + "\n";
+                    + SystemInfo.LINE_SEPARATOR;
             }
             return gamePlan.getActualNonPlayerCharacter().getSpeech();
         }

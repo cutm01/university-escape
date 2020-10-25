@@ -15,8 +15,7 @@ public enum CommandDescription {
     OVERLOOK_ITEM("hráč si v rýchlosti prehliadne 1 predmet zo svojho batohu alebo miestnosti"),
     GO("hráč prejde do ďalšej miestnosti"),
     HELP("zobrazí cieľ hry, hernú mapu a zoznam príkazov spolu s ich použitím"),
-    LOOK_AROUND(
-        "hráč sa rozhliadne po miestnosti v snahe nájsť v nej predmety, osoby alebo objekty"),
+    LOOK_AROUND("hráč sa rozhliadne po miestnosti v snahe nájsť v nej predmety, osoby alebo objekty"),
     SHOW_INVENTORY("zobrazí aktuálny obsah hráčovho batohu"),
     TAKE("hráč vezme 1 alebo viac predmetov (oddelených medzerou) z miestnosti"),
     TALK_TO("hráč sa prihovorí osobe, pri ktorej aktuálne stojí"),

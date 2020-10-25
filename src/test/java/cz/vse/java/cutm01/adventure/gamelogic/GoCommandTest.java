@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -120,7 +121,7 @@ class GoCommandTest {
                 + street.getName()
                 + ", "
                 + street.getDescription()
-                + "\n";
+                + SystemInfo.LINE_SEPARATOR;
             String actualOutput = goCommand.executeCommand(street.getName());
 
             assertEquals(expectedOutput, actualOutput);
@@ -140,7 +141,7 @@ class GoCommandTest {
                 + oldBuilding.getName()
                 + ", "
                 + oldBuilding.getDescription()
-                + "\n";
+                + SystemInfo.LINE_SEPARATOR;
             String actualOutput = goCommand.executeCommand(oldBuilding.getName());
 
             assertEquals(expectedOutput, actualOutput);
@@ -161,7 +162,7 @@ class GoCommandTest {
                 + oldBuilding.getName()
                 + ", "
                 + oldBuilding.getDescription()
-                + "\n";
+                + SystemInfo.LINE_SEPARATOR;
             String actualOutput = goCommand.executeCommand(oldBuilding.getName());
 
             assertEquals(expectedOutput, actualOutput);
@@ -180,7 +181,7 @@ class GoCommandTest {
                 + neighboringRoom.getName()
                 + ", "
                 + neighboringRoom.getDescription()
-                + "\n";
+                + SystemInfo.LINE_SEPARATOR;
             String actualOutput = goCommand.executeCommand(neighboringRoom.getName());
 
             assertEquals(expectedOutput, actualOutput);

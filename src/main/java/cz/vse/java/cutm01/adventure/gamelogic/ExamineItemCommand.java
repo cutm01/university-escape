@@ -1,5 +1,7 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
+
 /**
  * Examine item command implementation, player can use this command to examine item from his
  * inventory or from actual room in more detail.<br> Player can find hidden items this way
@@ -113,9 +115,12 @@ class ExamineItemCommand implements Command {
         String foundItemsInfo =
             "S trasúcimi rukami si prezeráš predmet "
             + itemToExamineName
-            + " a podarilo sa ti nájsť nasledovné veci (váha predmetu):\n"
+            + " a podarilo sa ti nájsť nasledovné veci (váha predmetu):"
+            + SystemInfo.LINE_SEPARATOR
             + itemToExamine.getHiddenItems().getHiddenItemsDescription()
-            + "\nAle nie! Vyzeráš byť z toho všetkého v značnom strese a veci, ktoré si práve našiel, ti popadali na zem\n"
+            + SystemInfo.LINE_SEPARATOR
+            + "Ale nie! Vyzeráš byť z toho všetkého v značnom strese a veci, ktoré si práve našiel, ti popadali na zem"
+            + SystemInfo.LINE_SEPARATOR
             + "a teraz sa povaľujú všade po miestnosti";
         itemToExamine.getHiddenItems()
             .moveHiddenItemsFromInventoryToRoom(gamePlan, itemToExamineName);
@@ -152,9 +157,12 @@ class ExamineItemCommand implements Command {
         String foundItemsInfo =
             "S trasúcimi rukami si prezeráš predmet "
             + itemToExamineName
-            + " a podarilo sa ti nájsť nasledovné veci (váha predmetu):\n"
+            + " a podarilo sa ti nájsť nasledovné veci (váha predmetu):"
++ SystemInfo.LINE_SEPARATOR
             + itemToExamine.getHiddenItems().getHiddenItemsDescription()
-            + "\nAle nie! Vyzeráš byť z toho všetkého v značnom strese a veci, ktoré si práve našiel, ti popadali na zem\n"
+            + SystemInfo.LINE_SEPARATOR
+            + "Ale nie! Vyzeráš byť z toho všetkého v značnom strese a veci, ktoré si práve našiel, ti popadali na zem"
++ SystemInfo.LINE_SEPARATOR
             + "a teraz sa povaľujú všade po miestnosti";
         itemToExamine.getHiddenItems().moveHiddenItemsFromItemToRoom(gamePlan, itemToExamineName);
 

@@ -1,5 +1,6 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,22 +84,25 @@ class TakeCommand implements Command {
         // preparing output String for player with information which items were taken and which were not
         StringBuilder outputText = new StringBuilder();
         if (itemsToTake.size() == 0) {
-            outputText.append("Z miestnosti si si nič nevzal!\n");
+            outputText.append("Z miestnosti si si nič nevzal!").append(SystemInfo.LINE_SEPARATOR);
         } else {
-            outputText.append("Do batohu si vkladáš nasledovné predmety (váha predmetu):\n");
+            outputText.append("Do batohu si vkladáš nasledovné predmety (váha predmetu):").append(SystemInfo.LINE_SEPARATOR);
             outputText
                 .append(FormatOutputTextUtils.getOutputTextForTakenItems(gamePlan, itemsToTake, 4));
         }
 
         if (nonValidItems.size() > 0) {
-            outputText.append(
-                "\nTieto veci sa mi v tejto miestnosti nepodarilo nájsť, nepomýlil si sa náhodou?\n");
+            outputText
+                .append(SystemInfo.LINE_SEPARATOR)
+                .append("Tieto veci sa mi v tejto miestnosti nepodarilo nájsť, nepomýlil si sa náhodou?")
+                .append(SystemInfo.LINE_SEPARATOR);
             outputText
                 .append(FormatOutputTextUtils.getOutputTextForNonValidItems(nonValidItems, 4));
             outputText
-                .append("\nStále môžeš použit príkaz ")
+                .append(SystemInfo.LINE_SEPARATOR)
+                .append("Stále môžeš použit príkaz ")
                 .append(CommandName.LOOK_AROUND.getCommandName())
-                .append(" pre zobrazenie vecí, ktoré sú aktuálne v miestnosti,\n");
+                .append(" pre zobrazenie vecí, ktoré sú aktuálne v miestnosti,").append(SystemInfo.LINE_SEPARATOR);
             outputText
                 .append("prípadne jeden z dvojice príkazov ")
                 .append(CommandName.EXAMINE_ITEM.getCommandName())
@@ -119,7 +123,7 @@ class TakeCommand implements Command {
         int newInventoryWeight = inventoryWeight + itemsToTakeWeight;
         gamePlan.getPlayer().getInventory().setInventoryWeight(newInventoryWeight);
 
-        outputText.append("\nAktuálna kapacita batohu: ");
+        outputText.append(SystemInfo.LINE_SEPARATOR).append("Aktuálna kapacita batohu: ");
         outputText.append(newInventoryWeight).append("/").append(inventoryCapacity);
 
         return outputText.toString();
