@@ -100,7 +100,7 @@ class UseCommandTest {
             String actualOutput = useCommand.executeCommand(itemToUse.getName());
 
             assertEquals(expectedOutput, actualOutput);
-            assertTrue(gamePlan.getPlayer().getIsPlayerWearingMedicalMask());
+            assertTrue(gamePlan.getPlayer().isPlayerWearingMedicalMask());
             assertFalse(
                 inventory.isItemInInventory(itemToUse.getName())); // medical mask should be removed
             assertEquals(
@@ -120,7 +120,7 @@ class UseCommandTest {
             String actualOutput = useCommand.executeCommand(itemToUse.getName());
 
             assertEquals(expectedOutput, actualOutput);
-            assertTrue(gamePlan.getPlayer().getIsPlayerWearingMedicalSuit());
+            assertTrue(gamePlan.getPlayer().isPlayerWearingMedicalSuit());
             assertFalse(
                 inventory.isItemInInventory(
                     itemToUse.getName())); // protective medical suit should be removed
@@ -143,8 +143,8 @@ class UseCommandTest {
             String actualOutput = useCommand.executeCommand(itemToUse.getName());
 
             assertEquals(expectedOutput, actualOutput);
-            assertTrue(gamePlan.getPlayer().getIsPlayerWearingMedicalMask());
-            assertTrue(gamePlan.getPlayer().getIsPlayerWearingMedicalSuit());
+            assertTrue(gamePlan.getPlayer().isPlayerWearingMedicalMask());
+            assertTrue(gamePlan.getPlayer().isPlayerWearingMedicalSuit());
             assertFalse(
                 inventory.isItemInInventory(itemToUse.getName())); // medical mask should be removed
             assertEquals(
@@ -186,7 +186,7 @@ class UseCommandTest {
 
             useCommand.executeCommand(itemToUse.getName());
 
-            assertTrue(gamePlan.getPlayer().getHasPlayerAttackedCleaningLady());
+            assertTrue(gamePlan.getPlayer().hasPlayerAttackedCleaningLady());
         }
 
         @ParameterizedTest
@@ -211,7 +211,7 @@ class UseCommandTest {
 
             useCommand.executeCommand(itemToUse.getName());
 
-            assertTrue(gamePlan.getPlayer().getHasPlayerAttackedITAdmin());
+            assertTrue(gamePlan.getPlayer().hasPlayerAttackedITAdmin());
         }
 
         @ParameterizedTest
@@ -237,7 +237,7 @@ class UseCommandTest {
 
             useCommand.executeCommand(itemToUse.getName());
 
-            assertTrue(gamePlan.getPlayer().getHasPlayerAttackedDoorKeeper());
+            assertTrue(gamePlan.getPlayer().hasPlayerAttackedDoorKeeper());
         }
 
         @ParameterizedTest
@@ -263,7 +263,7 @@ class UseCommandTest {
 
             useCommand.executeCommand(itemToUse.getName());
 
-            assertTrue(gamePlan.getPlayer().getHasPlayerBribedDoorKeeper());
+            assertTrue(gamePlan.getPlayer().hasPlayerBribedDoorKeeper());
         }
 
         @ParameterizedTest
@@ -279,8 +279,8 @@ class UseCommandTest {
 
             useCommand.executeCommand(itemToUse.getName());
 
-            assertTrue(gamePlan.getPlayer().getHasPlayerEscapedUsingWindow());
-            assertTrue(gamePlan.getHasPlayerReachedFinalRoom());
+            assertTrue(gamePlan.getPlayer().hasPlayerEscapedUsingWindow());
+            assertTrue(gamePlan.hasPlayerReachedFinalRoom());
         }
     }
 }

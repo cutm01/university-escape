@@ -44,7 +44,7 @@ class Item {
         return hiddenItems;
     }
 
-    public boolean getWasItemAlreadyExamined() {
+    public boolean wasItemAlreadyExamined() {
         return wasItemAlreadyExamined;
     }
 

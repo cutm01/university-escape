@@ -43,7 +43,7 @@ class InteractableObject {
         return name;
     }
 
-    public boolean getWasInteractableObjectAlreadyExamined() {
+    public boolean wasInteractableObjectAlreadyExamined() {
         return wasInteractableObjectAlreadyExamined;
     }
 

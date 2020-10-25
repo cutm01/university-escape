@@ -103,7 +103,7 @@ class Room {
         return Collections.unmodifiableCollection(neighboringRooms);
     }
 
-    public boolean getWasRoomAlreadyExamined() {
+    public boolean wasRoomAlreadyExamined() {
         return wasRoomAlreadyExamined;
     }
 
@@ -111,7 +111,7 @@ class Room {
         this.wasRoomAlreadyExamined = wasRoomAlreadyExamined;
     }
 
-    public boolean getIsRoomLocked() {
+    public boolean isRoomLocked() {
         return isRoomLocked;
     }
 

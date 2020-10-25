@@ -49,7 +49,7 @@ class ExamineObjectCommand implements Command {
 
         String interactableObjectName = commandParameters[0];
         // player has firstly look around the room to ,,unlock" interaction with objects
-        boolean wasRoomAlreadyExamined = gamePlan.getActualRoom().getWasRoomAlreadyExamined();
+        boolean wasRoomAlreadyExamined = gamePlan.getActualRoom().wasRoomAlreadyExamined();
         if (!wasRoomAlreadyExamined) {
             return "Si si istý, že sa tu ten objekt skutočne nachádza? Skús sa najprv poriadne rozhliadnuť po miestnosti";
         }
@@ -75,7 +75,7 @@ class ExamineObjectCommand implements Command {
         InteractableObject objectToExamine =
             gamePlan.getActualRoom().getInteractableObjectByName(interactableObjectName);
         boolean wasObjectAlreadyExamined = objectToExamine
-            .getWasInteractableObjectAlreadyExamined();
+            .wasInteractableObjectAlreadyExamined();
         if (wasObjectAlreadyExamined) {
             return "Tento objekt si už preskúmal v minulosti, nič nového, čo by ti pomohlo na ňom nenájdeš!";
         }

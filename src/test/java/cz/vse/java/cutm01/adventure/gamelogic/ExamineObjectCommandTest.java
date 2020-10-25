@@ -243,7 +243,7 @@ class ExamineObjectCommandTest {
             // object should be set to "wasAlreadyExamined = true" and remain in room after examination
             assertEquals(
                 interactableObject, room.getInteractableObjectByName(interactableObject.getName()));
-            assertTrue(interactableObject.getWasInteractableObjectAlreadyExamined());
+            assertTrue(interactableObject.wasInteractableObjectAlreadyExamined());
         }
 
         @ParameterizedTest(name = "examined object: {0}")
@@ -275,7 +275,7 @@ class ExamineObjectCommandTest {
                         .getName())); // object should remain in room after examination
             assertTrue(
                 interactableObject
-                    .getWasInteractableObjectAlreadyExamined()); // should be set to true, even if object
+                    .wasInteractableObjectAlreadyExamined()); // should be set to true, even if object
             // does not have any hidden items in it
         }
     }

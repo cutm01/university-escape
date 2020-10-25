@@ -135,7 +135,7 @@ public enum RoomSetUpInformation {
         this.nonPlayerCharactersInRoom = nonPlayerCharactersInRoom;
     }
 
-    public boolean getIsRoomLocked() {
+    public boolean isRoomLocked() {
         return isRoomLocked;
     }
 

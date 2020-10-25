@@ -81,7 +81,7 @@ public class GameImpl implements Game {
         StringBuilder gameEnding = new StringBuilder();
 
         // player can either escape through courtyard...
-        if (gamePlan.getPlayer().getHasPlayerEscapedThroughCourtyard()) {
+        if (gamePlan.getPlayer().hasPlayerEscapedThroughCourtyard()) {
             gameEnding
                 .append(
                     "Na poslednú chvíľu opúšťaš budovu a na ulici sa pripájaš k ostatným preživším."
@@ -90,7 +90,7 @@ public class GameImpl implements Game {
                 .append(SystemInfo.LINE_SEPARATOR);
         }
         // ...or through window in Old Building using rope
-        if (gamePlan.getPlayer().getHasPlayerEscapedUsingWindow()) {
+        if (gamePlan.getPlayer().hasPlayerEscapedUsingWindow()) {
             gameEnding
                 .append(
                     "Všetci so zatajeným dychom pozorujú ako sa zlaňuješ z okna Starej budovy")
@@ -101,7 +101,7 @@ public class GameImpl implements Game {
 
         // add game ending according to actions which player did during game:
         // player passed by coughing teacher and get Covid-19
-        if (gamePlan.getPlayer().getHasPlayerPassedByCoughingTeacher()) {
+        if (gamePlan.getPlayer().hasPlayerPassedByCoughingTeacher()) {
             gameEnding
                 .append(
                     "Má to však háčik... po 2 týždňoch sa u teba začali prejavovať respiračné problémy")
@@ -114,7 +114,7 @@ public class GameImpl implements Game {
 
         }
         // player attacked cleaning lady with pen, rope or fire extinguisher
-        else if (gamePlan.getPlayer().getHasPlayerAttackedCleaningLady()) {
+        else if (gamePlan.getPlayer().hasPlayerAttackedCleaningLady()) {
             gameEnding
                 .append(
                     "Má to však háčik...vyzerá to, že si niekto všimol to, čo si urobil tej úbohej pani")
@@ -129,7 +129,7 @@ public class GameImpl implements Game {
                 .append(SystemInfo.LINE_SEPARATOR);
         }
         // player attacked IT admin with pen, rope or fire extinguisher
-        else if (gamePlan.getPlayer().getHasPlayerAttackedITAdmin()) {
+        else if (gamePlan.getPlayer().hasPlayerAttackedITAdmin()) {
             gameEnding
                 .append(
                     "Má to však háčik...vyzerá to, že si niekto všimol to, čo si urobil tomu úbohému IT adminovi")
@@ -144,7 +144,7 @@ public class GameImpl implements Game {
                 .append(SystemInfo.LINE_SEPARATOR);
         }
         // player attacked door keeper with pen, rope or fire extinguisher
-        else if (gamePlan.getPlayer().getHasPlayerAttackedDoorKeeper()) {
+        else if (gamePlan.getPlayer().hasPlayerAttackedDoorKeeper()) {
             gameEnding
                 .append(
                     "Avšak...to si si naozaj myslel, že potom čo si urobil tomu vrátnikovi si iba tak spokojne odkráčaš domov?")
@@ -156,7 +156,7 @@ public class GameImpl implements Game {
                 .append(SystemInfo.LINE_SEPARATOR);
         }
         // player tried to bribe door keeper with stolen money
-        else if (gamePlan.getPlayer().getHasPlayerBribedDoorKeeper()) {
+        else if (gamePlan.getPlayer().hasPlayerBribedDoorKeeper()) {
             gameEnding
                 .append(
                     "Vyzerá to, že si ťa niekto všimol pri tvojom pokuse uplatiť vrátnika, ba čo viac, peniaze, ktorými")
@@ -204,7 +204,7 @@ public class GameImpl implements Game {
         return textToDisplay;
     }
 
-    public boolean getWasGameTerminatedUsingEndGameCommand() {
+    public boolean wasGameTerminatedUsingEndGameCommand() {
         return wasGameTerminatedUsingEndGameCommand;
     }
 

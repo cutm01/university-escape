@@ -46,7 +46,7 @@ class TakeCommand implements Command {
         }
 
         /// player has firstly look around the room to find all items he can take
-        boolean wasRoomAlreadyExamined = gamePlan.getActualRoom().getWasRoomAlreadyExamined();
+        boolean wasRoomAlreadyExamined = gamePlan.getActualRoom().wasRoomAlreadyExamined();
         if (!wasRoomAlreadyExamined) {
             return "Na chvíľu spomaľ a poriadne sa rozhliadni po miestnosti, aby si vôbec vedel, aké predmety si môžeš odniesť";
         }

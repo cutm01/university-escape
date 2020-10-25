@@ -53,7 +53,7 @@ class OverlookItemCommand implements Command {
                 .getDescription();
         }
 
-        boolean wasRoomAlreadyExamined = gamePlan.getActualRoom().getWasRoomAlreadyExamined();
+        boolean wasRoomAlreadyExamined = gamePlan.getActualRoom().wasRoomAlreadyExamined();
         if (!wasRoomAlreadyExamined) {
             return "Kde mám ten predmet hľadať? Asi by bolo fajn sa najprv poriadne rozhliadnuť po miestnosti";
         }

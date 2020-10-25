@@ -103,7 +103,7 @@ class LookAroundCommandTest {
             String actualOutput = lookAroundCommand.executeCommand(parameter);
 
             assertEquals(expectedOutput, actualOutput);
-            assertFalse(room.getWasRoomAlreadyExamined());
+            assertFalse(room.wasRoomAlreadyExamined());
         }
 
         @Test
@@ -114,7 +114,7 @@ class LookAroundCommandTest {
             String actualOutput = lookAroundCommand.executeCommand();
 
             assertEquals(expectedOutput, actualOutput);
-            assertTrue(room.getWasRoomAlreadyExamined());
+            assertTrue(room.wasRoomAlreadyExamined());
         }
 
         @ParameterizedTest
@@ -129,7 +129,7 @@ class LookAroundCommandTest {
             String actualOutput = lookAroundCommand.executeCommand();
 
             assertEquals(expectedOutput, actualOutput);
-            assertTrue(room.getWasRoomAlreadyExamined());
+            assertTrue(room.wasRoomAlreadyExamined());
         }
 
         @ParameterizedTest
@@ -145,7 +145,7 @@ class LookAroundCommandTest {
             String actualOutput = lookAroundCommand.executeCommand();
 
             assertEquals(expectedOutput, actualOutput);
-            assertTrue(room.getWasRoomAlreadyExamined());
+            assertTrue(room.wasRoomAlreadyExamined());
         }
 
         @ParameterizedTest
@@ -160,7 +160,7 @@ class LookAroundCommandTest {
             String actualOutput = lookAroundCommand.executeCommand();
 
             assertEquals(expectedOutput, actualOutput);
-            assertTrue(room.getWasRoomAlreadyExamined());
+            assertTrue(room.wasRoomAlreadyExamined());
         }
 
         @ParameterizedTest
@@ -174,7 +174,7 @@ class LookAroundCommandTest {
             String actualOutput = lookAroundCommand.executeCommand();
 
             assertEquals(expectedOutput, actualOutput);
-            assertTrue(room.getWasRoomAlreadyExamined());
+            assertTrue(room.wasRoomAlreadyExamined());
         }
 
         @ParameterizedTest
@@ -202,7 +202,7 @@ class LookAroundCommandTest {
             String actualOutput = lookAroundCommand.executeCommand();
 
             assertEquals(expectedOutput, actualOutput);
-            assertTrue(room.getWasRoomAlreadyExamined());
+            assertTrue(room.wasRoomAlreadyExamined());
         }
     }
 }

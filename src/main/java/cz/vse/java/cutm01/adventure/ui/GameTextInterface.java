@@ -39,14 +39,14 @@ public class GameTextInterface {
 
         while (!game.isGameOver()) {
             // player reached the final room and game ends
-            if (game.getGamePlan().getHasPlayerReachedFinalRoom()) {
+            if (game.getGamePlan().hasPlayerReachedFinalRoom()) {
                 break;
             }
             String userInput = readUserInput();
             System.out.println(game.parseUserInput(userInput));
         }
 
-        if (game.getWasGameTerminatedUsingEndGameCommand()) {
+        if (game.wasGameTerminatedUsingEndGameCommand()) {
             System.out.println(
                 "Hra bola ukončená príkazom " + CommandName.END_GAME.getCommandName() + SystemInfo.LINE_SEPARATOR);
         } else {

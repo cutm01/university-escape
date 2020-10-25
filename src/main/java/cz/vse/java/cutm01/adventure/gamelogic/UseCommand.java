@@ -58,7 +58,7 @@ class UseCommand implements Command {
             gamePlan.getPlayer().setIsPlayerWearingMedicalMask(true);
 
             boolean isPlayerWearingMedicalSuit = gamePlan.getPlayer()
-                .getIsPlayerWearingMedicalSuit();
+                .isPlayerWearingMedicalSuit();
             if (isPlayerWearingMedicalSuit) {
                 return "Opatrnosti nikdy nie je dosť a preto si sa rozhodol nasadiť si k celotelovému obleku aj rúško";
             }

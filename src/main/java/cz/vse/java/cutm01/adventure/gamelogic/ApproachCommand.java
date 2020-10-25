@@ -39,7 +39,7 @@ class ApproachCommand implements Command {
      */
     @Override
     public String executeCommand(String... commandParameters) {
-        if (!gamePlan.getActualRoom().getWasRoomAlreadyExamined()) {
+        if (!gamePlan.getActualRoom().wasRoomAlreadyExamined()) {
             return "Asi by bolo vhodné sa najprv poriadne rozhliadnuť po miestnosti";
         }
 

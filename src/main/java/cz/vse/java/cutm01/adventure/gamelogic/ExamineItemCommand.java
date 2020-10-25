@@ -59,7 +59,7 @@ class ExamineItemCommand implements Command {
                     .getPlayer()
                     .getInventory()
                     .getItemByName(itemToExamineName)
-                    .getWasItemAlreadyExamined();
+                    .wasItemAlreadyExamined();
             if (!wasItemAlreadyExamined) {
                 return examineItemFromInventory(itemToExamineName);
             }
@@ -67,7 +67,7 @@ class ExamineItemCommand implements Command {
         }
 
         // player has firstly look around the room to ,,unlock" interaction with items
-        boolean wasRoomAlreadyExamined = gamePlan.getActualRoom().getWasRoomAlreadyExamined();
+        boolean wasRoomAlreadyExamined = gamePlan.getActualRoom().wasRoomAlreadyExamined();
         if (!wasRoomAlreadyExamined) {
             return "Kde mám ten predmet hľadať? Asi by bolo fajn sa najprv poriadne rozhliadnuť po miestnosti";
         }
@@ -77,7 +77,7 @@ class ExamineItemCommand implements Command {
         if (isItemInRoom) {
             boolean wasItemAlreadyExamined =
                 gamePlan.getActualRoom().getItemByName(itemToExamineName)
-                    .getWasItemAlreadyExamined();
+                    .wasItemAlreadyExamined();
             if (!wasItemAlreadyExamined) {
                 return examineItemFromRoom(itemToExamineName);
             }

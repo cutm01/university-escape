@@ -73,7 +73,7 @@ class GameImplTest {
         assertFalse(
             game.getGamePlan().getPlayer().getInventory().isItemInInventory("hasiaci_pristroj"));
         assertFalse(
-            game.getGamePlan().getActualRoom().getNeighboringRoomByName("dvor").getIsRoomLocked());
+            game.getGamePlan().getActualRoom().getNeighboringRoomByName("dvor").isRoomLocked());
 
         game.parseUserInput("chod dvor");
         assertEquals(RoomName.getRoomName("COURTYARD"),
@@ -91,11 +91,11 @@ class GameImplTest {
         assertFalse(
             game.getGamePlan().getPlayer().getInventory().isItemInInventory("obciansky_preukaz"));
         assertFalse(
-            game.getGamePlan().getActualRoom().getNeighboringRoomByName("ulica").getIsRoomLocked());
+            game.getGamePlan().getActualRoom().getNeighboringRoomByName("ulica").isRoomLocked());
 
         game.parseUserInput("chod ulica");
         assertEquals(RoomName.getRoomName("STREET"), game.getGamePlan().getActualRoom().getName());
-        assertTrue(game.getGamePlan().getHasPlayerReachedFinalRoom());
+        assertTrue(game.getGamePlan().hasPlayerReachedFinalRoom());
 
         String expectedGameEnding =
             "Na poslednú chvíľu opúšťaš budovu a na ulici sa pripájaš k ostatným preživším."
@@ -145,7 +145,7 @@ class GameImplTest {
             game.getGamePlan().getActualNonPlayerCharacter().getName());
 
         game.parseUserInput("pouzi hasiaci_pristroj");
-        assertTrue(game.getGamePlan().getPlayer().getHasPlayerAttackedCleaningLady());
+        assertTrue(game.getGamePlan().getPlayer().hasPlayerAttackedCleaningLady());
         assertTrue(game.getGamePlan().getActualRoom().isItemInRoom("kluce"));
         assertFalse(
             game.getGamePlan().getPlayer().getInventory().isItemInInventory("hasiaci_pristroj"));
@@ -172,7 +172,7 @@ class GameImplTest {
         game.parseUserInput("pouzi kluce");
         assertFalse(game.getGamePlan().getPlayer().getInventory().isItemInInventory("kluce"));
         assertFalse(
-            game.getGamePlan().getActualRoom().getNeighboringRoomByName("dvor").getIsRoomLocked());
+            game.getGamePlan().getActualRoom().getNeighboringRoomByName("dvor").isRoomLocked());
 
         game.parseUserInput("chod dvor");
         assertEquals(RoomName.getRoomName("COURTYARD"),
@@ -190,11 +190,11 @@ class GameImplTest {
         assertFalse(
             game.getGamePlan().getPlayer().getInventory().isItemInInventory("obciansky_preukaz"));
         assertFalse(
-            game.getGamePlan().getActualRoom().getNeighboringRoomByName("ulica").getIsRoomLocked());
+            game.getGamePlan().getActualRoom().getNeighboringRoomByName("ulica").isRoomLocked());
 
         game.parseUserInput("chod ulica");
         assertEquals(RoomName.getRoomName("STREET"), game.getGamePlan().getActualRoom().getName());
-        assertTrue(game.getGamePlan().getHasPlayerReachedFinalRoom());
+        assertTrue(game.getGamePlan().hasPlayerReachedFinalRoom());
 
         String expectedGameEnding =
             "Na poslednú chvíľu opúšťaš budovu a na ulici sa pripájaš k ostatným preživším."
@@ -251,7 +251,7 @@ class GameImplTest {
             game.getGamePlan().getActualNonPlayerCharacter().getName());
 
         game.parseUserInput("pouzi pero");
-        assertTrue(game.getGamePlan().getPlayer().getHasPlayerAttackedITAdmin());
+        assertTrue(game.getGamePlan().getPlayer().hasPlayerAttackedITAdmin());
         assertFalse(game.getGamePlan().getPlayer().getInventory().isItemInInventory("pero"));
 
         game.parseUserInput("pristup_k stol");
@@ -284,7 +284,7 @@ class GameImplTest {
         game.parseUserInput("pouzi spinka");
         assertFalse(game.getGamePlan().getPlayer().getInventory().isItemInInventory("spinka"));
         assertFalse(
-            game.getGamePlan().getActualRoom().getNeighboringRoomByName("dvor").getIsRoomLocked());
+            game.getGamePlan().getActualRoom().getNeighboringRoomByName("dvor").isRoomLocked());
 
         game.parseUserInput("chod dvor");
         assertEquals(RoomName.getRoomName("COURTYARD"),
@@ -302,11 +302,11 @@ class GameImplTest {
         assertFalse(
             game.getGamePlan().getPlayer().getInventory().isItemInInventory("obciansky_preukaz"));
         assertFalse(
-            game.getGamePlan().getActualRoom().getNeighboringRoomByName("ulica").getIsRoomLocked());
+            game.getGamePlan().getActualRoom().getNeighboringRoomByName("ulica").isRoomLocked());
 
         game.parseUserInput("chod ulica");
         assertEquals(RoomName.getRoomName("STREET"), game.getGamePlan().getActualRoom().getName());
-        assertTrue(game.getGamePlan().getHasPlayerReachedFinalRoom());
+        assertTrue(game.getGamePlan().hasPlayerReachedFinalRoom());
 
         String expectedGameEnding =
             "Na poslednú chvíľu opúšťaš budovu a na ulici sa pripájaš k ostatným preživším."
@@ -374,7 +374,7 @@ class GameImplTest {
         assertFalse(
             game.getGamePlan().getPlayer().getInventory().isItemInInventory("hasiaci_pristroj"));
         assertFalse(
-            game.getGamePlan().getActualRoom().getNeighboringRoomByName("dvor").getIsRoomLocked());
+            game.getGamePlan().getActualRoom().getNeighboringRoomByName("dvor").isRoomLocked());
 
         game.parseUserInput("chod dvor");
         assertEquals(RoomName.getRoomName("COURTYARD"),
@@ -389,14 +389,14 @@ class GameImplTest {
             game.getGamePlan().getActualNonPlayerCharacter().getName());
 
         game.parseUserInput("pouzi pero");
-        assertTrue(game.getGamePlan().getPlayer().getHasPlayerAttackedDoorKeeper());
+        assertTrue(game.getGamePlan().getPlayer().hasPlayerAttackedDoorKeeper());
         assertFalse(game.getGamePlan().getPlayer().getInventory().isItemInInventory("pero"));
         assertFalse(
-            game.getGamePlan().getActualRoom().getNeighboringRoomByName("ulica").getIsRoomLocked());
+            game.getGamePlan().getActualRoom().getNeighboringRoomByName("ulica").isRoomLocked());
 
         game.parseUserInput("chod ulica");
         assertEquals(RoomName.getRoomName("STREET"), game.getGamePlan().getActualRoom().getName());
-        assertTrue(game.getGamePlan().getHasPlayerReachedFinalRoom());
+        assertTrue(game.getGamePlan().hasPlayerReachedFinalRoom());
 
         String expectedGameEnding =
             "Na poslednú chvíľu opúšťaš budovu a na ulici sa pripájaš k ostatným preživším."
@@ -459,7 +459,7 @@ class GameImplTest {
         assertFalse(
             game.getGamePlan().getPlayer().getInventory().isItemInInventory("hasiaci_pristroj"));
         assertFalse(
-            game.getGamePlan().getActualRoom().getNeighboringRoomByName("dvor").getIsRoomLocked());
+            game.getGamePlan().getActualRoom().getNeighboringRoomByName("dvor").isRoomLocked());
 
         game.parseUserInput("chod dvor");
         assertEquals(RoomName.getRoomName("COURTYARD"),
@@ -492,15 +492,15 @@ class GameImplTest {
             game.getGamePlan().getActualNonPlayerCharacter().getName());
 
         game.parseUserInput("pouzi velky_obnos_penazi");
-        assertTrue(game.getGamePlan().getPlayer().getHasPlayerBribedDoorKeeper());
+        assertTrue(game.getGamePlan().getPlayer().hasPlayerBribedDoorKeeper());
         assertFalse(
             game.getGamePlan().getPlayer().getInventory().isItemInInventory("velky_obnos_penazi"));
         assertFalse(
-            game.getGamePlan().getActualRoom().getNeighboringRoomByName("ulica").getIsRoomLocked());
+            game.getGamePlan().getActualRoom().getNeighboringRoomByName("ulica").isRoomLocked());
 
         game.parseUserInput("chod ulica");
         assertEquals(RoomName.getRoomName("STREET"), game.getGamePlan().getActualRoom().getName());
-        assertTrue(game.getGamePlan().getHasPlayerReachedFinalRoom());
+        assertTrue(game.getGamePlan().hasPlayerReachedFinalRoom());
 
         String expectedGameEnding =
             "Na poslednú chvíľu opúšťaš budovu a na ulici sa pripájaš k ostatným preživším."
@@ -593,7 +593,7 @@ class GameImplTest {
         assertFalse(
             game.getGamePlan().getPlayer().getInventory().isItemInInventory("hasiaci_pristroj"));
         assertFalse(
-            game.getGamePlan().getActualRoom().getNeighboringRoomByName("dvor").getIsRoomLocked());
+            game.getGamePlan().getActualRoom().getNeighboringRoomByName("dvor").isRoomLocked());
 
         game.parseUserInput("chod dvor");
         assertEquals(RoomName.getRoomName("COURTYARD"),
@@ -611,11 +611,11 @@ class GameImplTest {
         assertFalse(
             game.getGamePlan().getPlayer().getInventory().isItemInInventory("obciansky_preukaz"));
         assertFalse(
-            game.getGamePlan().getActualRoom().getNeighboringRoomByName("ulica").getIsRoomLocked());
+            game.getGamePlan().getActualRoom().getNeighboringRoomByName("ulica").isRoomLocked());
 
         game.parseUserInput("chod ulica");
         assertEquals(RoomName.getRoomName("STREET"), game.getGamePlan().getActualRoom().getName());
-        assertTrue(game.getGamePlan().getHasPlayerReachedFinalRoom());
+        assertTrue(game.getGamePlan().hasPlayerReachedFinalRoom());
 
         String expectedGameEnding =
             "Na poslednú chvíľu opúšťaš budovu a na ulici sa pripájaš k ostatným preživším."
@@ -656,7 +656,7 @@ class GameImplTest {
         assertTrue(game.getGamePlan().getPlayer().getInventory().isItemInInventory("rusko"));
 
         game.parseUserInput("pouzi rusko");
-        assertTrue(game.getGamePlan().getPlayer().getIsPlayerWearingMedicalMask());
+        assertTrue(game.getGamePlan().getPlayer().isPlayerWearingMedicalMask());
         assertFalse(game.getGamePlan().getPlayer().getInventory().isItemInInventory("rusko"));
 
         game.parseUserInput("chod chodba_na_I._poschodi");
@@ -776,8 +776,8 @@ class GameImplTest {
             game.getGamePlan().getActualInteractableObject().getName());
 
         game.parseUserInput("pouzi lano");
-        assertTrue(game.getGamePlan().getPlayer().getHasPlayerEscapedUsingWindow());
-        assertTrue(game.getGamePlan().getHasPlayerReachedFinalRoom());
+        assertTrue(game.getGamePlan().getPlayer().hasPlayerEscapedUsingWindow());
+        assertTrue(game.getGamePlan().hasPlayerReachedFinalRoom());
         // assertFalse(game.getGamePlan().getPlayer().getInventory().isItemInInventory("lano"));
 
         String expectedGameEnding =
@@ -813,7 +813,7 @@ class GameImplTest {
         assertTrue(game.getGamePlan().getPlayer().getInventory().isItemInInventory("rusko"));
 
         game.parseUserInput("pouzi rusko");
-        assertTrue(game.getGamePlan().getPlayer().getIsPlayerWearingMedicalMask());
+        assertTrue(game.getGamePlan().getPlayer().isPlayerWearingMedicalMask());
         assertFalse(game.getGamePlan().getPlayer().getInventory().isItemInInventory("rusko"));
 
         game.parseUserInput("chod chodba_na_I._poschodi");
@@ -905,7 +905,7 @@ class GameImplTest {
             game.getGamePlan().getActualNonPlayerCharacter().getName());
 
         game.parseUserInput("pouzi hasiaci_pristroj");
-        assertTrue(game.getGamePlan().getPlayer().getHasPlayerAttackedCleaningLady());
+        assertTrue(game.getGamePlan().getPlayer().hasPlayerAttackedCleaningLady());
         assertTrue(game.getGamePlan().getActualRoom().isItemInRoom("kluce"));
         assertFalse(
             game.getGamePlan().getPlayer().getInventory().isItemInInventory("hasiaci_pristroj"));
@@ -960,8 +960,8 @@ class GameImplTest {
             game.getGamePlan().getActualInteractableObject().getName());
 
         game.parseUserInput("pouzi lano");
-        assertTrue(game.getGamePlan().getPlayer().getHasPlayerEscapedUsingWindow());
-        assertTrue(game.getGamePlan().getHasPlayerReachedFinalRoom());
+        assertTrue(game.getGamePlan().getPlayer().hasPlayerEscapedUsingWindow());
+        assertTrue(game.getGamePlan().hasPlayerReachedFinalRoom());
         // assertFalse(game.getGamePlan().getPlayer().getInventory().isItemInInventory("lano"));
 
         String expectedGameEnding =
@@ -1011,7 +1011,7 @@ class GameImplTest {
         assertTrue(game.getGamePlan().getPlayer().getInventory().isItemInInventory("rusko"));
 
         game.parseUserInput("pouzi rusko");
-        assertTrue(game.getGamePlan().getPlayer().getIsPlayerWearingMedicalMask());
+        assertTrue(game.getGamePlan().getPlayer().isPlayerWearingMedicalMask());
         assertFalse(game.getGamePlan().getPlayer().getInventory().isItemInInventory("rusko"));
 
         game.parseUserInput("chod chodba_na_I._poschodi");
@@ -1031,7 +1031,7 @@ class GameImplTest {
 
         // player attacked IT admin here
         game.parseUserInput("pouzi pero");
-        assertTrue(game.getGamePlan().getPlayer().getHasPlayerAttackedITAdmin());
+        assertTrue(game.getGamePlan().getPlayer().hasPlayerAttackedITAdmin());
         assertFalse(game.getGamePlan().getPlayer().getInventory().isItemInInventory("pero"));
         // ----------------------------------------------------------------------------------------------------------
         game.parseUserInput("chod chodba_na_I._poschodi");
@@ -1083,8 +1083,8 @@ class GameImplTest {
             game.getGamePlan().getActualInteractableObject().getName());
 
         game.parseUserInput("pouzi lano");
-        assertTrue(game.getGamePlan().getPlayer().getHasPlayerEscapedUsingWindow());
-        assertTrue(game.getGamePlan().getHasPlayerReachedFinalRoom());
+        assertTrue(game.getGamePlan().getPlayer().hasPlayerEscapedUsingWindow());
+        assertTrue(game.getGamePlan().hasPlayerReachedFinalRoom());
         // assertFalse(game.getGamePlan().getPlayer().getInventory().isItemInInventory("lano"));
 
         String expectedGameEnding =
@@ -1134,7 +1134,7 @@ class GameImplTest {
         assertTrue(game.getGamePlan().getPlayer().getInventory().isItemInInventory("rusko"));
 
         game.parseUserInput("pouzi rusko");
-        assertTrue(game.getGamePlan().getPlayer().getIsPlayerWearingMedicalMask());
+        assertTrue(game.getGamePlan().getPlayer().isPlayerWearingMedicalMask());
         assertFalse(game.getGamePlan().getPlayer().getInventory().isItemInInventory("rusko"));
 
         game.parseUserInput("chod chodba_na_I._poschodi");
@@ -1240,7 +1240,7 @@ class GameImplTest {
         assertFalse(
             game.getGamePlan().getPlayer().getInventory().isItemInInventory("hasiaci_pristroj"));
         assertFalse(
-            game.getGamePlan().getActualRoom().getNeighboringRoomByName("dvor").getIsRoomLocked());
+            game.getGamePlan().getActualRoom().getNeighboringRoomByName("dvor").isRoomLocked());
 
         game.parseUserInput("chod dvor");
         assertEquals(RoomName.getRoomName("COURTYARD"),
@@ -1255,10 +1255,10 @@ class GameImplTest {
             game.getGamePlan().getActualNonPlayerCharacter().getName());
 
         game.parseUserInput("pouzi pero");
-        assertTrue(game.getGamePlan().getPlayer().getHasPlayerAttackedDoorKeeper());
+        assertTrue(game.getGamePlan().getPlayer().hasPlayerAttackedDoorKeeper());
         assertFalse(game.getGamePlan().getPlayer().getInventory().isItemInInventory("pero"));
         assertFalse(
-            game.getGamePlan().getActualRoom().getNeighboringRoomByName("ulica").getIsRoomLocked());
+            game.getGamePlan().getActualRoom().getNeighboringRoomByName("ulica").isRoomLocked());
 
         game.parseUserInput("chod Nova_budova");
         assertEquals(
@@ -1313,8 +1313,8 @@ class GameImplTest {
             game.getGamePlan().getActualInteractableObject().getName());
 
         game.parseUserInput("pouzi lano");
-        assertTrue(game.getGamePlan().getPlayer().getHasPlayerEscapedUsingWindow());
-        assertTrue(game.getGamePlan().getHasPlayerReachedFinalRoom());
+        assertTrue(game.getGamePlan().getPlayer().hasPlayerEscapedUsingWindow());
+        assertTrue(game.getGamePlan().hasPlayerReachedFinalRoom());
         // assertFalse(game.getGamePlan().getPlayer().getInventory().isItemInInventory("lano"));
 
         String expectedGameEnding =
@@ -1357,7 +1357,7 @@ class GameImplTest {
         assertTrue(game.getGamePlan().getPlayer().getInventory().isItemInInventory("rusko"));
 
         game.parseUserInput("pouzi rusko");
-        assertTrue(game.getGamePlan().getPlayer().getIsPlayerWearingMedicalMask());
+        assertTrue(game.getGamePlan().getPlayer().isPlayerWearingMedicalMask());
         assertFalse(game.getGamePlan().getPlayer().getInventory().isItemInInventory("rusko"));
 
         game.parseUserInput("chod chodba_na_I._poschodi");
@@ -1463,7 +1463,7 @@ class GameImplTest {
         assertFalse(
             game.getGamePlan().getPlayer().getInventory().isItemInInventory("hasiaci_pristroj"));
         assertFalse(
-            game.getGamePlan().getActualRoom().getNeighboringRoomByName("dvor").getIsRoomLocked());
+            game.getGamePlan().getActualRoom().getNeighboringRoomByName("dvor").isRoomLocked());
 
         game.parseUserInput("chod dvor");
         assertEquals(RoomName.getRoomName("COURTYARD"),
@@ -1496,11 +1496,11 @@ class GameImplTest {
             game.getGamePlan().getActualNonPlayerCharacter().getName());
 
         game.parseUserInput("pouzi velky_obnos_penazi");
-        assertTrue(game.getGamePlan().getPlayer().getHasPlayerBribedDoorKeeper());
+        assertTrue(game.getGamePlan().getPlayer().hasPlayerBribedDoorKeeper());
         assertFalse(
             game.getGamePlan().getPlayer().getInventory().isItemInInventory("velky_obnos_penazi"));
         assertFalse(
-            game.getGamePlan().getActualRoom().getNeighboringRoomByName("ulica").getIsRoomLocked());
+            game.getGamePlan().getActualRoom().getNeighboringRoomByName("ulica").isRoomLocked());
         // ----------------------------------------------------------------------------------------------------------
         game.parseUserInput("chod Nova_budova");
         assertEquals(
@@ -1555,8 +1555,8 @@ class GameImplTest {
             game.getGamePlan().getActualInteractableObject().getName());
 
         game.parseUserInput("pouzi lano");
-        assertTrue(game.getGamePlan().getPlayer().getHasPlayerEscapedUsingWindow());
-        assertTrue(game.getGamePlan().getHasPlayerReachedFinalRoom());
+        assertTrue(game.getGamePlan().getPlayer().hasPlayerEscapedUsingWindow());
+        assertTrue(game.getGamePlan().hasPlayerReachedFinalRoom());
         // assertFalse(game.getGamePlan().getPlayer().getInventory().isItemInInventory("lano"));
 
         String expectedGameEnding =
@@ -1599,7 +1599,7 @@ class GameImplTest {
             game.getGamePlan().getActualRoom().getName());
 
         game.parseUserInput("chod Stara_budova");
-        assertTrue(game.getGamePlan().getPlayer().getHasPlayerPassedByCoughingTeacher());
+        assertTrue(game.getGamePlan().getPlayer().hasPlayerPassedByCoughingTeacher());
         assertEquals(
             RoomName.getRoomName("OLD_BUILDING"), game.getGamePlan().getActualRoom().getName());
 
@@ -1703,8 +1703,8 @@ class GameImplTest {
             game.getGamePlan().getActualInteractableObject().getName());
 
         game.parseUserInput("pouzi lano");
-        assertTrue(game.getGamePlan().getPlayer().getHasPlayerEscapedUsingWindow());
-        assertTrue(game.getGamePlan().getHasPlayerReachedFinalRoom());
+        assertTrue(game.getGamePlan().getPlayer().hasPlayerEscapedUsingWindow());
+        assertTrue(game.getGamePlan().hasPlayerReachedFinalRoom());
         // assertFalse(game.getGamePlan().getPlayer().getInventory().isItemInInventory("lano"));
 
         String expectedGameEnding =

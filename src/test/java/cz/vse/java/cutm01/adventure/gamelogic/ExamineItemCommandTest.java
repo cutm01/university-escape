@@ -142,7 +142,7 @@ class ExamineItemCommandTest {
                 inventory.getItemByName(
                     item.getName())); // item should remain in inventory after examination
             assertTrue(
-                item.getWasItemAlreadyExamined()); // should be set to true, even if items does not have
+                item.wasItemAlreadyExamined()); // should be set to true, even if items does not have
             // any hidden items in it
         }
 
@@ -191,7 +191,7 @@ class ExamineItemCommandTest {
             assertEquals(0, item.getHiddenItems().getNumberOfHiddenItems());
             // item should be set to "wasAlreadyExamined = true" and remain in inventory after examination
             assertEquals(item, inventory.getItemByName(item.getName()));
-            assertTrue(item.getWasItemAlreadyExamined());
+            assertTrue(item.wasItemAlreadyExamined());
         }
 
         @ParameterizedTest(name = "examined item: {0}")
@@ -242,7 +242,7 @@ class ExamineItemCommandTest {
                 item,
                 room.getItemByName(item.getName())); // item should remain in room after examination
             assertTrue(
-                item.getWasItemAlreadyExamined()); // should be set to true, even if items does not have
+                item.wasItemAlreadyExamined()); // should be set to true, even if items does not have
             // any hidden items in it
         }
 
@@ -290,7 +290,7 @@ class ExamineItemCommandTest {
             assertEquals(0, item.getHiddenItems().getNumberOfHiddenItems());
             // item should be set to "wasAlreadyExamined = true" and remain in room after examination
             assertEquals(item, room.getItemByName(item.getName()));
-            assertTrue(item.getWasItemAlreadyExamined());
+            assertTrue(item.wasItemAlreadyExamined());
         }
 
         @ParameterizedTest(name = "examined item: {0}")

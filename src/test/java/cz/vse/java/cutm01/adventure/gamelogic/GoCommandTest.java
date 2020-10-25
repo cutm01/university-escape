@@ -126,7 +126,7 @@ class GoCommandTest {
 
             assertEquals(expectedOutput, actualOutput);
             assertEquals(gamePlan.getActualRoom(), street);
-            assertTrue(gamePlan.getHasPlayerReachedFinalRoom());
+            assertTrue(gamePlan.hasPlayerReachedFinalRoom());
         }
 
         @Test
@@ -146,7 +146,7 @@ class GoCommandTest {
 
             assertEquals(expectedOutput, actualOutput);
             assertEquals(gamePlan.getActualRoom(), oldBuilding);
-            assertTrue(gamePlan.getPlayer().getHasPlayerPassedByCoughingTeacher());
+            assertTrue(gamePlan.getPlayer().hasPlayerPassedByCoughingTeacher());
         }
 
         @Test
@@ -167,7 +167,7 @@ class GoCommandTest {
 
             assertEquals(expectedOutput, actualOutput);
             assertEquals(gamePlan.getActualRoom(), oldBuilding);
-            assertFalse(gamePlan.getPlayer().getHasPlayerPassedByCoughingTeacher());
+            assertFalse(gamePlan.getPlayer().hasPlayerPassedByCoughingTeacher());
         }
 
         @ParameterizedTest

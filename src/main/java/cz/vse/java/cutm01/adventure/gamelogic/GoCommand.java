@@ -64,7 +64,7 @@ class GoCommand implements Command {
             return "Vstup do tejto miestnosti tu nevidím, skús to znovu";
         }
 
-        if (roomToEnter.getIsRoomLocked()) {
+        if (roomToEnter.isRoomLocked()) {
             return roomToEnter.getLockedRoomDescription();
         }
 
@@ -75,8 +75,8 @@ class GoCommand implements Command {
         // player passes by coughing teacher in CONNECTING_CORRIDOR room
         // without wearing medical mask or suit
         if (gamePlan.getActualRoom().getName().equals(RoomName.getRoomName("OLD_BUILDING"))
-            && !gamePlan.getPlayer().getIsPlayerWearingMedicalSuit()
-            && !gamePlan.getPlayer().getIsPlayerWearingMedicalMask()) {
+            && !gamePlan.getPlayer().isPlayerWearingMedicalSuit()
+            && !gamePlan.getPlayer().isPlayerWearingMedicalMask()) {
             gamePlan.getPlayer().setHasPlayerPassedByCoughingTeacher(true);
         }
 

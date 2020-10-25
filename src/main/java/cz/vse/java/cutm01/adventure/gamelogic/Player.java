@@ -45,7 +45,7 @@ class Player {
 
     // region Getter and Setters for variable alternating game ending
     // --------------------------------------------------------------------------------
-    public boolean getIsPlayerWearingMedicalMask() {
+    public boolean isPlayerWearingMedicalMask() {
         return isPlayerWearingMedicalMask;
     }
 
@@ -53,7 +53,7 @@ class Player {
         isPlayerWearingMedicalMask = playerWearingMedicalMask;
     }
 
-    public boolean getIsPlayerWearingMedicalSuit() {
+    public boolean isPlayerWearingMedicalSuit() {
         return isPlayerWearingMedicalSuit;
     }
 
@@ -61,7 +61,7 @@ class Player {
         isPlayerWearingMedicalSuit = playerWearingMedicalSuit;
     }
 
-    public boolean getHasPlayerEscapedUsingWindow() {
+    public boolean hasPlayerEscapedUsingWindow() {
         return hasPlayerEscapedUsingWindow;
     }
 
@@ -69,7 +69,7 @@ class Player {
         this.hasPlayerEscapedUsingWindow = hasPlayerEscapedUsingWindow;
     }
 
-    public boolean getHasPlayerEscapedThroughCourtyard() {
+    public boolean hasPlayerEscapedThroughCourtyard() {
         return hasPlayerEscapedThroughCourtyard;
     }
 
@@ -77,7 +77,7 @@ class Player {
         this.hasPlayerEscapedThroughCourtyard = hasPlayerEscapedThroughCourtyard;
     }
 
-    public boolean getHasPlayerAttackedCleaningLady() {
+    public boolean hasPlayerAttackedCleaningLady() {
         return hasPlayerAttackedCleaningLady;
     }
 
@@ -85,7 +85,7 @@ class Player {
         this.hasPlayerAttackedCleaningLady = hasPlayerAttackedCleaningLady;
     }
 
-    public boolean getHasPlayerAttackedITAdmin() {
+    public boolean hasPlayerAttackedITAdmin() {
         return hasPlayerAttackedITAdmin;
     }
 
@@ -93,7 +93,7 @@ class Player {
         this.hasPlayerAttackedITAdmin = hasPlayerAttackedITAdmin;
     }
 
-    public boolean getHasPlayerAttackedDoorKeeper() {
+    public boolean hasPlayerAttackedDoorKeeper() {
         return hasPlayerAttackedDoorKeeper;
     }
 
@@ -101,7 +101,7 @@ class Player {
         this.hasPlayerAttackedDoorKeeper = hasPlayerAttackedDoorKeeper;
     }
 
-    public boolean getHasPlayerBribedDoorKeeper() {
+    public boolean hasPlayerBribedDoorKeeper() {
         return hasPlayerBribedDoorKeeper;
     }
 
@@ -109,7 +109,7 @@ class Player {
         this.hasPlayerBribedDoorKeeper = hasPlayerBribedDoorKeeper;
     }
 
-    public boolean getHasPlayerPassedByCoughingTeacher() {
+    public boolean hasPlayerPassedByCoughingTeacher() {
         return hasPlayerPassedByCoughingTeacher;
     }
 

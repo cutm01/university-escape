@@ -51,7 +51,7 @@ public class GamePlan {
         return actualRoom;
     }
 
-    public boolean getHasPlayerReachedFinalRoom() {
+    public boolean hasPlayerReachedFinalRoom() {
         return hasPlayerReachedFinalRoom;
     }
 
@@ -149,7 +149,7 @@ public class GamePlan {
         Map<String, Room> gameRooms = new HashMap<>();
         for (RoomSetUpInformation roomName : roomNames) {
             gameRooms.put(roomName.toString(),
-                new Room(roomName.toString(), roomName.getIsRoomLocked()));
+                new Room(roomName.toString(), roomName.isRoomLocked()));
         }
 
         return gameRooms;
