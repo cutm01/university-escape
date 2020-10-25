@@ -225,11 +225,11 @@ class ExamineObjectCommandTest {
                 "Prezeráš "
                 + interactableObject.getName()
                 + " zo všetkých strán a vyzerá to, že niečo skrýva (váha predmetu):"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + interactableObject.getHiddenItems().getHiddenItemsDescription()
                 + SystemInfo.LINE_SEPARATOR
                 + "Rozmýšľaš, ako tieto veci môžeš ďalej využiť, no v tom sa z diaľky ozve hlasný krik a nájdené"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + "veci ti vypadnú z rúk a povaľujú sa po miestnosti. Vezmi si nejaké! Možno sa ti budú neskôr hodiť";
             String actualOutput = examineObjectCommand.executeCommand(interactableObject.getName());
 

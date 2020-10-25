@@ -72,9 +72,11 @@ class DropCommand implements Command {
         // not
         StringBuilder outputText = new StringBuilder();
         if (itemsToDrop.size() == 0) {
-            outputText.append("Zo svojho batohu si neodhodil žiadnu vec!").append(SystemInfo.LINE_SEPARATOR);
+            outputText.append("Zo svojho batohu si neodhodil žiadnu vec!")
+                .append(SystemInfo.LINE_SEPARATOR);
         } else {
-            outputText.append("Zo svojho batohu si odhodil nasledovné predmety (váha predmetu):").append(SystemInfo.LINE_SEPARATOR);
+            outputText.append("Zo svojho batohu si odhodil nasledovné predmety (váha predmetu):")
+                .append(SystemInfo.LINE_SEPARATOR);
             outputText.append(
                 FormatOutputTextUtils.getOutputTextForDroppedItems(
                     gamePlan, new ArrayList<>(itemsToDrop), 4));
@@ -82,14 +84,16 @@ class DropCommand implements Command {
 
         if (nonValidItems.size() > 0) {
             outputText.append(
-                "Tieto veci sa mi nepodarilo nájsť v tvojom batohu, nepomýlil si sa náhodou?").append(SystemInfo.LINE_SEPARATOR);
+                "Tieto veci sa mi nepodarilo nájsť v tvojom batohu, nepomýlil si sa náhodou?")
+                .append(SystemInfo.LINE_SEPARATOR);
             outputText
                 .append(FormatOutputTextUtils.getOutputTextForNonValidItems(nonValidItems, 4));
             outputText
                 .append(SystemInfo.LINE_SEPARATOR)
                 .append("Stále môžeš použiť príkaz ")
                 .append(CommandName.SHOW_INVENTORY.getCommandName());
-            outputText.append(" pre zobrazenie vecí, ktoré máš u seba").append(SystemInfo.LINE_SEPARATOR);
+            outputText.append(" pre zobrazenie vecí, ktoré máš u seba")
+                .append(SystemInfo.LINE_SEPARATOR);
         }
 
         // removing items from player's inventory and adding them to actual room

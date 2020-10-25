@@ -106,16 +106,16 @@ class TakeCommandTest {
         void takeOneNonValidItem(String itemName) {
             String expectedOutput =
                 "Z miestnosti si si nič nevzal!"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + SystemInfo.LINE_SEPARATOR
                 + "Tieto veci sa mi v tejto miestnosti nepodarilo nájsť, nepomýlil si sa náhodou?"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + itemName
                 + SystemInfo.LINE_SEPARATOR
                 + "Stále môžeš použit príkaz "
                 + CommandName.LOOK_AROUND.getCommandName()
                 + " pre zobrazenie vecí, ktoré sú aktuálne v miestnosti,"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + "prípadne jeden z dvojice príkazov "
                 + CommandName.EXAMINE_ITEM.getCommandName()
                 + ", "
@@ -142,20 +142,20 @@ class TakeCommandTest {
             String actualOutput = takeCommand.executeCommand(itemsToTake);
             String expectedOutput =
                 "Do batohu si vkladáš nasledovné predmety (váha predmetu):"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + item.getName()
                 + "("
                 + item.getWeight()
                 + ")"
                 + SystemInfo.LINE_SEPARATOR
                 + "Tieto veci sa mi v tejto miestnosti nepodarilo nájsť, nepomýlil si sa náhodou?"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + item.getName()
                 + SystemInfo.LINE_SEPARATOR
                 + "Stále môžeš použit príkaz "
                 + CommandName.LOOK_AROUND.getCommandName()
                 + " pre zobrazenie vecí, ktoré sú aktuálne v miestnosti,"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + "prípadne jeden z dvojice príkazov "
                 + CommandName.EXAMINE_ITEM.getCommandName()
                 + ", "
@@ -185,7 +185,7 @@ class TakeCommandTest {
             String actualOutput = takeCommand.executeCommand(itemsToTake);
             String expectedOutput =
                 "Do batohu si vkladáš nasledovné predmety (váha predmetu):"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + item1.getName()
                 + "("
                 + item1.getWeight()
@@ -216,10 +216,10 @@ class TakeCommandTest {
             String actualOutput = takeCommand.executeCommand(nonValidItemNames);
             String expectedOutput =
                 "Z miestnosti si si nič nevzal!"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + SystemInfo.LINE_SEPARATOR
                 + "Tieto veci sa mi v tejto miestnosti nepodarilo nájsť, nepomýlil si sa náhodou?"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + nonValidItemName
                 + ", "
                 + nonValidItemName
@@ -227,7 +227,7 @@ class TakeCommandTest {
                 + "Stále môžeš použit príkaz "
                 + CommandName.LOOK_AROUND.getCommandName()
                 + " pre zobrazenie vecí, ktoré sú aktuálne v miestnosti,"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + "prípadne jeden z dvojice príkazov "
                 + CommandName.EXAMINE_ITEM.getCommandName()
                 + ", "
@@ -255,14 +255,14 @@ class TakeCommandTest {
             String actualOutput = takeCommand.executeCommand(itemsToTake);
             String expectedOutput =
                 "Do batohu si vkladáš nasledovné predmety (váha predmetu):"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + item.getName()
                 + "("
                 + item.getWeight()
                 + ")"
                 + SystemInfo.LINE_SEPARATOR
                 + "Tieto veci sa mi v tejto miestnosti nepodarilo nájsť, nepomýlil si sa náhodou?"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + itemsToTake[1]
                 + ", "
                 + itemsToTake[2]
@@ -274,7 +274,7 @@ class TakeCommandTest {
                 + "Stále môžeš použit príkaz "
                 + CommandName.LOOK_AROUND.getCommandName()
                 + " pre zobrazenie vecí, ktoré sú aktuálne v miestnosti,"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + "prípadne jeden z dvojice príkazov "
                 + CommandName.EXAMINE_ITEM.getCommandName()
                 + ", "

@@ -8,8 +8,7 @@ import java.util.Map;
  * Class GamePlan - třída představující mapu a stav adventury.
  *
  * <p>Tato třída inicializuje prvky ze kterých se hra skládá: vytváří všechny prostory, propojuje
- * je
- * vzájemně pomocí východů a pamatuje si aktuální prostor, ve kterém se hráč právě nachází.
+ * je vzájemně pomocí východů a pamatuje si aktuální prostor, ve kterém se hráč právě nachází.
  *
  * @author Michael Kolling, Lubos Pavlicek, Jarmila Pavlickova
  * @version pro školní rok 2016/2017

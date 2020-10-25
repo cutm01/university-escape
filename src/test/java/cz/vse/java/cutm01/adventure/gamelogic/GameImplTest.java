@@ -198,17 +198,17 @@ class GameImplTest {
 
         String expectedGameEnding =
             "Na poslednú chvíľu opúšťaš budovu a na ulici sa pripájaš k ostatným preživším."
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Gratulujem, úspešne sa ti podarilo dostať von!"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Má to však háčik...vyzerá to, že si niekto všimol to, čo si urobil tej úbohej pani"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "a rozhodne máš čo vysvetľovať polícii! Jediné šťastie, že sa nakoniec dostala von živá,"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "inak by si z kolabujúcej budovy putoval rovno do väzenia."
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Zúfalá situácia si vyžaduje zúfale riešenie, ale skús to nabudúce bez tých prejavov násilia!"
-+ SystemInfo.LINE_SEPARATOR;
+            + SystemInfo.LINE_SEPARATOR;
         String actualGameEnding = game.getGameEnding();
         assertEquals(expectedGameEnding, actualGameEnding);
     }
@@ -310,17 +310,17 @@ class GameImplTest {
 
         String expectedGameEnding =
             "Na poslednú chvíľu opúšťaš budovu a na ulici sa pripájaš k ostatným preživším."
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Gratulujem, úspešne sa ti podarilo dostať von!"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Má to však háčik...vyzerá to, že si niekto všimol to, čo si urobil tomu úbohému IT adminovi"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "a rozhodne máš čo vysvetľovať polícii! Jediné šťastie, že sa nakoniec dostal von živý,"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "inak by si z kolabujúcej budovy putoval rovno do väzenia."
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Zúfalá situácia si vyžaduje zúfale riešenie, ale skús to nabudúce bez tých prejavov násilia!"
-+ SystemInfo.LINE_SEPARATOR;
+            + SystemInfo.LINE_SEPARATOR;
         String actualGameEnding = game.getGameEnding();
         assertEquals(expectedGameEnding, actualGameEnding);
     }
@@ -400,15 +400,15 @@ class GameImplTest {
 
         String expectedGameEnding =
             "Na poslednú chvíľu opúšťaš budovu a na ulici sa pripájaš k ostatným preživším."
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Gratulujem, úspešne sa ti podarilo dostať von!"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Avšak...to si si naozaj myslel, že potom čo si urobil tomu vrátnikovi si iba tak spokojne odkráčaš domov?"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Z budovy si sa síce dostal, ale ešte máš čo vysvetľovať polícii"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Zúfalá situácia si vyžaduje zúfale riešenie, ale skús to nabudúce bez tých prejavov násilia"
-+ SystemInfo.LINE_SEPARATOR;
+            + SystemInfo.LINE_SEPARATOR;
         String actualGameEnding = game.getGameEnding();
         assertEquals(expectedGameEnding, actualGameEnding);
     }
@@ -504,17 +504,17 @@ class GameImplTest {
 
         String expectedGameEnding =
             "Na poslednú chvíľu opúšťaš budovu a na ulici sa pripájaš k ostatným preživším."
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Gratulujem, úspešne sa ti podarilo dostať von!"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Vyzerá to, že si ťa niekto všimol pri tvojom pokuse uplatiť vrátnika, ba čo viac, peniaze, ktorými"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "si sa pokúšal podplatiť vrátnika, zrejme patrili práve tejto osobe a ty tak ihneď po uniknutí"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "z budovy školy putuješ na políciu, kde budeš mať čo vysvetľovať."
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Do budúcna by sa určite šlo dostať von aj iným spôsobom!"
-+ SystemInfo.LINE_SEPARATOR;
+            + SystemInfo.LINE_SEPARATOR;
         String actualGameEnding = game.getGameEnding();
         assertEquals(expectedGameEnding, actualGameEnding);
     }
@@ -619,15 +619,15 @@ class GameImplTest {
 
         String expectedGameEnding =
             "Na poslednú chvíľu opúšťaš budovu a na ulici sa pripájaš k ostatným preživším."
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Gratulujem, úspešne sa ti podarilo dostať von!"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Má to však háčik... po 2 týždňoch sa u teba začali prejavovať respiračné problémy"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "a musel si byť hospitalizovaný v Nemocnici Na Bulovce."
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Nabudúce si dávaj väčší pozor okolo koho prechádzaš, a zváž či si nenasadiť nejaký ochranný prvok!"
-+ SystemInfo.LINE_SEPARATOR;
+            + SystemInfo.LINE_SEPARATOR;
         String actualGameEnding = game.getGameEnding();
         assertEquals(expectedGameEnding, actualGameEnding);
     }
@@ -782,9 +782,9 @@ class GameImplTest {
 
         String expectedGameEnding =
             "Všetci so zatajeným dychom pozorujú ako sa zlaňuješ z okna Starej budovy"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Gratulujem, úspešne sa ti podarilo dostať von!"
-+ SystemInfo.LINE_SEPARATOR;
+            + SystemInfo.LINE_SEPARATOR;
         String actualGameEnding = game.getGameEnding();
         assertEquals(expectedGameEnding, actualGameEnding);
     }
@@ -966,17 +966,17 @@ class GameImplTest {
 
         String expectedGameEnding =
             "Všetci so zatajeným dychom pozorujú ako sa zlaňuješ z okna Starej budovy"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Gratulujem, úspešne sa ti podarilo dostať von!"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Má to však háčik...vyzerá to, že si niekto všimol to, čo si urobil tej úbohej pani"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "a rozhodne máš čo vysvetľovať polícii! Jediné šťastie, že sa nakoniec dostala von živá,"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "inak by si z kolabujúcej budovy putoval rovno do väzenia."
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Zúfalá situácia si vyžaduje zúfale riešenie, ale skús to nabudúce bez tých prejavov násilia!"
-+ SystemInfo.LINE_SEPARATOR;
+            + SystemInfo.LINE_SEPARATOR;
         String actualGameEnding = game.getGameEnding();
         assertEquals(expectedGameEnding, actualGameEnding);
     }
@@ -1089,17 +1089,17 @@ class GameImplTest {
 
         String expectedGameEnding =
             "Všetci so zatajeným dychom pozorujú ako sa zlaňuješ z okna Starej budovy"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Gratulujem, úspešne sa ti podarilo dostať von!"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Má to však háčik...vyzerá to, že si niekto všimol to, čo si urobil tomu úbohému IT adminovi"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "a rozhodne máš čo vysvetľovať polícii! Jediné šťastie, že sa nakoniec dostal von živý,"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "inak by si z kolabujúcej budovy putoval rovno do väzenia."
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Zúfalá situácia si vyžaduje zúfale riešenie, ale skús to nabudúce bez tých prejavov násilia!"
-+ SystemInfo.LINE_SEPARATOR;
+            + SystemInfo.LINE_SEPARATOR;
         String actualGameEnding = game.getGameEnding();
         assertEquals(expectedGameEnding, actualGameEnding);
     }
@@ -1319,15 +1319,15 @@ class GameImplTest {
 
         String expectedGameEnding =
             "Všetci so zatajeným dychom pozorujú ako sa zlaňuješ z okna Starej budovy"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Gratulujem, úspešne sa ti podarilo dostať von!"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Avšak...to si si naozaj myslel, že potom čo si urobil tomu vrátnikovi si iba tak spokojne odkráčaš domov?"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Z budovy si sa síce dostal, ale ešte máš čo vysvetľovať polícii"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Zúfalá situácia si vyžaduje zúfale riešenie, ale skús to nabudúce bez tých prejavov násilia"
-+ SystemInfo.LINE_SEPARATOR;
+            + SystemInfo.LINE_SEPARATOR;
         String actualGameEnding = game.getGameEnding();
         assertEquals(expectedGameEnding, actualGameEnding);
     }
@@ -1561,17 +1561,17 @@ class GameImplTest {
 
         String expectedGameEnding =
             "Všetci so zatajeným dychom pozorujú ako sa zlaňuješ z okna Starej budovy"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Gratulujem, úspešne sa ti podarilo dostať von!"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Vyzerá to, že si ťa niekto všimol pri tvojom pokuse uplatiť vrátnika, ba čo viac, peniaze, ktorými"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "si sa pokúšal podplatiť vrátnika, zrejme patrili práve tejto osobe a ty tak ihneď po uniknutí"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "z budovy školy putuješ na políciu, kde budeš mať čo vysvetľovať."
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Do budúcna by sa určite šlo dostať von aj iným spôsobom!"
-+ SystemInfo.LINE_SEPARATOR;
+            + SystemInfo.LINE_SEPARATOR;
         String actualGameEnding = game.getGameEnding();
         assertEquals(expectedGameEnding, actualGameEnding);
     }
@@ -1709,15 +1709,15 @@ class GameImplTest {
 
         String expectedGameEnding =
             "Všetci so zatajeným dychom pozorujú ako sa zlaňuješ z okna Starej budovy"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Gratulujem, úspešne sa ti podarilo dostať von!"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Má to však háčik... po 2 týždňoch sa u teba začali prejavovať respiračné problémy"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "a musel si byť hospitalizovaný v Nemocnici Na Bulovce."
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "Nabudúce si dávaj väčší pozor okolo koho prechádzaš, a zváž či si nenasadiť nejaký ochranný prvok!"
-+ SystemInfo.LINE_SEPARATOR;
+            + SystemInfo.LINE_SEPARATOR;
         String actualGameEnding = game.getGameEnding();
         assertEquals(expectedGameEnding, actualGameEnding);
     }

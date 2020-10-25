@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
  * <p>Tato třída je součástí jednoduché textové hry.
  *
  * <p>"Room" reprezentuje jedno místo (místnost, prostor, ..) ve scénáři hry. Room může mít
- * sousední
- * prostory připojené přes východy. Pro každý východ si prostor ukládá odkaz na sousedící prostor.
+ * sousední prostory připojené přes východy. Pro každý východ si prostor ukládá odkaz na sousedící
+ * prostor.
  *
  * @author Michael Kolling, Lubos Pavlicek, Jarmila Pavlickova
  * @version pro školní rok 2016/2017

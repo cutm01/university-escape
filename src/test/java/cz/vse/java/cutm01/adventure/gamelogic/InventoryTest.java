@@ -185,7 +185,7 @@ class InventoryTest {
 
             String expectedOutput =
                 "V batohu máš nasledovné predmety (váha predmetu):"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + item.getName()
                 + "("
                 + itemWeight

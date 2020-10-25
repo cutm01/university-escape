@@ -163,7 +163,7 @@ class DropCommandTest {
                     itemsToDrop); // executeCommand method takes item name as parameter
             String expectedOutput =
                 "Zo svojho batohu si odhodil nasledovné predmety (váha predmetu):"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + droppedItem.getName()
                 + "("
                 + droppedItemWeight
@@ -196,7 +196,7 @@ class DropCommandTest {
                     itemsToDrop); // executeCommand method takes item name as parameter
             String expectedOutput =
                 "Zo svojho batohu si odhodil nasledovné predmety (váha predmetu):"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + item1.getName()
                 + "("
                 + item1.getWeight()
@@ -229,15 +229,15 @@ class DropCommandTest {
                     invalidItemName); // executeCommand method takes item name as parameter
             String expectedOutput =
                 "Zo svojho batohu si neodhodil žiadnu vec!"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + "Tieto veci sa mi nepodarilo nájsť v tvojom batohu, nepomýlil si sa náhodou?"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + invalidItemName
                 + SystemInfo.LINE_SEPARATOR
                 + "Stále môžeš použiť príkaz "
                 + CommandName.SHOW_INVENTORY.getCommandName()
                 + " pre zobrazenie vecí, ktoré máš u seba"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + SystemInfo.LINE_SEPARATOR
                 + "Aktuálna kapacita batohu: "
                 + inventory.getInventoryWeight()
@@ -260,9 +260,9 @@ class DropCommandTest {
                     invalidItemNames); // executeCommand method takes item name as parameter
             String expectedOutput =
                 "Zo svojho batohu si neodhodil žiadnu vec!"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + "Tieto veci sa mi nepodarilo nájsť v tvojom batohu, nepomýlil si sa náhodou?"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + invalidItemName
                 + ", "
                 + invalidItemName
@@ -270,7 +270,7 @@ class DropCommandTest {
                 + "Stále môžeš použiť príkaz "
                 + CommandName.SHOW_INVENTORY.getCommandName()
                 + " pre zobrazenie vecí, ktoré máš u seba"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + SystemInfo.LINE_SEPARATOR
                 + "Aktuálna kapacita batohu: "
                 + inventory.getInventoryWeight()
@@ -297,13 +297,13 @@ class DropCommandTest {
                     itemsToDrop); // executeCommand method takes item name as parameter
             String expectedOutput =
                 "Zo svojho batohu si odhodil nasledovné predmety (váha predmetu):"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + validItemName.getName()
                 + "("
                 + validItemWeight
                 + ")"
                 + "Tieto veci sa mi nepodarilo nájsť v tvojom batohu, nepomýlil si sa náhodou?"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + itemsToDrop[1]
                 + ", "
                 + itemsToDrop[2]
@@ -315,7 +315,7 @@ class DropCommandTest {
                 + "Stále môžeš použiť príkaz "
                 + CommandName.SHOW_INVENTORY.getCommandName()
                 + " pre zobrazenie vecí, ktoré máš u seba"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + SystemInfo.LINE_SEPARATOR
                 + "Aktuálna kapacita batohu: "
                 + inventory.getInventoryWeight()

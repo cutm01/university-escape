@@ -68,16 +68,16 @@ class ShowInventoryCommandTest {
 
             String expectedOutput =
                 "Chceš ukázať obsah batohu, pochopil som to správne? Nech sa ti páči,"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + "a nabudúce to skús, prosím ťa, bez tých zbytočných rečí okolo:"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + "V batohu máš nasledovné predmety (váha predmetu):"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + testItem.getName()
                 + "("
                 + testItem.getWeight()
                 + ")"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + "Aktuálna váha batohu je "
                 + inventory.getInventoryWeight()
                 + ", maximálna kapacita je "
@@ -109,12 +109,12 @@ class ShowInventoryCommandTest {
 
             String expectedOutput =
                 "V batohu máš nasledovné predmety (váha predmetu):"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + testItem.getName()
                 + "("
                 + testItem.getWeight()
                 + ")"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + "Aktuálna váha batohu je "
                 + inventory.getInventoryWeight()
                 + ", maximálna kapacita je "

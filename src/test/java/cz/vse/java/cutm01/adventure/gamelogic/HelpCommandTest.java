@@ -106,13 +106,13 @@ class HelpCommandTest {
                 + SystemInfo.LINE_SEPARATOR
                 + SystemInfo.LINE_SEPARATOR
                 + "K dispozícii máš nasledovné príkazy:"
-+ SystemInfo.LINE_SEPARATOR
+                + SystemInfo.LINE_SEPARATOR
                 + commandsList.getCommandsWithTheirUsage()
                 + SystemInfo.LINE_SEPARATOR
                 + "Aktuálne sa nachádzaš v "
                 + room.getName()
                 + ", mapa budovy:"
-+ SystemInfo.LINE_SEPARATOR;
+                + SystemInfo.LINE_SEPARATOR;
             String actualOutput = helpCommand.executeCommand();
 
             assertTrue(actualOutput.contains(partOfExpectedOutput));

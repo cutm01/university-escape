@@ -86,7 +86,8 @@ class TakeCommand implements Command {
         if (itemsToTake.size() == 0) {
             outputText.append("Z miestnosti si si nič nevzal!").append(SystemInfo.LINE_SEPARATOR);
         } else {
-            outputText.append("Do batohu si vkladáš nasledovné predmety (váha predmetu):").append(SystemInfo.LINE_SEPARATOR);
+            outputText.append("Do batohu si vkladáš nasledovné predmety (váha predmetu):")
+                .append(SystemInfo.LINE_SEPARATOR);
             outputText
                 .append(FormatOutputTextUtils.getOutputTextForTakenItems(gamePlan, itemsToTake, 4));
         }
@@ -94,7 +95,8 @@ class TakeCommand implements Command {
         if (nonValidItems.size() > 0) {
             outputText
                 .append(SystemInfo.LINE_SEPARATOR)
-                .append("Tieto veci sa mi v tejto miestnosti nepodarilo nájsť, nepomýlil si sa náhodou?")
+                .append(
+                    "Tieto veci sa mi v tejto miestnosti nepodarilo nájsť, nepomýlil si sa náhodou?")
                 .append(SystemInfo.LINE_SEPARATOR);
             outputText
                 .append(FormatOutputTextUtils.getOutputTextForNonValidItems(nonValidItems, 4));
@@ -102,7 +104,8 @@ class TakeCommand implements Command {
                 .append(SystemInfo.LINE_SEPARATOR)
                 .append("Stále môžeš použit príkaz ")
                 .append(CommandName.LOOK_AROUND.getCommandName())
-                .append(" pre zobrazenie vecí, ktoré sú aktuálne v miestnosti,").append(SystemInfo.LINE_SEPARATOR);
+                .append(" pre zobrazenie vecí, ktoré sú aktuálne v miestnosti,")
+                .append(SystemInfo.LINE_SEPARATOR);
             outputText
                 .append("prípadne jeden z dvojice príkazov ")
                 .append(CommandName.EXAMINE_ITEM.getCommandName())

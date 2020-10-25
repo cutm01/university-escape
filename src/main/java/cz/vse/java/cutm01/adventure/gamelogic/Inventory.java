@@ -103,7 +103,7 @@ class Inventory {
         }
 
         return "V batohu máš nasledovné predmety (váha predmetu):"
-+ SystemInfo.LINE_SEPARATOR
+               + SystemInfo.LINE_SEPARATOR
                + getItemNamesAndWeights()
                + SystemInfo.LINE_SEPARATOR
                + "Aktuálna váha batohu je "

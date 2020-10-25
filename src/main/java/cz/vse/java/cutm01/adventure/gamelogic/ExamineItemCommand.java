@@ -158,11 +158,11 @@ class ExamineItemCommand implements Command {
             "S trasúcimi rukami si prezeráš predmet "
             + itemToExamineName
             + " a podarilo sa ti nájsť nasledovné veci (váha predmetu):"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + itemToExamine.getHiddenItems().getHiddenItemsDescription()
             + SystemInfo.LINE_SEPARATOR
             + "Ale nie! Vyzeráš byť z toho všetkého v značnom strese a veci, ktoré si práve našiel, ti popadali na zem"
-+ SystemInfo.LINE_SEPARATOR
+            + SystemInfo.LINE_SEPARATOR
             + "a teraz sa povaľujú všade po miestnosti";
         itemToExamine.getHiddenItems().moveHiddenItemsFromItemToRoom(gamePlan, itemToExamineName);
 

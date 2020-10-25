@@ -39,7 +39,6 @@ class LookAroundCommandTest {
     private static final String ROOM_CONTAINING_ONLY_NON_PLAYER_CHARACTERS_OUTPUT = "Nie si tu sám, okrem teba je tu ešte ";
     private static final String ROOM_CONTAINING_ONLY_EXITS_OUTPUT = "Východy: ";
 
-
     //endregion STRING CONSTANTS USED IN TEST CASES
 
     @BeforeEach
