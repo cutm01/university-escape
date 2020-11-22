@@ -62,15 +62,24 @@ public class Start extends Application {
 
     /**
      * Method to start new JavaFX application if user choosed to start new game with graphical user interface<br>
-     * It loads main scene and init new game
+     *
      * @param primaryStage top level JavaFX container containing additional application objects
      */
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) {
+        setUpNewGame(primaryStage);
+    }
+
+    /**
+     * Method sets up new game, it loads FXML file and build the new main scene from it
+     *
+     * @param primaryStage top level JavaFX container containing additional application objects
+     */
+    public static void setUpNewGame(Stage primaryStage) {
         //get main scene resources
         FXMLLoader fxmlLoader = new FXMLLoader();
-        InputStream mainSceneInputStream = getClass().getClassLoader().getResourceAsStream("main_scene.fxml");
-        Parent rootSceneElement = fxmlLoader.load(mainSceneInputStream);
+        InputStream mainSceneInputStream = Start.class.getClassLoader().getResourceAsStream("main_scene.fxml");
+        Parent rootSceneElement = null;
         try {
             rootSceneElement = fxmlLoader.load(mainSceneInputStream);
         } catch (IOException e) {
@@ -81,7 +90,7 @@ public class Start extends Application {
         Scene mainScene = new Scene(rootSceneElement);
         primaryStage.setScene(mainScene);
         primaryStage.setTitle("Útek z VŠE");
-        primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true);
 
         //init FXML loader
         MainSceneController mainSceneController = fxmlLoader.getController();
@@ -89,15 +98,5 @@ public class Start extends Application {
         mainSceneController.init(newGame);
 
         primaryStage.show();
-        /*
-        var javaVersion = SystemInfo.javaVersion();
-        var javafxVersion = SystemInfo.javafxVersion();
-
-        var label =
-            new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-        var scene = new Scene(new StackPane(label), 640, 480);
-        stage.setScene(scene);
-        stage.show();
-         */
     }
 }

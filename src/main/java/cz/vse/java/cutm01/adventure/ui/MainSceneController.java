@@ -1,7 +1,18 @@
 package cz.vse.java.cutm01.adventure.ui;
 
 import cz.vse.java.cutm01.adventure.gamelogic.Game;
+import cz.vse.java.cutm01.adventure.main.Start;
+import cz.vse.java.cutm01.adventure.main.SystemInfo;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 /**
  * MainSceneController class contains methods to handle changes made in main scene
@@ -14,17 +25,47 @@ public class MainSceneController {
     private Game game;
 
     //scene elements
+    public BorderPane rootBorderPane;
     public Label actualGameRoomName;
     public Label actualGameRoomDescription;
 
+    public Menu newGameMenu;
+    public Menu showHelpMenu;
+
+
     public void init(Game game) {
         this.game = game;
+
+        makeMenuElementFireAction(newGameMenu);
+        makeMenuElementFireAction(showHelpMenu);
         update();
     }
 
     private void update() {
         actualGameRoomName.setText("Actual Game Rooom");
         actualGameRoomDescription.setText("Random Description");
+    }
+
+    /**
+     * Method makes JavaFX Menu element able to fire action (default behaviour
+     * is that only MenuItem inside Menu element can fire action on click).
+     * Method ensures that first MenuItem action is triggered after user clicks on its parent Menu element,
+     * this action is triggered without showing MenuItem's graphic to user and therefore parent Menu element
+     * looks like it can fire action after clicking on it
+     *
+     * @param menu Menu element with one 'dummy' MenuItem in it which will be used to fire action
+     */
+    private void makeMenuElementFireAction(Menu menu) {
+        if (menu.getItems().size() == 1) {
+            menu.showingProperty().addListener(
+                    (observableValue, oldValue, newValue) -> {
+                        if (newValue) {
+                            // the first MenuItem is triggered
+                            menu.getItems().get(0).fire();
+                        }
+                    }
+            );
+        }
     }
 
     private String getActualGameRoomName() {
@@ -34,5 +75,33 @@ public class MainSceneController {
 
     private String getActualGameRoomDescription() {
         return "";
+    }
+
+    //TODO: javadoc
+    public void startNewGame(ActionEvent actionEvent) {
+        Start.setUpNewGame(new Stage());
+        Stage currentStage = (Stage) rootBorderPane.getScene().getWindow();
+        currentStage.close();
+    }
+
+    //TODO: javadoc
+    public void showHelp(ActionEvent actionEvent) {
+        Alert helpWindow = new Alert(AlertType.INFORMATION);
+        helpWindow.setTitle("Nápoveda");
+
+        //disable header of pop-up alert
+        helpWindow.setHeaderText(null);
+        helpWindow.setGraphic(null);
+
+        //set content
+        String helpText = "Tvojou úlohou je dostať sa z areálu školy von na ulicu a zachrániť si tak život!" + SystemInfo.LINE_SEPARATOR
+                            + "V miestnostiach môžeš nájsť rôzne predmety či objekty. Nezabudni ich poriadne prehľadať,"
+                            + "môžu skrývať mnohé ďalšie užitočné predmety!" + SystemInfo.LINE_SEPARATOR
+                            + "V niektorých miestnotiach nie si sám a sú to okrem tebe ďalšie osoby, skús sa s nimi porozprávať alebo v ich blízkosti využiť " + SystemInfo.LINE_SEPARATOR
+                            + "nejaký zo svojich predmetov z batohu, možno sa ti odmenia!" + SystemInfo.LINE_SEPARATOR
+                            + "Veľa štastia!";
+        helpWindow.setContentText(helpText);
+
+        helpWindow.show();
     }
 }
