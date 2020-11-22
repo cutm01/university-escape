@@ -4,13 +4,14 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane fx:id="rootBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.java.cutm01.adventure.ui.MainSceneController">
     <top>
-        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="960.0" BorderPane.alignment="CENTER">
             <children>
                 <MenuBar>
                     <menus>
@@ -32,6 +33,49 @@
         </VBox>
     </top>
     <bottom>
-        <TextArea fx:id="gameCommandOutputText" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+        <TextArea fx:id="gameCommandOutputText" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="960.0" BorderPane.alignment="CENTER" />
     </bottom>
+   <right>
+      <VBox prefHeight="340.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Label" />
+                  <Separator prefWidth="200.0" />
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Label" />
+                  <Separator prefWidth="200.0" />
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
+               </children></VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Label" />
+                  <Separator prefWidth="200.0" />
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
+               </children></VBox>
+         </children></VBox>
+   </right>
+   <left>
+      <VBox prefHeight="340.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="170.0" prefWidth="150.0">
+               <children>
+                  <Label text="Mapa" />
+                  <Separator prefWidth="200.0" />
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="170.0" prefWidth="150.0">
+               <children>
+                  <Label text="Batoh" />
+                  <Separator prefWidth="200.0" />
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </left>
 </BorderPane>
