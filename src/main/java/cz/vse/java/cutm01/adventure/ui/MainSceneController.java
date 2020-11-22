@@ -5,14 +5,13 @@ import cz.vse.java.cutm01.adventure.main.Start;
 import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
+import java.util.Optional;
 
 /**
  * MainSceneController class contains methods to handle changes made in main scene
@@ -77,21 +76,46 @@ public class MainSceneController {
         return "";
     }
 
-    //TODO: javadoc
-    public void startNewGame(ActionEvent actionEvent) {
-        Start.setUpNewGame(new Stage());
-        Stage currentStage = (Stage) rootBorderPane.getScene().getWindow();
-        currentStage.close();
+    /**
+     * Method shows confirmation dialog to user where he can choose
+     * if he wants to start a new game or continue in the actual one
+     */
+    public void startNewGame() {
+        Alert confirmationDialog = new Alert(AlertType.CONFIRMATION);
+        confirmationDialog.setTitle("Nová hra");
+        confirmationDialog.setHeaderText("Naozaj si praješ začať novú hru?");
+
+        ButtonType confirmButtonType = new ButtonType("Áno, táto je už dávno stratená...");
+        ButtonType cancelButtonType = new ButtonType("Nie, nevzdávam to!", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        confirmationDialog.getButtonTypes().setAll(confirmButtonType, cancelButtonType);
+
+        //change default button
+        Button confirmButton = (Button) confirmationDialog.getDialogPane().lookupButton(confirmButtonType);
+        confirmButton.setDefaultButton(false);
+        Button cancelButton = (Button) confirmationDialog.getDialogPane().lookupButton(cancelButtonType);
+        cancelButton.setDefaultButton(true);
+
+        //wait for user input
+        Optional<ButtonType> userInput = confirmationDialog.showAndWait();
+        if (userInput.get() == confirmButtonType){
+            Start.setUpNewGame(new Stage());
+            Stage currentStage = (Stage) rootBorderPane.getScene().getWindow();
+            currentStage.close();
+        }
     }
 
-    //TODO: javadoc
-    public void showHelp(ActionEvent actionEvent) {
+    /**
+     * Method shows user pop-up window with tips how to finish adventure
+     */
+    public void showHelp() {
         Alert helpWindow = new Alert(AlertType.INFORMATION);
         helpWindow.setTitle("Nápoveda");
 
-        //disable header of pop-up alert
+        //disable header of pop-up alert and confirmation button
         helpWindow.setHeaderText(null);
         helpWindow.setGraphic(null);
+        helpWindow.getDialogPane().lookupButton(ButtonType.OK).setVisible(false);
 
         //set content
         String helpText = "Tvojou úlohou je dostať sa z areálu školy von na ulicu a zachrániť si tak život!" + SystemInfo.LINE_SEPARATOR
