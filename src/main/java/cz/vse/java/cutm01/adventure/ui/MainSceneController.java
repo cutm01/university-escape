@@ -36,7 +36,7 @@ public class MainSceneController {
         this.game = game;
 
         makeMenuElementFireAction(newGameMenu);
-        makeMenuElementFireAction(showHelpMenu);
+        //makeMenuElementFireAction(showHelpMenu);
         update();
     }
 

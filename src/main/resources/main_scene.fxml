@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="rootBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.java.cutm01.adventure.ui.MainSceneController">
     <top>
-        <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="960.0" BorderPane.alignment="CENTER">
+        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="960.0" BorderPane.alignment="CENTER">
             <children>
-                <MenuBar>
+                <MenuBar maxWidth="1.7976931348623157E308">
                     <menus>
                         <Menu fx:id="newGameMenu" mnemonicParsing="false" text="Nová hra">
                      <items>
@@ -22,60 +29,122 @@
                         </Menu>
                         <Menu fx:id="showHelpMenu" mnemonicParsing="false" text="Nápoveda">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#showHelp" />
+                        <MenuItem mnemonicParsing="false" onAction="#showHelp" text="Nápoveda ku hre" />
+                        <MenuItem mnemonicParsing="false" onAction="#showHelp" text="Textové príkazy" />
                      </items>
                         </Menu>
                     </menus>
                 </MenuBar>
-                <Label fx:id="actualGameRoomName" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="actualGameRoomName" textAlignment="CENTER" />
-                <Label fx:id="actualGameRoomDescription" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="actualGameRoomDescription" textAlignment="CENTER" />
+                <Label fx:id="actualGameRoomName" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="actualGameRoomName" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Label>
+                <Label fx:id="actualGameRoomDescription" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="actualGameRoomDescription" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Separator prefWidth="200.0" />
             </children>
         </VBox>
     </top>
-    <bottom>
-        <TextArea fx:id="gameCommandOutputText" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="960.0" BorderPane.alignment="CENTER" />
-    </bottom>
    <right>
-      <VBox prefHeight="340.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="220.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Label text="Label" />
-                  <Separator prefWidth="200.0" />
-                  <VBox prefHeight="200.0" prefWidth="100.0" />
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Predmety" VBox.vgrow="ALWAYS" />
+                  <Separator prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                  <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Label text="Label" />
-                  <Separator prefWidth="200.0" />
-                  <VBox prefHeight="200.0" prefWidth="100.0" />
-               </children></VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Objekty" VBox.vgrow="ALWAYS" />
+                  <Separator prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                  <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Label text="Label" />
-                  <Separator prefWidth="200.0" />
-                  <VBox prefHeight="200.0" prefWidth="100.0" />
-               </children></VBox>
-         </children></VBox>
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Postavy" VBox.vgrow="ALWAYS" />
+                  <Separator prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                  <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin></VBox>
    </right>
    <left>
-      <VBox prefHeight="340.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="220.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="170.0" prefWidth="150.0">
+            <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="SOMETIMES">
                <children>
-                  <Label text="Mapa" />
-                  <Separator prefWidth="200.0" />
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Mapa" VBox.vgrow="ALWAYS" />
+                  <Separator maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                           <image>
+                              <Image url="@test_image.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
                </children>
             </VBox>
-            <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="170.0" prefWidth="150.0">
+            <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                <children>
-                  <Label text="Batoh" />
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Batoh" VBox.vgrow="ALWAYS" />
+                  <Separator maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+                  <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+   <bottom>
+      <VBox prefHeight="100.0" prefWidth="960.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+               <children>
                   <Separator prefWidth="200.0" />
-                  <VBox prefHeight="200.0" prefWidth="100.0" />
+                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Label" VBox.vgrow="ALWAYS" />
+                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                     <children>
+                        <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Hru je taktiež možné ovládať zadaním textového príkazu a potvrdením klávesou ENTER. Správny formát príkazov je možné nájsť v časti Nápoveda &gt; Textové príkazy" HBox.hgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" text="Vykonaj príkaz" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children></VBox>
+   </bottom>
+   <center>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="BOTTOM_LEFT" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Východy z miestnosti" VBox.vgrow="ALWAYS" />
+                  <HBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="100.0" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
                </children>
             </VBox>
          </children>
       </VBox>
-   </left>
+   </center>
 </BorderPane>
