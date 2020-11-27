@@ -3,10 +3,10 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -35,11 +35,11 @@
                         </Menu>
                     </menus>
                 </MenuBar>
-                <Label fx:id="actualGameRoomName" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="actualGameRoomName" textAlignment="CENTER">
+                <Label fx:id="actualGameRoomName" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="Názov aktuálnej miestnosti" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font></Label>
-                <Label fx:id="actualGameRoomDescription" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="actualGameRoomDescription" textAlignment="CENTER">
+                <Label fx:id="actualGameRoomDescription" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Popis aktuálnej miestnosti" textAlignment="CENTER">
                <font>
                   <Font size="14.0" />
                </font></Label>
@@ -52,15 +52,27 @@
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Predmety" VBox.vgrow="ALWAYS" />
-                  <Separator prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Predmety" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
+                  <Separator prefWidth="200.0" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin></Separator>
                   <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Objekty" VBox.vgrow="ALWAYS" />
-                  <Separator prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Objekty" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
+                  <Separator prefWidth="200.0" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin></Separator>
                   <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
                </children>
                <VBox.margin>
@@ -68,8 +80,14 @@
                </VBox.margin></VBox>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Postavy" VBox.vgrow="ALWAYS" />
-                  <Separator prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Postavy" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
+                  <Separator prefWidth="200.0" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin></Separator>
                   <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
                </children>
                <VBox.margin>
@@ -85,9 +103,15 @@
          <children>
             <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="SOMETIMES">
                <children>
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Mapa" VBox.vgrow="ALWAYS" />
-                  <Separator maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
-                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Mapa" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
+                  <Separator maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin></Separator>
+                  <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                      <children>
                         <ImageView fitHeight="150.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
                            <image>
@@ -96,13 +120,50 @@
                         </ImageView>
                      </children>
                   </VBox>
+                  <Button alignment="CENTER" mnemonicParsing="false" text="Zväčšiť mapu" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Button>
                </children>
             </VBox>
             <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                <children>
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Batoh" VBox.vgrow="ALWAYS" />
-                  <Separator maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
-                  <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Batoh" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
+                  <Separator maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin></Separator>
+                  <ListView fx:id="inventoryItems" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+                  <HBox alignment="CENTER" maxWidth="1.7976931348623157E308">
+                     <children>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#getInventoryItemDescription" prefWidth="90.0" text="Prehliadnúť si">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button alignment="CENTER" mnemonicParsing="false" prefWidth="90.0" text="Preskúmať" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="114.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefWidth="90.0" text="Použiť">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" prefWidth="90.0" text="Odhodiť" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
                </children>
                <VBox.margin>
                   <Insets top="10.0" />
@@ -120,7 +181,7 @@
             <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                <children>
                   <Separator prefWidth="200.0" />
-                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Label" VBox.vgrow="ALWAYS" />
+                  <Label fx:id="gameInteractionOutput" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Label" VBox.vgrow="ALWAYS" />
                   <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <children>
                         <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Hru je taktiež možné ovládať zadaním textového príkazu a potvrdením klávesou ENTER. Správny formát príkazov je možné nájsť v časti Nápoveda &gt; Textové príkazy" HBox.hgrow="ALWAYS" />
@@ -134,15 +195,31 @@
    <center>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="BOTTOM_LEFT" VBox.vgrow="ALWAYS">
+            <VBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
                <children>
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Východy z miestnosti" VBox.vgrow="ALWAYS" />
+                  <ImageView fitHeight="221.0" fitWidth="212.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@test_image_2.jpg" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Východy z miestnosti" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
+                  <Separator maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Separator>
                   <HBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="100.0" VBox.vgrow="ALWAYS">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
                   </HBox>
                </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
             </VBox>
          </children>
       </VBox>

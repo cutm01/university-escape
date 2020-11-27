@@ -4,14 +4,20 @@ import cz.vse.java.cutm01.adventure.gamelogic.Game;
 import cz.vse.java.cutm01.adventure.main.Start;
 import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
-import java.util.Optional;
+import java.util.*;
 
 /**
  * MainSceneController class contains methods to handle changes made in main scene
@@ -27,6 +33,9 @@ public class MainSceneController {
     public BorderPane rootBorderPane;
     public Label actualGameRoomName;
     public Label actualGameRoomDescription;
+    public ListView<InventoryItem> inventoryItems; // = addTestItemsToInventory()
+    //text shown to user after his interaction with game (i.e. clicking on button)
+    public Label gameInteractionOutput;
 
     public Menu newGameMenu;
     public Menu showHelpMenu;
@@ -40,9 +49,17 @@ public class MainSceneController {
         update();
     }
 
+    private void addTestItemsToInventory(){
+        inventoryItems.getItems().addAll(new InventoryItem("Cheese"),
+                                         new InventoryItem("Pepperoni"),
+                                         new InventoryItem("Black Olives"));
+        inventoryItems.setCellFactory(CheckBoxListCell.forListView(InventoryItem::getSelectedProperty));
+    }
+
     private void update() {
-        actualGameRoomName.setText("Actual Game Rooom");
-        actualGameRoomDescription.setText("Random Description");
+        actualGameRoomName.setText("Aktuálna herná miestnosť");
+        actualGameRoomDescription.setText("Popis miestnosti");
+        addTestItemsToInventory();
     }
 
     /**
@@ -127,5 +144,9 @@ public class MainSceneController {
         helpWindow.setContentText(helpText);
 
         helpWindow.show();
+    }
+
+    public void getInventoryItemDescription(ActionEvent actionEvent) {
+        //String gameCommandOutput = game.parseUserInput()
     }
 }
