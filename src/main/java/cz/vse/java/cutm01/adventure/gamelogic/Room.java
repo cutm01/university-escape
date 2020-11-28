@@ -1,14 +1,8 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
 import cz.vse.java.cutm01.adventure.main.SystemInfo;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -234,6 +228,10 @@ class Room {
 
     // region Methods related to items in room
     // --------------------------------------------------------------------------------
+    public List<Item> getItemsInRoom() {
+        return new ArrayList<>(items.values());
+    }
+
     public boolean isItemInRoom(String itemName) {
         return items.containsKey(itemName);
     }

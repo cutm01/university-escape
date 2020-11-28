@@ -3,20 +3,22 @@ package cz.vse.java.cutm01.adventure.ui;
 import cz.vse.java.cutm01.adventure.gamelogic.Game;
 import cz.vse.java.cutm01.adventure.main.Start;
 import cz.vse.java.cutm01.adventure.main.SystemInfo;
-import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ListChangeListener;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.CheckBoxListCell;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import java.io.InputStream;
 import java.util.*;
 
 /**
@@ -33,9 +35,9 @@ public class MainSceneController {
     public BorderPane rootBorderPane;
     public Label actualGameRoomName;
     public Label actualGameRoomDescription;
-    public ListView<InventoryItem> inventoryItems; // = addTestItemsToInventory()
+    public ListView<InventoryItem> inventoryItems;
     //text shown to user after his interaction with game (i.e. clicking on button)
-    public Label gameInteractionOutput;
+    public Text gameInteractionOutput;
 
     public Menu newGameMenu;
     public Menu showHelpMenu;
@@ -50,16 +52,26 @@ public class MainSceneController {
     }
 
     private void addTestItemsToInventory(){
-        inventoryItems.getItems().addAll(new InventoryItem("Cheese"),
-                                         new InventoryItem("Pepperoni"),
-                                         new InventoryItem("Black Olives"));
-        inventoryItems.setCellFactory(CheckBoxListCell.forListView(InventoryItem::getSelectedProperty));
+        inventoryItems.getItems().add(new InventoryItem("BOTTLE"));
+        inventoryItems.getItems().add(new InventoryItem("PEN"));
+        inventoryItems.setCellFactory(CheckBoxListCell.forListView(InventoryItem::checkedProperty));
     }
 
     private void update() {
         actualGameRoomName.setText("Aktuálna herná miestnosť");
         actualGameRoomDescription.setText("Popis miestnosti");
+        updateGameInteractionOutput(game.getPrologue());
         addTestItemsToInventory();
+    }
+
+    /**
+     * Method updates gameInteractionOutput Text. This text are is used to inform user about
+     * performed changes in game after he executes one of game command
+     * @param newValue value to set
+     */
+    private void updateGameInteractionOutput(String newValue) {
+        gameInteractionOutput.setText(newValue);
+        //gameInteractionOutput.("");
     }
 
     /**
@@ -146,7 +158,46 @@ public class MainSceneController {
         helpWindow.show();
     }
 
-    public void getInventoryItemDescription(ActionEvent actionEvent) {
-        //String gameCommandOutput = game.parseUserInput()
+    public void showItemDescription(ActionEvent actionEvent) {
+        updateGameInteractionOutput("testing function" + SystemInfo.LINE_SEPARATOR
+                                            + "testing function" + SystemInfo.LINE_SEPARATOR
+                                            + "testing function" + SystemInfo.LINE_SEPARATOR
+                                            + "testing function" + SystemInfo.LINE_SEPARATOR
+                                            + "testing function" + SystemInfo.LINE_SEPARATOR);
+    }
+
+    public void showItemExaminationResult(ActionEvent actionEvent) {
+    }
+
+    public void useInventoryItem(ActionEvent actionEvent) {
+    }
+
+    public void dropInventoryItem(ActionEvent actionEvent) {
+    }
+
+    /**
+     * Method to execute one of game commands. Command execution will perform all necessary changes in actual state
+     * of game (e.g. insert item to inventory in case of TakeCommand execution)
+     * @param commandName command to execute
+     * @param commandParameters parameters (arguments) to execute command with
+     * @return String output of command execution which is later displayed to user to notify him about performed changes
+     * in game
+     */
+    private String executeGameCommand(String commandName, List<String> commandParameters) {
+        //when user tries to execute HelpCommand (i.e. write "napoveda" to text field in the bottom of GUI)
+        //game shows pop-up window containing help info rather than displaying command execution output in bottom of screen
+        if (commandName.equals("napoveda")) {
+            //TODO: implement to show new pop up window with help to user instead of updating GUI with command output
+            return "text napovedy";
+        }
+
+        //get command execution output for commands with parameters (such as "vezmi predmet1 predmet2")
+        if (commandParameters.size() > 0) {
+            String parameters = String.join(" ", commandParameters);
+            return game.parseUserInput(commandName + " " + parameters);
+        }
+
+        //get command execution output for commands without parameters
+        return game.parseUserInput(commandName);
     }
 }

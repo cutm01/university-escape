@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
@@ -14,6 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane fx:id="rootBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.java.cutm01.adventure.ui.MainSceneController">
     <top>
@@ -62,12 +64,12 @@
                   <ListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                   <HBox alignment="CENTER" maxWidth="1.7976931348623157E308">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#getInventoryItemDescription" prefWidth="90.0" text="Prehliadnúť si">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showItemDescription" prefWidth="90.0" text="Prehliadnúť si">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="90.0" text="Preskúmať" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showItemExaminationResult" prefWidth="90.0" text="Preskúmať" />
                      </children>
                      <VBox.margin>
                         <Insets top="5.0" />
@@ -96,7 +98,7 @@
                   <ListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                   <VBox alignment="CENTER">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#getInventoryItemDescription" prefWidth="150.0" text="Pristúpiť">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="150.0" text="Pristúpiť">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
@@ -125,7 +127,7 @@
                   <ListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                   <VBox alignment="CENTER">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#getInventoryItemDescription" prefWidth="150.0" text="Pristúpiť">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="150.0" text="Pristúpiť">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
@@ -184,12 +186,12 @@
                   <ListView fx:id="inventoryItems" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
                   <HBox alignment="CENTER" maxWidth="1.7976931348623157E308">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#getInventoryItemDescription" prefWidth="90.0" text="Prehliadnúť si">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showItemDescription" prefWidth="90.0" text="Prehliadnúť si">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="90.0" text="Preskúmať" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showItemExaminationResult" prefWidth="90.0" text="Preskúmať" />
                      </children>
                      <VBox.margin>
                         <Insets top="5.0" />
@@ -197,12 +199,12 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="114.0">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="90.0" text="Použiť">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#useInventoryItem" prefWidth="90.0" text="Použiť">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="90.0" text="Odhodiť" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#dropInventoryItem" prefWidth="90.0" text="Odhodiť" />
                      </children>
                      <VBox.margin>
                         <Insets top="5.0" />
@@ -220,12 +222,19 @@
       </VBox>
    </left>
    <bottom>
-      <VBox prefHeight="100.0" prefWidth="960.0" BorderPane.alignment="CENTER">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="960.0" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                <children>
                   <Separator prefWidth="200.0" />
-                  <Label fx:id="gameInteractionOutput" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Label" VBox.vgrow="ALWAYS" />
+                  <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                     <content>
+                        <VBox alignment="CENTER">
+                           <children>
+                                <Text fx:id="gameInteractionOutput" textAlignment="CENTER" VBox.vgrow="ALWAYS">Nasledovný text sa bude zobrazovať hráčovi po vykonaní príkazu a bude ho informovať o zmenách v hre</Text>
+                           </children>
+                        </VBox>
+                     </content></ScrollPane>
                   <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <children>
                         <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Hru je taktiež možné ovládať zadaním textového príkazu a potvrdením klávesou ENTER. Správny formát príkazov je možné nájsť v časti Nápoveda &gt; Textové príkazy" HBox.hgrow="ALWAYS" />
