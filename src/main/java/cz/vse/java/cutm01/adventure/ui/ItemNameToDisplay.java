@@ -34,10 +34,12 @@ public enum ItemNameToDisplay {
 
     private final String itemNameToDisplay;
     private static final Map<String, String> ITEM_NAMES_TO_DISPLAY = new HashMap<>();
+    private static final Map<String, String> ENUM_VALUES_FOR_ITEM_NAMES = new HashMap<>();
 
     static {
         for (ItemNameToDisplay i : values()) {
             ITEM_NAMES_TO_DISPLAY.put(i.toString(), i.itemNameToDisplay);
+            ENUM_VALUES_FOR_ITEM_NAMES.put(i.itemNameToDisplay, i.toString());
         }
     }
 
@@ -47,5 +49,9 @@ public enum ItemNameToDisplay {
 
     public static String getItemNameToDisplay(String itemNameToDisplay) {
         return ITEM_NAMES_TO_DISPLAY.get(itemNameToDisplay);
+    }
+
+    public static String getEnumValueForItemName(String itemName) {
+        return ENUM_VALUES_FOR_ITEM_NAMES.get(itemName);
     }
 }

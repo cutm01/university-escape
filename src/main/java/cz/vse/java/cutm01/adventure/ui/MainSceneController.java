@@ -16,10 +16,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * MainSceneController class contains methods to handle changes made in main scene
@@ -36,7 +33,11 @@ public class MainSceneController {
     public BorderPane rootBorderPane;
     public Label actualGameRoomName;
     public Label actualGameRoomDescription;
-    public ListView<String> inventoryItems;
+    public ListView<String> inventoryItemsListView;
+    public ListView<String> roomItemsListView;
+    public ListView<String> roomInteractableObjectsListView;
+    public ListView<String> roomNonPlayerCharactersListView;
+
     //text shown to user after his interaction with game (i.e. clicking on button)
     public Text gameInteractionOutput;
 
@@ -55,10 +56,10 @@ public class MainSceneController {
     private void addTestItemsToInventory(){
         ObservableList<String> items = FXCollections.observableArrayList("Pero", "Lano", "Bunda");
 
-        inventoryItems.setItems(items);
-        inventoryItems.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        inventoryItemsListView.setItems(items);
+        inventoryItemsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        inventoryItems.setCellFactory(param -> new ListCell<>() {
+        inventoryItemsListView.setCellFactory(param -> new ListCell<>() {
             private ImageView displayImage = new ImageView();
 
             @Override
@@ -80,8 +81,8 @@ public class MainSceneController {
     }
 
     private void update() {
-        actualGameRoomName.setText("Aktuálna herná miestnosť");
-        actualGameRoomDescription.setText("Popis miestnosti");
+        actualGameRoomName.setText(getActualGameRoomName());
+        actualGameRoomDescription.setText(getActualGameRoomDescription());
         updateGameInteractionOutput(game.getPrologue());
         addTestItemsToInventory();
     }
@@ -93,7 +94,6 @@ public class MainSceneController {
      */
     private void updateGameInteractionOutput(String newValue) {
         gameInteractionOutput.setText(newValue);
-        //gameInteractionOutput.("");
     }
 
     /**
@@ -180,15 +180,41 @@ public class MainSceneController {
         helpWindow.show();
     }
 
-    public void showItemDescription(ActionEvent actionEvent) {
-        ObservableList<String> selectedItemsFromInventory = inventoryItems.getSelectionModel().getSelectedItems();
-        String selectedItemsNames = "";
+    public void lookAroundRoom(ActionEvent actionEvent) {
+        updateGameInteractionOutput(executeGameCommand("rozhliadnut_sa", null));
+        if (!game.getGamePlan().getActualRoom().wasRoomAlreadyExamined()) {
+            updateRoomItemsListView();
+            updateRoomInteractableObjectsListView();
+            updateRoomNonPlayerCharactersListView();
+        }
+    }
+
+    public void showInventoryItemDescription(ActionEvent actionEvent) {
+        ObservableList<String> selectedItemsFromInventory = inventoryItemsListView.getSelectionModel().getSelectedItems();
+        //used to store item names in format which can be used as game command argument
+        List<String> gameCommandArguments = new ArrayList<>();
 
         for (String s : selectedItemsFromInventory) {
-            selectedItemsNames += ItemName.getItemName(s) + " ";
+            // following line get item name which is used as argument for game commands from item name which is displayed
+            // in game GUI (e.q. "Fľaša s vodou" --(Enum value)--> "BOTTLE" --(item name to execute command)--> "flasa"
+            gameCommandArguments.add(ItemName.getItemName(ItemNameToDisplay.getEnumValueForItemName(s)));
         }
 
-        updateGameInteractionOutput("boli vybrane nasledovne veci " + selectedItemsNames);
+        updateGameInteractionOutput(executeGameCommand("prehliadnut_si", gameCommandArguments));
+    }
+
+    public void showRoomItemDescription(ActionEvent actionEvent) {
+        ObservableList<String> selectedItemsFromRoom = roomItemsListView.getSelectionModel().getSelectedItems();
+        //used to store item names in format which can be used as game command argument
+        List<String> gameCommandArguments = new ArrayList<>();
+
+        for (String s : selectedItemsFromRoom) {
+            // following line get item name which is used as argument for game commands from item name which is displayed
+            // in game GUI (e.q. "Fľaša s vodou" --(Enum value)--> "BOTTLE" --(item name to execute command)--> "flasa"
+            gameCommandArguments.add(ItemName.getItemName(ItemNameToDisplay.getEnumValueForItemName(s)));
+        }
+
+        updateGameInteractionOutput(executeGameCommand("prehliadnut_si", gameCommandArguments));
     }
 
     public void showItemExaminationResult(ActionEvent actionEvent) {
@@ -217,7 +243,7 @@ public class MainSceneController {
         }
 
         //get command execution output for commands with parameters (such as "vezmi predmet1 predmet2")
-        if (commandParameters.size() > 0) {
+        if (commandParameters != null && commandParameters.size() > 0) {
             String parameters = String.join(" ", commandParameters);
             return game.parseUserInput(commandName + " " + parameters);
         }
@@ -245,4 +271,17 @@ public class MainSceneController {
 
         return loadedImages;
     }
+
+    private void updateRoomItemsListView() {
+
+    }
+
+    private void updateRoomInteractableObjectsListView() {
+
+    }
+
+    private void updateRoomNonPlayerCharactersListView() {
+
+    }
+
 }

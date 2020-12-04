@@ -45,6 +45,7 @@
                   <Font size="14.0" />
                </font></Label>
             <Separator prefWidth="200.0" />
+            <Button fx:id="lookAroundButton" mnemonicParsing="false" onAction="#lookAroundRoom" text="Rozhliadnúť sa po miestnosti" />
             </children>
         </VBox>
     </top>
@@ -61,10 +62,10 @@
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin></Separator>
-                  <ListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                  <ListView fx:id="roomItemsListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                   <HBox alignment="CENTER" maxWidth="1.7976931348623157E308">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showItemDescription" prefWidth="90.0" text="Prehliadnúť si">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showRoomItemDescription" prefWidth="90.0" text="Prehliadnúť si">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
@@ -95,7 +96,7 @@
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin></Separator>
-                  <ListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                  <ListView fx:id="roomInteractableObjectsListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                   <VBox alignment="CENTER">
                      <children>
                         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="150.0" text="Pristúpiť">
@@ -124,7 +125,7 @@
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin></Separator>
-                  <ListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                  <ListView fx:id="roomNonPlayerCharactersListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                   <VBox alignment="CENTER">
                      <children>
                         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="150.0" text="Pristúpiť">
@@ -183,10 +184,10 @@
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin></Separator>
-                  <ListView fx:id="inventoryItems" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+                  <ListView fx:id="inventoryItemsListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
                   <HBox alignment="CENTER" maxWidth="1.7976931348623157E308">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showItemDescription" prefWidth="90.0" text="Prehliadnúť si">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showInventoryItemDescription" prefWidth="90.0" text="Prehliadnúť si">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>

@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * @author Michael Kolling, Lubos Pavlicek, Jarmila Pavlickova
  * @version pro školní rok 2016/2017
  */
-class Room {
+public class Room {
 
     private final String name;
     private final String description;
