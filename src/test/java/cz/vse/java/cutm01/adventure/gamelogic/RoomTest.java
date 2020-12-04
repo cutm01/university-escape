@@ -177,7 +177,7 @@ class RoomTest {
             testRoom.addItemToRoom(testItem);
 
             String expectedOutput = testItem.getName();
-            String actualOutput = testRoom.getItemNames();
+            String actualOutput = testRoom.getItemNamesAsString();
 
             assertEquals(expectedOutput, actualOutput);
             assertEquals(1, testRoom.getNumberOfItemsInRoom());

@@ -34,10 +34,12 @@ public enum ItemName {
 
     private final String itemName;
     private static final Map<String, String> ITEM_NAMES = new HashMap<>();
+    private static final Map<String, String> ENUM_VALUES_FOR_ITEM_NAMES = new HashMap<>();
 
     static {
         for (ItemName i : values()) {
             ITEM_NAMES.put(i.toString(), i.itemName);
+            ENUM_VALUES_FOR_ITEM_NAMES.put(i.itemName, i.toString());
         }
     }
 
@@ -47,5 +49,9 @@ public enum ItemName {
 
     public static String getItemName(String itemName) {
         return ITEM_NAMES.get(itemName);
+    }
+
+    public static String getEnumValueForItemName(String itemName) {
+        return ENUM_VALUES_FOR_ITEM_NAMES.get(itemName);
     }
 }

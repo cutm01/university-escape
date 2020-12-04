@@ -59,7 +59,7 @@ class LookAroundCommand implements Command {
         // get names of items, object, NPCs and exits for game actual room
         Room actualRoom = gamePlan.getActualRoom();
         String itemNames =
-            (actualRoom.getNumberOfItemsInRoom() > 0) ? actualRoom.getItemNames() : null;
+            (actualRoom.getNumberOfItemsInRoom() > 0) ? actualRoom.getItemNamesAsString() : null;
         String objectNames =
             (actualRoom.getNumberOfInteractableObjectsInRoom() > 0)
             ? actualRoom.getInteractableObjectNames()

@@ -257,12 +257,21 @@ public class Room {
     }
 
     /**
+     * Method return names of all items which are currently placed in room
+     * @return Set of game items currently placed in room, names are returned in format from ItemName Enum
+     * and therefore they can be used to as game command arguments
+     */
+    public Set<String> getRoomItemNames() {
+        return items.keySet();
+    }
+
+    /**
      * Method return names of all items inside the room which player can take<br> Names of items are
      * returned as one String, where each one is separated by comma
      *
      * @return names of items which player can take
      */
-    public String getItemNames() {
+    public String getItemNamesAsString() {
         StringBuilder itemNames = new StringBuilder();
         Iterator<String> itemIterator = items.keySet().iterator();
 

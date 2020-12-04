@@ -64,9 +64,6 @@ public class MainSceneController {
 
             @Override
             public void updateItem(String itemNameToDisplay, boolean empty) {
-                // game item names are internally represented as values from ItemNameToDisplay Enum (such as "BOTTLE" or "PEN"),
-                // following line will obtain String from this Enum which is shown in game GUI //TODO: maybe delete later
-                //String itemNameToDisplay = ItemNameToDisplay.getItemNameToDisplay(itemNameEnumValue);
                 super.updateItem(itemNameToDisplay, empty);
                 if (empty) {
                     setText(null);
@@ -182,7 +179,7 @@ public class MainSceneController {
 
     public void lookAroundRoom(ActionEvent actionEvent) {
         updateGameInteractionOutput(executeGameCommand("rozhliadnut_sa", null));
-        if (!game.getGamePlan().getActualRoom().wasRoomAlreadyExamined()) {
+        if (game.getGamePlan().getActualRoom().wasRoomAlreadyExamined()) {
             updateRoomItemsListView();
             updateRoomInteractableObjectsListView();
             updateRoomNonPlayerCharactersListView();
@@ -195,8 +192,8 @@ public class MainSceneController {
         List<String> gameCommandArguments = new ArrayList<>();
 
         for (String s : selectedItemsFromInventory) {
-            // following line get item name which is used as argument for game commands from item name which is displayed
-            // in game GUI (e.q. "Fľaša s vodou" --(Enum value)--> "BOTTLE" --(item name to execute command)--> "flasa"
+            // following line get item name which is used as argument for game commands from item name which is displayed in game GUI, e.g.:
+            // (item name in GUI) "Fľaša s vodou" --(Enum value)--> "BOTTLE" --(item name to execute command)--> "flasa"
             gameCommandArguments.add(ItemName.getItemName(ItemNameToDisplay.getEnumValueForItemName(s)));
         }
 
@@ -273,7 +270,34 @@ public class MainSceneController {
     }
 
     private void updateRoomItemsListView() {
+        Set<String> roomItemNames = game.getGamePlan().getActualRoom().getRoomItemNames();
+        ObservableList<String> roomItems = FXCollections.observableArrayList();
 
+        for (String s : roomItemNames) {
+            // following line get item name which will be displayed in GUI from item name in format used for game command execution, e.g.:
+            // (item name for game command execution) "flasa" --(Enum value)--> "BOTTLE" --(item name to display in GUI)--> "Fľaša s vodou"
+            roomItems.add(ItemNameToDisplay.getItemNameToDisplay(ItemName.getEnumValueForItemName(s)));
+        }
+
+        roomItemsListView.setItems(roomItems);
+        roomItemsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        roomItemsListView.setCellFactory(param -> new ListCell<>() {
+            private ImageView displayImage = new ImageView();
+
+            @Override
+            public void updateItem(String itemNameToDisplay, boolean empty) {
+                super.updateItem(itemNameToDisplay, empty);
+                if (empty) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    displayImage.setImage(inventoryItemsImages.get(itemNameToDisplay));
+                    setText(itemNameToDisplay);
+                    setGraphic(displayImage);
+                }
+            }
+        });
     }
 
     private void updateRoomInteractableObjectsListView() {
