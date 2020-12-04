@@ -23,7 +23,7 @@ public enum ItemNameToDisplay {
     BIG_SNACK("Veľká bageta"),
     FIRE_EXTINGUISHER("Hasiaci prístroj"),
     PROTECTIVE_MEDICAL_SUIT("Celotelový oblek"),
-    JACKET("Budna"),
+    JACKET("Bunda"),
     MUSIC_CD("CD Helenky Vondráčkovej"),
     BOOK("Kniha algoritmov"),
     STOLEN_WALLET("Cuzdia peňaženka"),

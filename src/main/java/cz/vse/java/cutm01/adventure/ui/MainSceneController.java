@@ -1,25 +1,25 @@
 package cz.vse.java.cutm01.adventure.ui;
 
 import cz.vse.java.cutm01.adventure.gamelogic.Game;
+import cz.vse.java.cutm01.adventure.gamelogic.ItemName;
 import cz.vse.java.cutm01.adventure.main.Start;
 import cz.vse.java.cutm01.adventure.main.SystemInfo;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 import java.io.InputStream;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * MainSceneController class contains methods to handle changes made in main scene
@@ -30,12 +30,13 @@ import java.util.*;
  */
 public class MainSceneController {
     private Game game;
+    private final Map<String, Image> inventoryItemsImages = loadItemImages();
 
     //scene elements
     public BorderPane rootBorderPane;
     public Label actualGameRoomName;
     public Label actualGameRoomDescription;
-    public ListView<InventoryItem> inventoryItems;
+    public ListView<String> inventoryItems;
     //text shown to user after his interaction with game (i.e. clicking on button)
     public Text gameInteractionOutput;
 
@@ -52,9 +53,30 @@ public class MainSceneController {
     }
 
     private void addTestItemsToInventory(){
-        inventoryItems.getItems().add(new InventoryItem("BOTTLE"));
-        inventoryItems.getItems().add(new InventoryItem("PEN"));
-        inventoryItems.setCellFactory(CheckBoxListCell.forListView(InventoryItem::checkedProperty));
+        ObservableList<String> items = FXCollections.observableArrayList("Pero", "Lano", "Bunda");
+
+        inventoryItems.setItems(items);
+        inventoryItems.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        inventoryItems.setCellFactory(param -> new ListCell<>() {
+            private ImageView displayImage = new ImageView();
+
+            @Override
+            public void updateItem(String itemNameToDisplay, boolean empty) {
+                // game item names are internally represented as values from ItemNameToDisplay Enum (such as "BOTTLE" or "PEN"),
+                // following line will obtain String from this Enum which is shown in game GUI //TODO: maybe delete later
+                //String itemNameToDisplay = ItemNameToDisplay.getItemNameToDisplay(itemNameEnumValue);
+                super.updateItem(itemNameToDisplay, empty);
+                if (empty) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    displayImage.setImage(inventoryItemsImages.get(itemNameToDisplay));
+                    setText(itemNameToDisplay);
+                    setGraphic(displayImage);
+                }
+            }
+        });
     }
 
     private void update() {
@@ -159,11 +181,14 @@ public class MainSceneController {
     }
 
     public void showItemDescription(ActionEvent actionEvent) {
-        updateGameInteractionOutput("testing function" + SystemInfo.LINE_SEPARATOR
-                                            + "testing function" + SystemInfo.LINE_SEPARATOR
-                                            + "testing function" + SystemInfo.LINE_SEPARATOR
-                                            + "testing function" + SystemInfo.LINE_SEPARATOR
-                                            + "testing function" + SystemInfo.LINE_SEPARATOR);
+        ObservableList<String> selectedItemsFromInventory = inventoryItems.getSelectionModel().getSelectedItems();
+        String selectedItemsNames = "";
+
+        for (String s : selectedItemsFromInventory) {
+            selectedItemsNames += ItemName.getItemName(s) + " ";
+        }
+
+        updateGameInteractionOutput("boli vybrane nasledovne veci " + selectedItemsNames);
     }
 
     public void showItemExaminationResult(ActionEvent actionEvent) {
@@ -199,5 +224,25 @@ public class MainSceneController {
 
         //get command execution output for commands without parameters
         return game.parseUserInput(commandName);
+    }
+
+    /**
+     * Method to load images for all game items
+     * @return Map where key is name of game item and value is corresponding image
+     */
+    private Map<String, Image> loadItemImages() {
+        Map<String, Image> loadedImages = new HashMap<>();
+
+        Object[] itemNames = ItemName.values();
+        for(Object o : itemNames) {
+            String itemName = o.toString().toLowerCase();
+
+            InputStream imageStream = getClass().getClassLoader().getResourceAsStream(itemName + ".png");
+            Image itemImage = new Image(imageStream);
+
+            loadedImages.put(ItemNameToDisplay.getItemNameToDisplay(o.toString()), itemImage);
+        }
+
+        return loadedImages;
     }
 }
