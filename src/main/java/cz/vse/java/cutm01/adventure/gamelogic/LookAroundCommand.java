@@ -62,7 +62,7 @@ class LookAroundCommand implements Command {
             (actualRoom.getNumberOfItemsInRoom() > 0) ? actualRoom.getItemNamesAsString() : null;
         String objectNames =
             (actualRoom.getNumberOfInteractableObjectsInRoom() > 0)
-            ? actualRoom.getInteractableObjectNames()
+            ? actualRoom.getInteractableObjectNamesAsString()
             : null;
         String characterNames =
             (actualRoom.getNumberOfNonPlayerCharactersInRoom() > 0)

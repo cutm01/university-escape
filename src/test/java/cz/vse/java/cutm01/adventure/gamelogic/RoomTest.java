@@ -236,7 +236,7 @@ class RoomTest {
             testRoom.addInteractableObjectToRoom(testObject);
 
             String expectedOutput = testObject.getName();
-            String actualOutput = testRoom.getInteractableObjectNames();
+            String actualOutput = testRoom.getInteractableObjectNamesAsString();
 
             assertEquals(expectedOutput, actualOutput);
             assertEquals(1, testRoom.getNumberOfInteractableObjectsInRoom());

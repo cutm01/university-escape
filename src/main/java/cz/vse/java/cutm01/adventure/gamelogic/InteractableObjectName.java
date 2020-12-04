@@ -21,10 +21,12 @@ public enum InteractableObjectName {
 
     private final String interactableObjectName;
     private static final Map<String, String> INTERACTABLE_OBJECTS_NAMES = new HashMap<>();
+    private static final Map<String, String> ENUM_VALUES_FOR_INTERACTABLE_OBJECT_NAMES = new HashMap<>();
 
     static {
         for (InteractableObjectName o : values()) {
             INTERACTABLE_OBJECTS_NAMES.put(o.toString(), o.interactableObjectName);
+            ENUM_VALUES_FOR_INTERACTABLE_OBJECT_NAMES.put(o.interactableObjectName, o.toString());
         }
     }
 
@@ -34,5 +36,9 @@ public enum InteractableObjectName {
 
     public static String getInteractableObjectName(String objectName) {
         return INTERACTABLE_OBJECTS_NAMES.get(objectName);
+    }
+
+    public static String getEnumValueForInteractableObjectName(String interactableObjectName) {
+        return ENUM_VALUES_FOR_INTERACTABLE_OBJECT_NAMES.get(interactableObjectName);
     }
 }

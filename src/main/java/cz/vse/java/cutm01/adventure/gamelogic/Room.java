@@ -257,11 +257,11 @@ public class Room {
     }
 
     /**
-     * Method return names of all items which are currently placed in room
-     * @return Set of game items currently placed in room, names are returned in format from ItemName Enum
-     * and therefore they can be used to as game command arguments
+     * Method returns names of all items which are currently placed in room
+     * @return Set of game item names currently placed in room, names are returned in format from ItemName Enum
+     * and therefore they can be used as game command argument
      */
-    public Set<String> getRoomItemNames() {
+    public Set<String> getRoomItemsNames() {
         return items.keySet();
     }
 
@@ -311,12 +311,21 @@ public class Room {
     }
 
     /**
+     * Method returns names of all interactable objects which are currently placed in room
+     * @return Set of interactable object names currently placed in room, names are returned in format from InteractableObjectName Enum
+     * and therefore they can be used as game command arguments
+     */
+    public Set<String> getRoomInteractableObjectsNames() {
+        return interactableObjects.keySet();
+    }
+
+    /**
      * Method return names of all interactable object inside the room which player can use<br> Names
      * of objects are returned as one String, where each one is separated by comma
      *
      * @return names of interactable objects which player can interact with
      */
-    public String getInteractableObjectNames() {
+    public String getInteractableObjectNamesAsString() {
         StringBuilder objectNames = new StringBuilder();
         Iterator<String> objectIterator = interactableObjects.keySet().iterator();
 

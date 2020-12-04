@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Game items (which player can discover during game) with their name, i.e. Strings which be displayed
+ * Game items (which player can discover during game) with their name, i.e. Strings which will be displayed
  * to player in game GUI
  *
  * @author Cúth Michal (xname: cutm01)
