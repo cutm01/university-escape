@@ -3,6 +3,7 @@ package cz.vse.java.cutm01.adventure.ui;
 import cz.vse.java.cutm01.adventure.gamelogic.Game;
 import cz.vse.java.cutm01.adventure.gamelogic.InteractableObjectName;
 import cz.vse.java.cutm01.adventure.gamelogic.ItemName;
+import cz.vse.java.cutm01.adventure.gamelogic.NonPlayerCharacterName;
 import cz.vse.java.cutm01.adventure.main.Start;
 import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import javafx.collections.FXCollections;
@@ -29,7 +30,8 @@ import java.util.*;
 public class MainSceneController {
     private Game game;
     private final Map<String, Image> gameItemsImages = loadGameItemsImages();
-    private final Map<String, Image>  gameInteractableObjectsImages = loadInteractableObjectsImages();
+    private final Map<String, Image>  gameInteractableObjectsImages = loadGameInteractableObjectsImages();
+    private final Map<String, Image>  gameNonPlayerCharactersImages = loadGameNonPlayerCharactersImages();
 
     //scene elements
     public BorderPane rootBorderPane;
@@ -272,13 +274,49 @@ public class MainSceneController {
     }
 
     /**
-     * Method to load images for all game items
-     * @return Map where key is name of game item and value is corresponding image
+     * Method to load images for all game interactable objects
+     * @return Map where key is name of game interactable object and value is corresponding image
      */
-    private Map<String, Image> loadInteractableObjectsImages() {
+    private Map<String, Image> loadGameInteractableObjectsImages() {
+        Map<String, Image> loadedImages = new HashMap<>();
 
+        Object[] interactableObjectNames = InteractableObjectName.values();
+        for(Object o : interactableObjectNames) {
+            String interactableObjectName = o.toString().toLowerCase();
+
+            InputStream imageStream = getClass().getClassLoader().getResourceAsStream(interactableObjectName + ".png");
+            Image itemImage = new Image(imageStream);
+
+            loadedImages.put(InteractableObjectNameToDisplay.getInteractableObjectNameToDisplay(o.toString()), itemImage);
+        }
+
+        return loadedImages;
     }
 
+    /**
+     * Method to load images for all game non player characters
+     * @return Map where key is name of game non player character object and value is corresponding image
+     */
+    private Map<String, Image> loadGameNonPlayerCharactersImages() {
+        Map<String, Image> loadedImages = new HashMap<>();
+
+        Object[] nonPlayerCharacterNames = NonPlayerCharacterName.values();
+        for(Object npc : nonPlayerCharacterNames) {
+            String nonPlayerCharacterName = npc.toString().toLowerCase();
+
+            InputStream imageStream = getClass().getClassLoader().getResourceAsStream(nonPlayerCharacterName + ".png");
+            Image itemImage = new Image(imageStream);
+
+            loadedImages.put(NonPlayerCharacterNameToDisplay.getNonPlayerCharacterNameToDisplay(npc.toString()), itemImage);
+        }
+
+        return loadedImages;
+    }
+
+    /**
+     * Method to update roomItemsListView with items which are currently placed in actual game room.
+     * Method when player is looking around the room in order to examine it
+     */
     private void updateRoomItemsListView() {
         Set<String> roomItemsNames = game.getGamePlan().getActualRoom().getRoomItemsNames();
         ObservableList<String> roomItems = FXCollections.observableArrayList();
@@ -310,12 +348,16 @@ public class MainSceneController {
         });
     }
 
+    /**
+     * Method to update roomInteractableObjectsListView with interactable objects which are currently placed in actual game room.
+     * Method when player is looking around the room in order to examine it
+     */
     private void updateRoomInteractableObjectsListView() {
         Set<String> roomInteractableObjectNames = game.getGamePlan().getActualRoom().getRoomInteractableObjectsNames();
         ObservableList<String> roomInteractableObjects = FXCollections.observableArrayList();
 
         for (String s : roomInteractableObjectNames) {
-            // following line get interactable objectc name which will be displayed in GUI from interactable object name in format used for game command execution, e.g.:
+            // following line get interactable object name which will be displayed in GUI from interactable object name in format used for game command execution, e.g.:
             // (interactable object name for game command execution) "lavicka" --(Enum value)--> "BENCH" --(item name to display in GUI)--> "Lavička"
             roomInteractableObjects.add(InteractableObjectNameToDisplay.getInteractableObjectNameToDisplay(InteractableObjectName.getEnumValueForInteractableObjectName(s)));
         }
@@ -333,7 +375,7 @@ public class MainSceneController {
                     setText(null);
                     setGraphic(null);
                 } else {
-                    displayImage.setImage(gameItemsImages.get(itemNameToDisplay));
+                    displayImage.setImage(gameInteractableObjectsImages.get(itemNameToDisplay));
                     setText(itemNameToDisplay);
                     setGraphic(displayImage);
                 }
@@ -341,8 +383,39 @@ public class MainSceneController {
         });
     }
 
+    /**
+     * Method to update roomNonPlayerCharactersListView with NPCs which are currently placed in actual game room.
+     * Method when player is looking around the room in order to examine it
+     */
     private void updateRoomNonPlayerCharactersListView() {
+        Set<String> roomNonPlayerCharacterNames = game.getGamePlan().getActualRoom().getRoomNonPlayerCharactersNames();
+        ObservableList<String> roomNonPlayerCharacters = FXCollections.observableArrayList();
 
+        for (String npc : roomNonPlayerCharacterNames) {
+            // following line get non-player character name which will be displayed in GUI from non-player character object name in format used for game command execution, e.g.:
+            // (non-player character name for game command execution) "upratovacka" --(Enum value)--> "CLEANING_LADY" --(item name to display in GUI)--> "Upratovačka"
+            roomNonPlayerCharacters.add(NonPlayerCharacterNameToDisplay.getNonPlayerCharacterNameToDisplay(NonPlayerCharacterName.getEnumValueForNonPlayerCharacterName(npc)));
+        }
+
+        roomNonPlayerCharactersListView.setItems(roomNonPlayerCharacters);
+        roomNonPlayerCharactersListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        roomNonPlayerCharactersListView.setCellFactory(param -> new ListCell<>() {
+            private ImageView displayImage = new ImageView();
+
+            @Override
+            public void updateItem(String itemNameToDisplay, boolean empty) {
+                super.updateItem(itemNameToDisplay, empty);
+                if (empty) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    displayImage.setImage(gameNonPlayerCharactersImages.get(itemNameToDisplay));
+                    setText(itemNameToDisplay);
+                    setGraphic(displayImage);
+                }
+            }
+        });
     }
 
 }

@@ -365,12 +365,21 @@ public class Room {
     }
 
     /**
+     * Method returns names of all non-player characters which are currently placed in room
+     * @return Set of non-player characterst names currently placed in room, names are returned in format from NonPlayerCharacterName Enum
+     * and therefore they can be used as game command arguments
+     */
+    public Set<String> getRoomNonPlayerCharactersNames() {
+        return nonPlayerCharacters.keySet();
+    }
+
+    /**
      * Method return names of all non-player characters inside the room the player can talk to<br>
      * Names of characters are returned as one String, where each one is separated by comma
      *
      * @return names of non-player characters the player can talk to
      */
-    public String getNonPlayerCharacterNames() {
+    public String getNonPlayerCharacterNamesAsString() {
         StringBuilder nonPlayerCharacterNames = new StringBuilder();
         Iterator<String> characterIterator = nonPlayerCharacters.keySet().iterator();
 

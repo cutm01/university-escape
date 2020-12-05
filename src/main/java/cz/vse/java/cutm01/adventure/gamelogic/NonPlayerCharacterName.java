@@ -18,10 +18,13 @@ public enum NonPlayerCharacterName {
 
     private final String nonPlayerCharacterName;
     private static final Map<String, String> NPC_NAMES = new HashMap<>();
+    private static final Map<String, String> ENUM_VALUES_FOR_NON_PLAYER_CHARACTER_NAMES = new HashMap<>();
+
 
     static {
         for (NonPlayerCharacterName npc : values()) {
             NPC_NAMES.put(npc.toString(), npc.nonPlayerCharacterName);
+            ENUM_VALUES_FOR_NON_PLAYER_CHARACTER_NAMES.put(npc.nonPlayerCharacterName, npc.toString());
         }
     }
 
@@ -29,7 +32,11 @@ public enum NonPlayerCharacterName {
         this.nonPlayerCharacterName = nonPlayerCharacterName;
     }
 
-    public static String getNonPlayerCharacterName(String characterName) {
-        return NPC_NAMES.get(characterName);
+    public static String getNonPlayerCharacterName(String nonPlayerCharacterName) {
+        return NPC_NAMES.get(nonPlayerCharacterName);
+    }
+
+    public static String getEnumValueForNonPlayerCharacterName(String nonPlayerCharacterName) {
+        return ENUM_VALUES_FOR_NON_PLAYER_CHARACTER_NAMES.get(nonPlayerCharacterName);
     }
 }

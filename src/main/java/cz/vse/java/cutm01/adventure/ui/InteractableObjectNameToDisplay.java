@@ -20,13 +20,13 @@ public enum InteractableObjectNameToDisplay {
     LOCKED_DOOR("Zamknuté dvere");
 
     private final String interactableObjectNameToDisplay;
-    private static final Map<String, String> ITEM_NAMES_TO_DISPLAY = new HashMap<>();
-    private static final Map<String, String> ENUM_VALUES_FOR_ITEM_NAMES = new HashMap<>();
+    private static final Map<String, String> INTERACTABLE_OBJECT_NAMES_TO_DISPLAY = new HashMap<>();
+    private static final Map<String, String> ENUM_VALUES_FOR_INTERACTABLE_OBJECT_NAMES = new HashMap<>();
 
     static {
         for (InteractableObjectNameToDisplay o : values()) {
-            ITEM_NAMES_TO_DISPLAY.put(o.toString(), o.interactableObjectNameToDisplay);
-            ENUM_VALUES_FOR_ITEM_NAMES.put(o.interactableObjectNameToDisplay, o.toString());
+            INTERACTABLE_OBJECT_NAMES_TO_DISPLAY.put(o.toString(), o.interactableObjectNameToDisplay);
+            ENUM_VALUES_FOR_INTERACTABLE_OBJECT_NAMES.put(o.interactableObjectNameToDisplay, o.toString());
         }
     }
 
@@ -35,11 +35,11 @@ public enum InteractableObjectNameToDisplay {
     }
 
     public static String getInteractableObjectNameToDisplay(String interactableObjectNameToDisplay) {
-        return ITEM_NAMES_TO_DISPLAY.get(interactableObjectNameToDisplay);
+        return INTERACTABLE_OBJECT_NAMES_TO_DISPLAY.get(interactableObjectNameToDisplay);
     }
 
-    public static String getEnumValueForItemName(String itemName) {
-        return ENUM_VALUES_FOR_ITEM_NAMES.get(itemName);
+    public static String getEnumValueForInteractableObjectName(String itemName) {
+        return ENUM_VALUES_FOR_INTERACTABLE_OBJECT_NAMES.get(itemName);
     }
 }
 

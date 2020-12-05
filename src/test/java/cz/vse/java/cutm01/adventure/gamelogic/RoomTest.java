@@ -295,7 +295,7 @@ class RoomTest {
             testRoom.addNonPlayerCharacterToRoom(testNPC);
 
             String expectedOutput = testNPC.getName();
-            String actualOutput = testRoom.getNonPlayerCharacterNames();
+            String actualOutput = testRoom.getNonPlayerCharacterNamesAsString();
 
             assertEquals(expectedOutput, actualOutput);
             assertEquals(1, testRoom.getNumberOfNonPlayerCharactersInRoom());

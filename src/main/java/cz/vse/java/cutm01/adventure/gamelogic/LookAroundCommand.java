@@ -66,7 +66,7 @@ class LookAroundCommand implements Command {
             : null;
         String characterNames =
             (actualRoom.getNumberOfNonPlayerCharactersInRoom() > 0)
-            ? actualRoom.getNonPlayerCharacterNames()
+            ? actualRoom.getNonPlayerCharacterNamesAsString()
             : null;
         String exits =
             (actualRoom.getNeighboringRooms().size() > 0) ? actualRoom.getNeighboringRoomNames()
