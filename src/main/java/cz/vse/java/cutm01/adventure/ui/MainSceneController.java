@@ -1,20 +1,20 @@
 package cz.vse.java.cutm01.adventure.ui;
 
-import cz.vse.java.cutm01.adventure.gamelogic.Game;
-import cz.vse.java.cutm01.adventure.gamelogic.InteractableObjectName;
-import cz.vse.java.cutm01.adventure.gamelogic.ItemName;
-import cz.vse.java.cutm01.adventure.gamelogic.NonPlayerCharacterName;
+import cz.vse.java.cutm01.adventure.gamelogic.*;
 import cz.vse.java.cutm01.adventure.main.Start;
 import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.geometry.Bounds;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.InputStream;
@@ -32,9 +32,11 @@ public class MainSceneController {
     private final Map<String, Image> gameItemsImages = loadGameItemsImages();
     private final Map<String, Image>  gameInteractableObjectsImages = loadGameInteractableObjectsImages();
     private final Map<String, Image>  gameNonPlayerCharactersImages = loadGameNonPlayerCharactersImages();
+    private final Map<String, Image> gameRoomMapsImages = loadGameRoomMapsImages();
 
     //scene elements
     public BorderPane rootBorderPane;
+    public ImageView actualRoomMiniMap;
     public Label actualGameRoomName;
     public Label actualGameRoomDescription;
     public ListView<String> inventoryItemsListView;
@@ -86,6 +88,11 @@ public class MainSceneController {
         actualGameRoomDescription.setText(getActualGameRoomDescription());
         updateGameInteractionOutput(game.getPrologue());
         addTestItemsToInventory();
+        updateActualRoomMiniMap();
+    }
+
+    private void updateActualRoomMiniMap() {
+        actualRoomMiniMap.setImage(gameRoomMapsImages.get("rb_201"));
     }
 
     /**
@@ -178,7 +185,29 @@ public class MainSceneController {
                             + "Veľa štastia!";
         helpWindow.setContentText(helpText);
 
-        helpWindow.show();
+        helpWindow.showAndWait();
+    }
+
+    /**
+     * Method shows big game map after user clicks on button
+     * @param actionEvent
+     */
+    public void showGameMap(ActionEvent actionEvent) {
+        Alert gameMapDialogWindow = new Alert(AlertType.INFORMATION);
+        gameMapDialogWindow.setTitle("Herná mapa");
+        gameMapDialogWindow.getDialogPane().setPrefSize(910.0, 500.0);
+
+        //disable header of pop-up alert and confirmation button
+        gameMapDialogWindow.setHeaderText(null);
+        gameMapDialogWindow.setGraphic(null);
+        gameMapDialogWindow.getDialogPane().lookupButton(ButtonType.OK).setVisible(false);
+
+        //set content
+        gameMapDialogWindow.setContentText("Aktuálne sa nachádzaš v miestnosti: ");
+        ImageView gameMapImage = new ImageView(gameRoomMapsImages.get("game_map"));
+        gameMapDialogWindow.setGraphic(gameMapImage);
+
+        gameMapDialogWindow.showAndWait();
     }
 
     public void lookAroundRoom(ActionEvent actionEvent) {
@@ -314,6 +343,31 @@ public class MainSceneController {
     }
 
     /**
+     * Method to load images for all minimaps of game rooms and one big game map with all rooms in it
+     */
+    private Map<String, Image> loadGameRoomMapsImages() {
+        Map<String, Image> loadedImages = new HashMap<>();
+        Object[] gameRoomNames = RoomName.values();
+        for(Object r : gameRoomNames) {
+            String gameRoomName = r.toString().toLowerCase();
+
+            //there is no minimap for game room with name street as game ends after reaching this room
+            if (!gameRoomName.equals("street")) {
+                InputStream imageStream = getClass().getClassLoader().getResourceAsStream(gameRoomName + "_map.png");
+                Image gameRoomMapImage = new Image(imageStream);
+                loadedImages.put(gameRoomName, gameRoomMapImage);
+            }
+        }
+
+        //insert image for whole game map
+        InputStream imageStream = getClass().getClassLoader().getResourceAsStream("game_map.png");
+        Image gameRoomMapImage = new Image(imageStream);
+        loadedImages.put("game_map", gameRoomMapImage);
+
+        return loadedImages;
+    }
+
+    /**
      * Method to update roomItemsListView with items which are currently placed in actual game room.
      * Method when player is looking around the room in order to examine it
      */
@@ -418,4 +472,26 @@ public class MainSceneController {
         });
     }
 
+    /**
+     * Method is used to center pop-up Alert elements in game window
+     * @param alert element to center
+     * @param width desired width of element to center
+     * @param height desired height of element to center
+     */
+    private void centerAlert(Alert alert, double width, double height) {
+        double applicationWindowXCoordinate = rootBorderPane.getScene().getWindow().getX();
+        double applicationWindowYCoordinate = rootBorderPane.getScene().getWindow().getY();
+        double applicationWindowWidth = rootBorderPane.getScene().getWindow().getWidth();
+        double applicationWindowHeight = rootBorderPane.getScene().getWindow().getHeight();
+
+        //get X and Y coordinates which ensures that alert window will be centered in current application window
+        double alertXCoordinate = applicationWindowXCoordinate + ((applicationWindowWidth - width) / 2);
+        double alertYCoordinate = applicationWindowYCoordinate + ((applicationWindowHeight - height) / 2);
+
+       alert.setResizable(true);
+       alert.getDialogPane().setPrefSize(width, height);
+
+        alert.setX(alertXCoordinate);
+        alert.setY(alertYCoordinate);
+    }
 }
