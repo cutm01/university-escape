@@ -6,15 +6,15 @@ import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.geometry.Bounds;
-import javafx.geometry.Rectangle2D;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.InputStream;
@@ -203,9 +203,14 @@ public class MainSceneController {
         gameMapDialogWindow.getDialogPane().lookupButton(ButtonType.OK).setVisible(false);
 
         //set content
-        gameMapDialogWindow.setContentText("Aktuálne sa nachádzaš v miestnosti: ");
+        //get actual game room name in format with diacritics (defined in RoomNameToDisplay)
+        String actualGameRoomName = RoomNameToDisplay.getRoomNameToDisplay(RoomName.getEnumValueForRoomName(game.getGamePlan().getActualRoom().getName()));
+        Label label = new Label("Aktuálne sa nachádzaš v miestnosti: " + actualGameRoomName);
         ImageView gameMapImage = new ImageView(gameRoomMapsImages.get("game_map"));
-        gameMapDialogWindow.setGraphic(gameMapImage);
+        VBox content = new VBox(10, label, gameMapImage);
+        content.setPadding(new Insets(10));
+        content.setAlignment(Pos.CENTER);
+        gameMapDialogWindow.getDialogPane().setContent(content);
 
         gameMapDialogWindow.showAndWait();
     }

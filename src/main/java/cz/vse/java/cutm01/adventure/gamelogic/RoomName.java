@@ -27,10 +27,12 @@ public enum RoomName {
 
     private final String roomName;
     private static final Map<String, String> ROOM_NAMES = new HashMap<>();
+    private static final Map<String, String> ENUM_VALUES_FOR_ROOM_NAMES = new HashMap<>();
 
     static {
         for (RoomName r : values()) {
             ROOM_NAMES.put(r.toString(), r.roomName);
+            ENUM_VALUES_FOR_ROOM_NAMES.put(r.roomName, r.toString());
         }
     }
 
@@ -40,5 +42,9 @@ public enum RoomName {
 
     public static String getRoomName(String roomName) {
         return ROOM_NAMES.get(roomName);
+    }
+
+    public static String getEnumValueForRoomName(String roomName) {
+        return ENUM_VALUES_FOR_ROOM_NAMES.get(roomName);
     }
 }
