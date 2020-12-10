@@ -223,6 +223,20 @@ public class Room {
             return rooms.get(0);
         }
     }
+
+    /**
+     * Method returns names of all neighboring rooms, i.e. possible exits from actual room
+     * @return Set of neighboring rooms names, names are returned in format from RoomName Enum
+     * and therefore they can be used as game command argument
+     */
+    public Set<String> getNeighboringRoomsNames() {
+        Set<String> neighboringRoomsNames = new LinkedHashSet<>();
+        for(Room r : neighboringRooms) {
+            neighboringRoomsNames.add(r.getName());
+        }
+
+        return neighboringRoomsNames;
+    }
     // --------------------------------------------------------------------------------
     // endregion Methods related to neighboringRooms
 

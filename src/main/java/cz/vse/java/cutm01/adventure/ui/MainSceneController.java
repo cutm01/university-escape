@@ -33,6 +33,7 @@ public class MainSceneController {
     private final Map<String, Image>  gameInteractableObjectsImages = loadGameInteractableObjectsImages();
     private final Map<String, Image>  gameNonPlayerCharactersImages = loadGameNonPlayerCharactersImages();
     private final Map<String, Image> gameRoomMapsImages = loadGameRoomMapsImages();
+    private final Map<String, Image> gameRoomsImages = loadGameRoomsImages();
 
     //scene elements
     public BorderPane rootBorderPane;
@@ -43,6 +44,7 @@ public class MainSceneController {
     public ListView<String> roomItemsListView;
     public ListView<String> roomInteractableObjectsListView;
     public ListView<String> roomNonPlayerCharactersListView;
+    public ListView<String> roomExitsListView;
 
     //text shown to user after his interaction with game (i.e. clicking on button)
     public Text gameInteractionOutput;
@@ -89,6 +91,7 @@ public class MainSceneController {
         updateGameInteractionOutput(game.getPrologue());
         addTestItemsToInventory();
         updateActualRoomMiniMap();
+        updateRoomExitsListView();
     }
 
     private void updateActualRoomMiniMap() {
@@ -373,6 +376,25 @@ public class MainSceneController {
     }
 
     /**
+     * Method to load images for all game rooms
+     */
+    private Map<String, Image> loadGameRoomsImages() {
+        Map<String, Image> loadedImages = new HashMap<>();
+
+        Object[] roomNames = RoomName.values();
+        for(Object room : roomNames) {
+            String roomName = room.toString().toLowerCase();
+
+            InputStream imageStream = getClass().getClassLoader().getResourceAsStream(roomName + ".png");
+            Image itemImage = new Image(imageStream);
+
+            loadedImages.put(RoomNameToDisplay.getRoomNameToDisplay(room.toString()), itemImage);
+        }
+
+        return loadedImages;
+    }
+
+    /**
      * Method to update roomItemsListView with items which are currently placed in actual game room.
      * Method when player is looking around the room in order to examine it
      */
@@ -471,6 +493,40 @@ public class MainSceneController {
                 } else {
                     displayImage.setImage(gameNonPlayerCharactersImages.get(itemNameToDisplay));
                     setText(itemNameToDisplay);
+                    setGraphic(displayImage);
+                }
+            }
+        });
+    }
+
+    /**
+     * Method to update roomExitsListView with all possible exits from actual game room
+     */
+    private void updateRoomExitsListView() {
+        Set<String> roomExitsNames = game.getGamePlan().getActualRoom().getNeighboringRoomsNames();
+        ObservableList<String> roomExits = FXCollections.observableArrayList();
+
+        for (String s : roomExitsNames) {
+            // following line get neighboring room name which will be displayed in GUI from room name in format used for game command execution, e.g.:
+            // (room name for game command execution) "kancelaria" --(Enum value)--> "OFFICE" --(room name to display in GUI)--> "Kancelária"
+            roomExits.add(RoomNameToDisplay.getRoomNameToDisplay(RoomName.getEnumValueForRoomName(s)));
+        }
+
+        roomExitsListView.setItems(roomExits);
+        roomExitsListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+        roomExitsListView.setCellFactory(param -> new ListCell<>() {
+            private ImageView displayImage = new ImageView();
+
+            @Override
+            public void updateItem(String roomNameToDisplay, boolean empty) {
+                super.updateItem(roomNameToDisplay, empty);
+                if (empty) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    displayImage.setImage(gameRoomsImages.get(roomNameToDisplay));
+                    setText(roomNameToDisplay);
                     setGraphic(displayImage);
                 }
             }
