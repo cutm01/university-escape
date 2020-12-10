@@ -14,4 +14,7 @@ Big thanks to following [Flaticon](https://www.flaticon.com/) artists whose free
 [Smashicons](https://www.flaticon.com/authors/smashicons)<br>
 [Pixel perfect](https://www.flaticon.com/authors/pixel-perfect)<br>
 [xnimrodx](https://www.flaticon.com/authors/xnimrodx)<br>
-
+[photo3idea_studio](https://www.flaticon.com/authors/photo3idea-studio)<br>
+[Good Ware](https://www.flaticon.com/authors/good-ware)<br>
+[Eucalyp](https://www.flaticon.com/authors/eucalyp)<br>
+[Icongeek26](https://www.flaticon.com/authors/icongeek26)<br>
