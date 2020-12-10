@@ -260,7 +260,7 @@
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </Separator>
-                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="100.0" />
+                  <HBox fx:id="roomExits" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="100.0" />
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" top="10.0" />
