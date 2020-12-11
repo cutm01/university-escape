@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -41,6 +42,8 @@ public class MainSceneController {
     private final Map<String, Image>  gameNonPlayerCharactersImages = loadGameNonPlayerCharactersImages();
     private final Map<String, Image> gameRoomMapsImages = loadGameRoomMapsImages();
     private final Map<String, Image> gameRoomsImages = loadGameRoomsImages();
+
+    public TextField gameConsole;
 
     //scene elements
     public BorderPane rootBorderPane;
@@ -338,13 +341,59 @@ public class MainSceneController {
         updateGameInteractionOutput(executeGameCommand("prehliadnut_si", gameCommandArguments));
     }
 
-    public void showItemExaminationResult(ActionEvent actionEvent) {
+    public void showRoomItemExaminationResult(ActionEvent actionEvent) {
+        ObservableList<String> selectedItemsFromRoom = roomItemsListView.getSelectionModel().getSelectedItems();
+        //used to store item names in format which can be used as game command argument
+        List<String> gameCommandArguments = new ArrayList<>();
+
+        for (String s : selectedItemsFromRoom) {
+            // following line get item name which is used as argument for game commands from item name which is displayed
+            // in game GUI (e.q. "Fľaša s vodou" --(Enum value)--> "BOTTLE" --(item name to execute command)--> "flasa"
+            gameCommandArguments.add(ItemName.getItemName(ItemNameToDisplay.getEnumValueForItemName(s)));
+        }
+
+        updateGameInteractionOutput(executeGameCommand("preskumaj_predmet", gameCommandArguments));
+        updateRoomItemsListView();
+    }
+
+    /**
+     * Method takes room item(s) selected by player and add them to his inventory
+     * @param actionEvent
+     */
+    public void takeItemsFromRoom(ActionEvent actionEvent) {
+        ObservableList<String> selectedItemsFromRoom = roomItemsListView.getSelectionModel().getSelectedItems();
+        //used to store item names in format which can be used as game command argument
+        List<String> gameCommandArguments = new ArrayList<>();
+
+        for (String s : selectedItemsFromRoom) {
+            // following line get item name which is used as argument for game commands from item name which is displayed
+            // in game GUI (e.q. "Fľaša s vodou" --(Enum value)--> "BOTTLE" --(item name to execute command)--> "flasa"
+            gameCommandArguments.add(ItemName.getItemName(ItemNameToDisplay.getEnumValueForItemName(s)));
+            roomItemsListView.getItems().remove(s);
+        }
+
+        updateGameInteractionOutput(executeGameCommand("vezmi", gameCommandArguments));
+        //updateRoomItemsListView();
+        updateInventoryItemsListView();
+    }
+
+    public void showInventoryItemExaminationResult(ActionEvent actionEvent) {
+
     }
 
     public void useInventoryItem(ActionEvent actionEvent) {
     }
 
     public void dropInventoryItem(ActionEvent actionEvent) {
+    }
+
+    /**
+     * Method takes user input from gameConsole TextField and execute this text input as game command
+     * @param actionEvent
+     */
+    public void executeTypedInGameCommand(ActionEvent actionEvent) {
+        String commandExecutionOutput = game.parseUserInput(gameConsole.getText());
+        updateGameInteractionOutput(commandExecutionOutput);
     }
 
     /**
@@ -496,8 +545,42 @@ public class MainSceneController {
     }
 
     /**
+     * Method to update inventoryItemsListView with items which are currently placed in player's inventory.
+     */
+    private void updateInventoryItemsListView() {
+        Set<String> inventoryItemsNames = game.getGamePlan().getPlayer().getInventory().getInventoryItemsNames();
+        ObservableList<String> inventoryItems = FXCollections.observableArrayList();
+
+        for (String s : inventoryItemsNames) {
+            // following line get item name which will be displayed in GUI from item name in format used for game command execution, e.g.:
+            // (item name for game command execution) "flasa" --(Enum value)--> "BOTTLE" --(item name to display in GUI)--> "Fľaša s vodou"
+            inventoryItems.add(ItemNameToDisplay.getItemNameToDisplay(ItemName.getEnumValueForItemName(s)));
+        }
+
+        roomItemsListView.setItems(inventoryItems);
+        roomItemsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        roomItemsListView.setCellFactory(param -> new ListCell<>() {
+            private ImageView displayImage = new ImageView();
+
+            @Override
+            public void updateItem(String itemNameToDisplay, boolean empty) {
+                super.updateItem(itemNameToDisplay, empty);
+                if (empty) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    displayImage.setImage(gameItemsImages.get(itemNameToDisplay));
+                    setText(itemNameToDisplay);
+                    setGraphic(displayImage);
+                }
+            }
+        });
+    }
+
+    /**
      * Method to update roomItemsListView with items which are currently placed in actual game room.
-     * Method when player is looking around the room in order to examine it
+     * Method is used when player is looking around the room in order to examine it
      */
     private void updateRoomItemsListView() {
         Set<String> roomItemsNames = game.getGamePlan().getActualRoom().getRoomItemsNames();
@@ -509,6 +592,7 @@ public class MainSceneController {
             roomItems.add(ItemNameToDisplay.getItemNameToDisplay(ItemName.getEnumValueForItemName(s)));
         }
 
+        roomItemsListView.getItems().clear();
         roomItemsListView.setItems(roomItems);
         roomItemsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
@@ -532,7 +616,7 @@ public class MainSceneController {
 
     /**
      * Method to update roomInteractableObjectsListView with interactable objects which are currently placed in actual game room.
-     * Method when player is looking around the room in order to examine it
+     * Method is used when player is looking around the room in order to examine it
      */
     private void updateRoomInteractableObjectsListView() {
         Set<String> roomInteractableObjectNames = game.getGamePlan().getActualRoom().getRoomInteractableObjectsNames();
@@ -567,7 +651,7 @@ public class MainSceneController {
 
     /**
      * Method to update roomNonPlayerCharactersListView with NPCs which are currently placed in actual game room.
-     * Method when player is looking around the room in order to examine it
+     * Method is used when player is looking around the room in order to examine it
      */
     private void updateRoomNonPlayerCharactersListView() {
         Set<String> roomNonPlayerCharacterNames = game.getGamePlan().getActualRoom().getRoomNonPlayerCharactersNames();

@@ -4,6 +4,7 @@ import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Inventory class represent player's inventory (bag) and provides methods used to manipulate with
@@ -12,7 +13,7 @@ import java.util.Map;
  * @author Cúth Michal (xname: cutm01)
  * @version spring semester 2019/2020
  */
-class Inventory {
+public class Inventory {
 
     private final Map<String, Item> items;
     private int inventoryCapacity;
@@ -50,6 +51,10 @@ class Inventory {
 
     // region Methods related to items
     // --------------------------------------------------------------------------------
+    public Set<String> getInventoryItemsNames() {
+        return items.keySet();
+    }
+
     public boolean isItemInInventory(String itemName) {
         return items.containsKey(itemName);
     }
