@@ -6,13 +6,16 @@ import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -45,6 +48,7 @@ public class MainSceneController {
     public ListView<String> roomInteractableObjectsListView;
     public ListView<String> roomNonPlayerCharactersListView;
     public ListView<String> roomExitsListView;
+    public HBox roomExits;
 
     //text shown to user after his interaction with game (i.e. clicking on button)
     public Text gameInteractionOutput;
@@ -91,7 +95,8 @@ public class MainSceneController {
         updateGameInteractionOutput(game.getPrologue());
         addTestItemsToInventory();
         updateActualRoomMiniMap();
-        updateRoomExitsListView();
+        //updateRoomExitsListView();
+        updateRoomExits();
     }
 
     private void updateActualRoomMiniMap() {
@@ -517,6 +522,9 @@ public class MainSceneController {
 
         roomExitsListView.setCellFactory(param -> new ListCell<>() {
             private ImageView displayImage = new ImageView();
+            private Label label = new Label();
+            private VBox vbox;
+            private HBox hbox;
 
             @Override
             public void updateItem(String roomNameToDisplay, boolean empty) {
@@ -526,11 +534,47 @@ public class MainSceneController {
                     setGraphic(null);
                 } else {
                     displayImage.setImage(gameRoomsImages.get(roomNameToDisplay));
-                    setText(roomNameToDisplay);
-                    setGraphic(displayImage);
+                    label.setText(roomNameToDisplay);
+                    //vbox = new VBox(0, label, displayImage);
+                    //vbox.setAlignment(Pos.CENTER);
+                    //setText(roomNameToDisplay);
+                    hbox = new HBox(label, displayImage);
+                    hbox.setAlignment(Pos.CENTER);
+
+                    setGraphic(hbox);
                 }
             }
         });
+
+        roomExitsListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                updateGameInteractionOutput("clicked");
+            }
+        });
+    }
+
+    private void updateRoomExits(){
+        List<VBox> content = new LinkedList();
+        Set<String> roomExitsNames = game.getGamePlan().getActualRoom().getNeighboringRoomsNames();
+        String roomNameToDispay;
+        for(String s : roomExitsNames) {
+            roomNameToDispay = RoomNameToDisplay.getRoomNameToDisplay(RoomName.getEnumValueForRoomName(s));
+            Label roomName = new Label(roomNameToDispay);
+            ImageView roomImage = new ImageView(gameRoomsImages.get(roomNameToDispay));
+            VBox roomExit = new VBox(10, roomName, roomImage);
+            roomExit.setMinWidth(100.00);
+            roomExit.setAlignment(Pos.CENTER);
+            roomExit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    updateGameInteractionOutput("kliknuta bola " + s);
+                }
+            });
+            content.add(roomExit);
+        }
+
+        roomExits.getChildren().addAll(content);
     }
 
     /**
