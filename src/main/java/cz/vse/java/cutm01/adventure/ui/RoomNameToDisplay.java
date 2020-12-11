@@ -14,8 +14,8 @@ import java.util.Map;
 public enum RoomNameToDisplay {
     RB_201("RB 201"),
     RB_202("RB 202"),
-    FIRST_FLOOR_HALL("Chodba na I. poschodí"),
-    SECOND_FLOOR_HALL("Chodba na II. poschodí"),
+    FIRST_FLOOR_HALL("Chodba I. poschodie"),
+    SECOND_FLOOR_HALL("Chodba II. poschodie"),
     TOILETS("Toalety"),
     OFFICE("Kancelária"),
     DRESSING_ROOM("Šatňa"),

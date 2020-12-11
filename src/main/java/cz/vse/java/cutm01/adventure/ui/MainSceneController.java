@@ -96,7 +96,7 @@ public class MainSceneController {
         addTestItemsToInventory();
         updateActualRoomMiniMap();
         //updateRoomExitsListView();
-        updateRoomExits();
+        updateRoomExitsScrollPane();
     }
 
     private void updateActualRoomMiniMap() {
@@ -554,16 +554,29 @@ public class MainSceneController {
         });
     }
 
-    private void updateRoomExits(){
+    /**
+     * Method to update ScrollPane with all possible exits from actual game room
+     */
+    private void updateRoomExitsScrollPane(){
         List<VBox> content = new LinkedList();
         Set<String> roomExitsNames = game.getGamePlan().getActualRoom().getNeighboringRoomsNames();
-        String roomNameToDispay;
+        String roomNameToDisplay;
+        //TODO: move to separate CSS file later
+        String cssLayout = "-fx-border-color: black;\n"
+                            /*+ "-fx-border-insets: 5;\n"*/
+                            + "-fx-border-width: 1;\n"
+                            + "-fx-border-style: solid;\n"
+                            + "";
+
         for(String s : roomExitsNames) {
-            roomNameToDispay = RoomNameToDisplay.getRoomNameToDisplay(RoomName.getEnumValueForRoomName(s));
-            Label roomName = new Label(roomNameToDispay);
-            ImageView roomImage = new ImageView(gameRoomsImages.get(roomNameToDispay));
+            roomNameToDisplay = RoomNameToDisplay.getRoomNameToDisplay(RoomName.getEnumValueForRoomName(s));
+            Label roomName = new Label(roomNameToDisplay);
+            ImageView roomImage = new ImageView(gameRoomsImages.get(roomNameToDisplay));
             VBox roomExit = new VBox(10, roomName, roomImage);
-            roomExit.setMinWidth(100.00);
+            roomExit.setMinWidth(130.0);
+            roomExit.setMaxHeight(130.0);
+            roomExit.setPadding(new Insets(5.0));
+            roomExit.setStyle(cssLayout);
             roomExit.setAlignment(Pos.CENTER);
             roomExit.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -575,6 +588,7 @@ public class MainSceneController {
         }
 
         roomExits.getChildren().addAll(content);
+        roomExits.setAlignment(Pos.CENTER);
     }
 
     /**
