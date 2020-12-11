@@ -3,6 +3,9 @@ package cz.vse.java.cutm01.adventure.ui;
 import cz.vse.java.cutm01.adventure.gamelogic.*;
 import cz.vse.java.cutm01.adventure.main.Start;
 import cz.vse.java.cutm01.adventure.main.SystemInfo;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,6 +35,7 @@ import java.util.*;
  */
 public class MainSceneController {
     private Game game;
+    private SimpleObjectProperty actualGameRoomProperty;
     private final Map<String, Image> gameItemsImages = loadGameItemsImages();
     private final Map<String, Image>  gameInteractableObjectsImages = loadGameInteractableObjectsImages();
     private final Map<String, Image>  gameNonPlayerCharactersImages = loadGameNonPlayerCharactersImages();
@@ -59,10 +63,18 @@ public class MainSceneController {
 
     public void init(Game game) {
         this.game = game;
-
         makeMenuElementFireAction(newGameMenu);
-        //makeMenuElementFireAction(showHelpMenu);
-        update();
+        initialGameSetUp();
+
+        game.getGamePlan().actualRoomNameProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                updateActualGameRoomNameLabel();
+                updateActualGameRoomDescriptionLabel();
+                updateActualRoomMiniMap();
+                updateRoomExitsScrollPane();
+            }
+        });
     }
 
     private void addTestItemsToInventory(){
@@ -89,18 +101,22 @@ public class MainSceneController {
         });
     }
 
-    private void update() {
-        actualGameRoomName.setText(getActualGameRoomName());
-        actualGameRoomDescription.setText(getActualGameRoomDescription());
-        updateGameInteractionOutput(game.getPrologue());
-        addTestItemsToInventory();
-        updateActualRoomMiniMap();
-        //updateRoomExitsListView();
+    /**
+     * Method set up all necessary MainScene elements which are needed to start playing new game
+     */
+    private void initialGameSetUp() {
+        updateActualGameRoomNameLabel();
+        updateActualGameRoomDescriptionLabel();
         updateRoomExitsScrollPane();
+        updateActualRoomMiniMap();
+        updateGameInteractionOutput(game.getPrologueInGraphicalGameVersion());
     }
 
     private void updateActualRoomMiniMap() {
-        actualRoomMiniMap.setImage(gameRoomMapsImages.get("rb_201"));
+        String actualRoomName = getActualRoomName();
+        String actualRoomNameAsEnum = RoomName.getEnumValueForRoomName(actualRoomName);
+        //keys in gameRoomMapsImages are inserted in lowercase during loading of these images
+        actualRoomMiniMap.setImage(gameRoomMapsImages.get(actualRoomNameAsEnum.toLowerCase()));
     }
 
     /**
@@ -134,13 +150,34 @@ public class MainSceneController {
         }
     }
 
-    private String getActualGameRoomName() {
-        //return game.getGamePlan().getActualRoom().getName();
-        return "";
+    /**
+     * Method updates actualGameRoomName Label after player moves to another room
+     */
+    private void updateActualGameRoomNameLabel() {
+        String actualRoomName = getActualRoomName();
+        // following line get room name which is which is displayed in game GUI from room name used as argument for game commands, e.g.:
+        // (room name to execute command) "toalety" --(Enum value)--> "TOILETS" --(room name displayed in GUI)--> "Toalety"
+        String actualRoomNameToDisplay = RoomNameToDisplay.getRoomNameToDisplay(RoomName.getEnumValueForRoomName(actualRoomName));
+        actualGameRoomName.setText(actualRoomNameToDisplay);
     }
 
-    private String getActualGameRoomDescription() {
-        return "";
+    /**
+     * Method updates actualGameRoomDescription Label after player moves to another room
+     */
+    private void updateActualGameRoomDescriptionLabel() {
+        String actualRoomName = getActualRoomName();
+        // following line get room description which is which is displayed in game GUI from room name used as argument for game commands, e.g.:
+        // (room name to execute command) "toalety" --(Enum value)--> "TOILETS" --(room description displayed in GUI)--> "Trochu to tu zapácha, ale na to si si už za tie roky zvykol"
+        String actualRoomNameDescriptionToDisplay = RoomDescriptionToDisplay.getRoomDescriptionToDisplay(RoomName.getEnumValueForRoomName(actualRoomName));
+        actualGameRoomDescription.setText(actualRoomNameDescriptionToDisplay);
+    }
+
+    /**
+     * Methods get actual room name
+     * @return String representing actual room name in format defined in RoomName Enum
+     */
+    private String getActualRoomName() {
+        return game.getGamePlan().getActualRoom().getName();
     }
 
     /**
@@ -505,56 +542,6 @@ public class MainSceneController {
     }
 
     /**
-     * Method to update roomExitsListView with all possible exits from actual game room
-     */
-    private void updateRoomExitsListView() {
-        Set<String> roomExitsNames = game.getGamePlan().getActualRoom().getNeighboringRoomsNames();
-        ObservableList<String> roomExits = FXCollections.observableArrayList();
-
-        for (String s : roomExitsNames) {
-            // following line get neighboring room name which will be displayed in GUI from room name in format used for game command execution, e.g.:
-            // (room name for game command execution) "kancelaria" --(Enum value)--> "OFFICE" --(room name to display in GUI)--> "Kancelária"
-            roomExits.add(RoomNameToDisplay.getRoomNameToDisplay(RoomName.getEnumValueForRoomName(s)));
-        }
-
-        roomExitsListView.setItems(roomExits);
-        roomExitsListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
-        roomExitsListView.setCellFactory(param -> new ListCell<>() {
-            private ImageView displayImage = new ImageView();
-            private Label label = new Label();
-            private VBox vbox;
-            private HBox hbox;
-
-            @Override
-            public void updateItem(String roomNameToDisplay, boolean empty) {
-                super.updateItem(roomNameToDisplay, empty);
-                if (empty) {
-                    setText(null);
-                    setGraphic(null);
-                } else {
-                    displayImage.setImage(gameRoomsImages.get(roomNameToDisplay));
-                    label.setText(roomNameToDisplay);
-                    //vbox = new VBox(0, label, displayImage);
-                    //vbox.setAlignment(Pos.CENTER);
-                    //setText(roomNameToDisplay);
-                    hbox = new HBox(label, displayImage);
-                    hbox.setAlignment(Pos.CENTER);
-
-                    setGraphic(hbox);
-                }
-            }
-        });
-
-        roomExitsListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                updateGameInteractionOutput("clicked");
-            }
-        });
-    }
-
-    /**
      * Method to update ScrollPane with all possible exits from actual game room
      */
     private void updateRoomExitsScrollPane(){
@@ -581,12 +568,14 @@ public class MainSceneController {
             roomExit.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    updateGameInteractionOutput("kliknuta bola " + s);
+                    updateGameInteractionOutput(executeGameCommand("chod", new ArrayList<>(){{ add(s); }}));
                 }
             });
+
             content.add(roomExit);
         }
 
+        roomExits.getChildren().clear();
         roomExits.getChildren().addAll(content);
         roomExits.setAlignment(Pos.CENTER);
     }

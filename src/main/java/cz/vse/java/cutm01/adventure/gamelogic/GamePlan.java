@@ -1,5 +1,8 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +26,7 @@ public class GamePlan {
     private final Player player;
     // game ends after player reaches room Street
     private boolean hasPlayerReachedFinalRoom;
+    private StringProperty actualRoomName = new SimpleStringProperty();
 
     // region Constructor
     // --------------------------------------------------------------------------------
@@ -38,6 +42,27 @@ public class GamePlan {
     }
     // --------------------------------------------------------------------------------
     // endregion Constructor
+
+    // region JavaFX beans getters and setters
+    // --------------------------------------------------------------------------------
+    /**
+     * Getter for the property's value
+     * @return value of actualRoomName StringProperty
+     */
+    public final String getActualRoomName(){return actualRoomName.get();}
+
+    /**
+     * Setter for the property's value
+     */
+    public final void setActualRoomName(String value){actualRoomName.set(value);}
+
+    /**
+     * Getter for the property itself
+     * @return StringProperty actualRoomName
+     */
+    public StringProperty actualRoomNameProperty() {return actualRoomName;}
+    // --------------------------------------------------------------------------------
+    // endregion JavaFX beans getters and setters
 
     // region Getters and Setters
     // --------------------------------------------------------------------------------
@@ -66,6 +91,7 @@ public class GamePlan {
      */
     public void setActualRoom(Room room) {
         actualRoom = room;
+        actualRoomName.setValue(room.getName());
     }
 
     /**
@@ -136,6 +162,7 @@ public class GamePlan {
         addNonPlayerCharacterToEachRoom(gameRooms);
 
         actualRoom = gameRooms.get("RB_201"); // game begin in this room
+        setActualRoomName("RB_201");
     }
 
     /**

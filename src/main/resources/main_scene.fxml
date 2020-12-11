@@ -223,7 +223,7 @@
       </VBox>
    </left>
    <bottom>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="960.0" BorderPane.alignment="CENTER">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="960.0" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                <children>
@@ -266,7 +266,7 @@
                            <content>
                               <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="${roomExitsScrollPane.viewportBounds.width}">
                                  <children>
-                                    <HBox fx:id="roomExits" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER" minWidth="${roomExitsScrollPane.viewportBounds.width}" minHeight="${roomExitsScrollPane.viewportBounds.height}" />
+                                    <HBox fx:id="roomExits" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="${roomExitsScrollPane.viewportBounds.height}" minWidth="${roomExitsScrollPane.viewportBounds.width}" VBox.vgrow="NEVER" />
                                  </children></VBox>
                            </content>
                         </ScrollPane>

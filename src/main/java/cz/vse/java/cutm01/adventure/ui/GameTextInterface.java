@@ -32,7 +32,7 @@ public class GameTextInterface {
      * epilogu.
      */
     public void play() {
-        System.out.println(game.getPrologue());
+        System.out.println(game.getPrologueInTextGameVersion());
 
         // základní cyklus programu - opakovaně se čtou příkazy a poté
         // se provádějí do konce hry.

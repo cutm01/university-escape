@@ -44,9 +44,10 @@ public class GameImpl implements Game {
     }
 
     /**
-     * Vrátí úvodní zprávu pro hráče.
+     * Method returns game prologue displayed in text version of game
+     * @return String representing game prologue showed in text version of game
      */
-    public String getPrologue() {
+    public String getPrologueInTextGameVersion() {
         return "Jún 2020, celý svet sa pomaly spamätáva z krízy, ktorú spôsobil koronavírus."
                + SystemInfo.LINE_SEPARATOR
                + "Od získania vysnívaného titulu ťa delí už iba úspešné zvládnutie štátnic."
@@ -69,6 +70,26 @@ public class GameImpl implements Game {
                + SystemInfo.LINE_SEPARATOR
                + SystemInfo.LINE_SEPARATOR
                + gamePlan.getActualRoom().getRoomDescriptionWithExits();
+    }
+
+    /**
+     * Method returns game prologue displayed in graphical version of game
+     * @return String representing game prologue showed in graphical version of game
+     */
+    public String getPrologueInGraphicalGameVersion() {
+        return "Jún 2020, celý svet sa pomaly spamätáva z krízy, ktorú spôsobil koronavírus."
+                + SystemInfo.LINE_SEPARATOR
+                + "Od získania vysnívaného titulu ťa delí už iba úspešné zvládnutie štátnic."
+                + SystemInfo.LINE_SEPARATOR
+                + "Sedíš v prednáškovej miestnosti pripravený vylosovať si otázky k tvojej ústnej skúške, keď tu zrazu..."
+                + SystemInfo.LINE_SEPARATOR
+                + "Priestormi budovy sa ozve hlasný výbuch. Vyzerá to, že neznámy bomberman už ďalej nezvládol žiarliť na koronavírus,"
+                + SystemInfo.LINE_SEPARATOR
+                + "ktorý dokázal zavrieť všetky školy na dobu niekoľkých mesiacov bez jediného anonymného e-mailu"
+                + SystemInfo.LINE_SEPARATOR
+                + "a tak sa rozhodol dokonať svoje diabolské dielo – v budove školy odpálil bombu."
+                + SystemInfo.LINE_SEPARATOR
+                + "V rýchlosti berieš so sebou svoj batoh a snažíš sa dostať von skôr než celá budova skolabuje!";
     }
 
     /**
