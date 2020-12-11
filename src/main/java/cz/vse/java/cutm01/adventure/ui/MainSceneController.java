@@ -58,12 +58,16 @@ public class MainSceneController {
     public Text gameInteractionOutput;
 
     public Menu newGameMenu;
-    public Menu showHelpMenu;
+    public Menu helpMenu;
+    public Menu textCommandsMenu;
 
 
     public void init(Game game) {
         this.game = game;
         makeMenuElementFireAction(newGameMenu);
+        makeMenuElementFireAction(helpMenu);
+        makeMenuElementFireAction(textCommandsMenu);
+
         initialGameSetUp();
 
         game.getGamePlan().actualRoomNameProperty().addListener(new ChangeListener<String>() {
@@ -73,6 +77,7 @@ public class MainSceneController {
                 updateActualGameRoomDescriptionLabel();
                 updateActualRoomMiniMap();
                 updateRoomExitsScrollPane();
+                updateRightPanel();
             }
         });
     }
@@ -181,6 +186,14 @@ public class MainSceneController {
     }
 
     /**
+     * Method returns boolean value based on whether actual game room was already examined or not
+     * @return true if actual game room was already examined, false otherwise
+     */
+    private boolean wasActualRoomAlreadyExamined() {
+        return game.getGamePlan().getActualRoom().wasRoomAlreadyExamined();
+    }
+
+    /**
      * Method shows confirmation dialog to user where he can choose
      * if he wants to start a new game or continue in the actual one
      */
@@ -231,6 +244,34 @@ public class MainSceneController {
         helpWindow.setContentText(helpText);
 
         helpWindow.showAndWait();
+    }
+
+    /**
+     * Method shows user pop-up window with correct format of text game commands.
+     * Player use these commands to interact with game instead of clicking on elements in GUI
+     */
+    public void showGameCommands() {
+        Alert textCommandsWindow = new Alert(AlertType.INFORMATION);
+        textCommandsWindow.setTitle("Textové príkazy");
+        textCommandsWindow.getDialogPane().setPrefSize(910.0, 500.0);
+
+        //disable header of pop-up alert and confirmation button
+        textCommandsWindow.setHeaderText(null);
+        textCommandsWindow.setGraphic(null);
+        textCommandsWindow.getDialogPane().lookupButton(ButtonType.OK).setVisible(false);
+
+        //set content
+        Label header = new Label("Počas hry môžeš zadávať nasledovné príkazy:" + SystemInfo.LINE_SEPARATOR);
+
+        CommandsList gameTextCommandsList = ((GameImpl)game).getCommandsList();
+        Label textCommands = new Label(gameTextCommandsList.getCommandsWithTheirUsage());
+
+        VBox content = new VBox(10, header, textCommands);
+        content.setPadding(new Insets(10));
+        content.setAlignment(Pos.CENTER);
+        textCommandsWindow.getDialogPane().setContent(content);
+
+        textCommandsWindow.showAndWait();
     }
 
     /**
@@ -434,6 +475,24 @@ public class MainSceneController {
         }
 
         return loadedImages;
+    }
+
+    /**
+     * Method update game's right panel (ListView with room items, interactable objects and NPCs) after player
+     * moves to another room
+     */
+    private void updateRightPanel() {
+        if (wasActualRoomAlreadyExamined()) {
+            updateRoomItemsListView();
+            updateRoomInteractableObjectsListView();
+            updateRoomNonPlayerCharactersListView();
+        }
+        //clear right panel if actual game room was not examined yet
+        else {
+            roomItemsListView.setItems(null);
+            roomInteractableObjectsListView.setItems(null);
+            roomNonPlayerCharactersListView.setItems(null);
+        }
     }
 
     /**

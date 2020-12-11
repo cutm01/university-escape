@@ -28,12 +28,16 @@
                         <MenuItem mnemonicParsing="false" onAction="#startNewGame" />
                      </items>
                         </Menu>
-                        <Menu fx:id="showHelpMenu" mnemonicParsing="false" text="Nápoveda">
+                        <Menu fx:id="helpMenu" mnemonicParsing="false" text="Nápoveda">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#showHelp" text="Nápoveda ku hre" />
-                        <MenuItem mnemonicParsing="false" onAction="#showHelp" text="Textové príkazy" />
+                        <MenuItem mnemonicParsing="false" onAction="#showHelp" />
                      </items>
                         </Menu>
+                  <Menu fx:id="textCommandsMenu" mnemonicParsing="false" text="Textové príkazy">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#showGameCommands" />
+                    </items>
+                  </Menu>
                     </menus>
                 </MenuBar>
                 <Label fx:id="actualGameRoomName" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="Názov aktuálnej miestnosti" textAlignment="CENTER">
@@ -238,7 +242,7 @@
                      </content></ScrollPane>
                   <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <children>
-                        <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Hru je taktiež možné ovládať zadaním textového príkazu a potvrdením klávesou ENTER. Správny formát príkazov je možné nájsť v časti Nápoveda &gt; Textové príkazy" HBox.hgrow="ALWAYS" />
+                        <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Hru je taktiež možné ovládať zadaním textového príkazu a potvrdením klávesou ENTER. Správny formát príkazov je možné nájsť v hornom menu v časti Textové príkazy" HBox.hgrow="ALWAYS" />
                         <Button mnemonicParsing="false" text="Vykonaj príkaz" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>

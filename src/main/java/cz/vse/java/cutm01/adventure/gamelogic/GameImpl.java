@@ -253,4 +253,12 @@ public class GameImpl implements Game {
     public GamePlan getGamePlan() {
         return gamePlan;
     }
+
+    /**
+     * Method retuns all commands which can be used in actual game session
+     * @return CommandsList instance containing all valid game commands which can player use
+     */
+    public CommandsList getCommandsList() {
+        return validCommands;
+    }
 }
