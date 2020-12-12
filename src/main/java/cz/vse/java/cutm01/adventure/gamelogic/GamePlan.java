@@ -2,6 +2,8 @@ package cz.vse.java.cutm01.adventure.gamelogic;
 
 import cz.vse.java.cutm01.adventure.ui.InteractableObjectNameToDisplay;
 import cz.vse.java.cutm01.adventure.ui.NonPlayerCharacterNameToDisplay;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -30,7 +32,7 @@ public class GamePlan {
     private boolean hasPlayerReachedFinalRoom;
     private StringProperty actualRoomName = new SimpleStringProperty();
     private StringProperty playerActuallyStandsBy = new SimpleStringProperty();
-
+    private BooleanProperty playerFinishedGame = new SimpleBooleanProperty();
     // region Constructor
     // --------------------------------------------------------------------------------
 
@@ -68,7 +70,7 @@ public class GamePlan {
 
     /**
      * Getter for the property's value
-     * @return value of actualRoomName StringProperty
+     * @return value of playerActuallyStandsBy StringProperty
      */
     public final String getPlayerActuallyStandsBy(){return playerActuallyStandsBy.get();}
 
@@ -79,9 +81,26 @@ public class GamePlan {
 
     /**
      * Getter for the property itself
-     * @return StringProperty actualRoomName
+     * @return StringProperty playerActuallyStandsBy
      */
     public StringProperty playerActuallyStandsBy() {return playerActuallyStandsBy;}
+
+    /**
+     * Getter for the property's value
+     * @return value of playerFinishedGame BooleanProperty
+     */
+    public final boolean getPlayerFinishedGame(){return playerFinishedGame.get();}
+
+    /**
+     * Setter for the property's value
+     */
+    public final void setPlayerFinishedGame(boolean value){playerFinishedGame.set(value);}
+
+    /**
+     * Getter for the property itself
+     * @return BooleanProperty playerFinishedGame
+     */
+    public BooleanProperty playerFinishedGame() {return playerFinishedGame;}
     // --------------------------------------------------------------------------------
     // endregion JavaFX beans getters and setters
 
@@ -102,6 +121,7 @@ public class GamePlan {
 
     public void setHasPlayerReachedFinalRoom(boolean hasPlayerReachedFinalRoom) {
         this.hasPlayerReachedFinalRoom = hasPlayerReachedFinalRoom;
+        playerFinishedGame.setValue(hasPlayerReachedFinalRoom);
     }
 
     /**

@@ -3,6 +3,7 @@ package cz.vse.java.cutm01.adventure.ui;
 import cz.vse.java.cutm01.adventure.gamelogic.*;
 import cz.vse.java.cutm01.adventure.main.Start;
 import cz.vse.java.cutm01.adventure.main.SystemInfo;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -24,6 +25,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.InputStream;
@@ -43,6 +45,7 @@ public class MainSceneController {
     private Game game;
     private StringProperty actualGameRoomProperty;
     private StringProperty playerActuallyStandsByProperty;
+    private BooleanProperty playerFinishedGame;
     private MainSceneControllerUtils controllerUtils = new MainSceneControllerUtils();
     private final Map<String, Image> gameItemsImages = controllerUtils.loadGameItemsImages();
     private final Map<String, Image>  gameInteractableObjectsImages = controllerUtils.loadGameInteractableObjectsImages();
@@ -114,6 +117,15 @@ public class MainSceneController {
      * Method initialize all necessary change listeners which are used to handle changes in game's GUI
      */
     private void initializeChangeListeners() {
+        //listener for showing game ending after player finishes the game
+        playerFinishedGame = game.getGamePlan().playerFinishedGame();
+        playerFinishedGame.addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                showGameEnding();
+            }
+        });
+
         //listener for updating GUI when player moves to another room
         actualGameRoomProperty = game.getGamePlan().actualRoomNameProperty();
         actualGameRoomProperty.addListener(new ChangeListener<String>() {
@@ -874,6 +886,65 @@ public class MainSceneController {
     }
     // --------------------------------------------------------------------------------
     // endregion Help methods used in another controller's methods
+
+    /**
+     * Method shows one of possible game endings in new pop-up window
+     */
+    private void showGameEnding() {
+        Alert gameEndingWindow = new Alert(AlertType.INFORMATION);
+        gameEndingWindow.setTitle("Koniec hry");
+        gameEndingWindow.getDialogPane().setPrefSize(910.0, 500.0);
+
+        //disable header of pop-up alert and confirmation button
+        gameEndingWindow.setHeaderText(null);
+        gameEndingWindow.setGraphic(null);
+        gameEndingWindow.getDialogPane().lookupButton(ButtonType.OK).setVisible(false);
+
+        //set content
+        //label with game ending
+        Label gameEnding = new Label(((GameImpl)game).getGameEnding());
+        gameEnding.setContentDisplay(ContentDisplay.CENTER);
+        gameEnding.setTextAlignment(TextAlignment.CENTER);
+
+        //button for starting new game
+        Button newGameButton = new Button("Začať novú hru");
+        newGameButton.setPrefWidth(100);
+        newGameButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Stage popUpWindow = (Stage) newGameButton.getScene().getWindow();
+                popUpWindow.close();
+
+                Start.setUpNewGame(new Stage());
+                Stage currentStage = (Stage) rootBorderPane.getScene().getWindow();
+                currentStage.close();
+            }
+        });
+
+        //button for ending current game
+        Button endGameButton = new Button("Ukončiť hru");
+        endGameButton.setPrefWidth(100);
+        endGameButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Stage popUpWindow = (Stage) endGameButton.getScene().getWindow();
+                popUpWindow.close();
+
+                Stage currentStage = (Stage) rootBorderPane.getScene().getWindow();
+                currentStage.close();
+            }
+        });
+
+        HBox buttons = new HBox(10, newGameButton, endGameButton);
+        buttons.setAlignment(Pos.CENTER);
+
+        VBox content = new VBox(10, gameEnding, buttons);
+        content.setPadding(new Insets(10));
+        content.setAlignment(Pos.CENTER);
+        gameEndingWindow.getDialogPane().setContent(content);
+
+        gameEndingWindow.showAndWait();
+    }
 
     /**
      * Method takes user input from gameConsole TextField and execute this text input as game command

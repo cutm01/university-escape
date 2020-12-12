@@ -82,8 +82,8 @@ class GoCommand implements Command {
 
         // game ends after reaching room Street
         if (roomToEnter.getName().equals(RoomName.getRoomName("STREET"))) {
-            gamePlan.setHasPlayerReachedFinalRoom(true);
             gamePlan.getPlayer().setHasPlayerEscapedThroughCourtyard(true);
+            gamePlan.setHasPlayerReachedFinalRoom(true);
         }
 
         return roomToEnter.getRoomDescriptionWithExits();
