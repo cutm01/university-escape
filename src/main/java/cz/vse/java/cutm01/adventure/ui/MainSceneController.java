@@ -28,6 +28,7 @@ import javafx.stage.Stage;
 
 import java.io.InputStream;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * MainSceneController class contains methods to handle changes made in main scene
@@ -448,6 +449,20 @@ public class MainSceneController {
      * @param actionEvent
      */
     public void approachAndExamineInteractableObject(ActionEvent actionEvent) {
+        ObservableList<String> selectedInteractableObjectFromRoom = roomInteractableObjectsListView.getSelectionModel().getSelectedItems();
+        //used to store item names in format which can be used as game command argument
+        List<String> gameCommandArguments = new ArrayList<>();
+
+        for (String s : selectedInteractableObjectFromRoom) {
+            // following line get interactable object name which is used as argument for game commands from interactable object name which is displayed
+            // in game GUI (e.q. "Lavička" --(Enum value)--> "BENCH" --(interactable object name to execute command)--> "lavicka"
+            gameCommandArguments.add(InteractableObjectName.getInteractableObjectName(InteractableObjectNameToDisplay.getEnumValueForInteractableObjectName(s)));
+        }
+
+        //two game commands will be executed
+        updateGameInteractionOutput(executeGameCommand("pristup_k", gameCommandArguments)
+                                            + SystemInfo.LINE_SEPARATOR
+                                            + executeGameCommand("preskumaj_objekt", gameCommandArguments));
     }
     // --------------------------------------------------------------------------------
     // endregion Room interactable object buttons actions
