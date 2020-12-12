@@ -1,6 +1,10 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
 import cz.vse.java.cutm01.adventure.main.SystemInfo;
+import cz.vse.java.cutm01.adventure.ui.ItemNameToDisplay;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -18,6 +22,12 @@ public class Inventory {
     private final Map<String, Item> items;
     private int inventoryCapacity;
     private int inventoryWeight;
+
+    private ObservableList<String> itemsInPlayerInventoryObservableList = FXCollections.observableArrayList();
+
+    public ObservableList<String> getItemsInPlayerInventoryObservableList() {
+        return itemsInPlayerInventoryObservableList;
+    }
 
     // region Constructor
     // --------------------------------------------------------------------------------
@@ -71,6 +81,9 @@ public class Inventory {
         if (item != null) {
             items.put(item.getName(), item);
             inventoryWeight += item.getWeight();
+
+            String itemNameToDisplay = ItemNameToDisplay.getItemNameToDisplay(ItemName.getEnumValueForItemName(item.getName()));
+            itemsInPlayerInventoryObservableList.add(itemNameToDisplay);
         }
     }
 
@@ -78,6 +91,9 @@ public class Inventory {
         if (itemName != null && isItemInInventory(itemName)) {
             inventoryWeight -= items.get(itemName).getWeight();
             items.remove(itemName);
+
+            String itemNameToDisplay = ItemNameToDisplay.getItemNameToDisplay(ItemName.getEnumValueForItemName(itemName));
+            itemsInPlayerInventoryObservableList.remove(itemNameToDisplay);
         }
     }
 

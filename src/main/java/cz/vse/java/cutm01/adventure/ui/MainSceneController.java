@@ -37,12 +37,14 @@ import java.util.*;
 public class MainSceneController {
     private Game game;
     private SimpleObjectProperty actualGameRoomProperty;
-    private final Map<String, Image> gameItemsImages = loadGameItemsImages();
-    private final Map<String, Image>  gameInteractableObjectsImages = loadGameInteractableObjectsImages();
-    private final Map<String, Image>  gameNonPlayerCharactersImages = loadGameNonPlayerCharactersImages();
-    private final Map<String, Image> gameRoomMapsImages = loadGameRoomMapsImages();
-    private final Map<String, Image> gameRoomsImages = loadGameRoomsImages();
+    private MainSceneControllerUtils controllerUtils = new MainSceneControllerUtils();
+    private final Map<String, Image> gameItemsImages = controllerUtils.loadGameItemsImages();
+    private final Map<String, Image>  gameInteractableObjectsImages = controllerUtils.loadGameInteractableObjectsImages();
+    private final Map<String, Image>  gameNonPlayerCharactersImages = controllerUtils.loadGameNonPlayerCharactersImages();
+    private final Map<String, Image> gameRoomMapsImages = controllerUtils.loadGameRoomMapsImages();
+    private final Map<String, Image> gameRoomsImages = controllerUtils.loadGameRoomsImages();
 
+    //TextField to input game commands which player wants to execute
     public TextField gameConsole;
 
     //scene elements
@@ -56,13 +58,16 @@ public class MainSceneController {
     public ListView<String> roomNonPlayerCharactersListView;
     public ListView<String> roomExitsListView;
     public HBox roomExits;
+    public Menu newGameMenu;
+    public Menu helpMenu;
+    public Menu textCommandsMenu;
 
     //text shown to user after his interaction with game (i.e. clicking on button)
     public Text gameInteractionOutput;
 
-    public Menu newGameMenu;
-    public Menu helpMenu;
-    public Menu textCommandsMenu;
+    //observable lists which are used to update GUI
+    private ObservableList<String> itemsInActualRoom;
+    private ObservableList<String> itemsInPlayerInventory;
 
 
     public void init(Game game) {
@@ -70,6 +75,23 @@ public class MainSceneController {
         makeMenuElementFireAction(newGameMenu);
         makeMenuElementFireAction(helpMenu);
         makeMenuElementFireAction(textCommandsMenu);
+
+        itemsInActualRoom = game.getGamePlan().getActualRoom().getRoomItemsObservableList();
+        itemsInActualRoom.addListener(new ListChangeListener<String>() {
+            @Override
+            public void onChanged(Change<? extends String> change) {
+                updateRoomItemsListView();
+                //roomItemsListView.refresh();
+            }
+        });
+
+        itemsInPlayerInventory = game.getGamePlan().getPlayer().getInventory().getItemsInPlayerInventoryObservableList();
+        itemsInPlayerInventory.addListener(new ListChangeListener<String>() {
+            @Override
+            public void onChanged(Change<? extends String> change) {
+                updateInventoryItemsListView();
+            }
+        });
 
         initialGameSetUp();
 
@@ -80,31 +102,16 @@ public class MainSceneController {
                 updateActualGameRoomDescriptionLabel();
                 updateActualRoomMiniMap();
                 updateRoomExitsScrollPane();
-                updateRightPanel();
-            }
-        });
-    }
+                //updateRightPanel();
 
-    private void addTestItemsToInventory(){
-        ObservableList<String> items = FXCollections.observableArrayList("Pero", "Lano", "Bunda");
-
-        inventoryItemsListView.setItems(items);
-        inventoryItemsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-        inventoryItemsListView.setCellFactory(param -> new ListCell<>() {
-            private ImageView displayImage = new ImageView();
-
-            @Override
-            public void updateItem(String itemNameToDisplay, boolean empty) {
-                super.updateItem(itemNameToDisplay, empty);
-                if (empty) {
-                    setText(null);
-                    setGraphic(null);
-                } else {
-                    displayImage.setImage(gameItemsImages.get(itemNameToDisplay));
-                    setText(itemNameToDisplay);
-                    setGraphic(displayImage);
-                }
+                itemsInActualRoom = game.getGamePlan().getActualRoom().getRoomItemsObservableList();
+                itemsInActualRoom.addListener(new ListChangeListener<String>() {
+                    @Override
+                    public void onChanged(Change<? extends String> change) {
+                        updateRoomItemsListView();
+                        //roomItemsListView.refresh();
+                    }
+                });
             }
         });
     }
@@ -353,7 +360,6 @@ public class MainSceneController {
         }
 
         updateGameInteractionOutput(executeGameCommand("preskumaj_predmet", gameCommandArguments));
-        updateRoomItemsListView();
     }
 
     /**
@@ -369,12 +375,9 @@ public class MainSceneController {
             // following line get item name which is used as argument for game commands from item name which is displayed
             // in game GUI (e.q. "Fľaša s vodou" --(Enum value)--> "BOTTLE" --(item name to execute command)--> "flasa"
             gameCommandArguments.add(ItemName.getItemName(ItemNameToDisplay.getEnumValueForItemName(s)));
-            roomItemsListView.getItems().remove(s);
         }
 
         updateGameInteractionOutput(executeGameCommand("vezmi", gameCommandArguments));
-        //updateRoomItemsListView();
-        updateInventoryItemsListView();
     }
 
     public void showInventoryItemExaminationResult(ActionEvent actionEvent) {
@@ -423,110 +426,6 @@ public class MainSceneController {
     }
 
     /**
-     * Method to load images for all game items
-     * @return Map where key is name of game item and value is corresponding image
-     */
-    private Map<String, Image> loadGameItemsImages() {
-        Map<String, Image> loadedImages = new HashMap<>();
-
-        Object[] itemNames = ItemName.values();
-        for(Object o : itemNames) {
-            String itemName = o.toString().toLowerCase();
-
-            InputStream imageStream = getClass().getClassLoader().getResourceAsStream(itemName + ".png");
-            Image itemImage = new Image(imageStream);
-
-            loadedImages.put(ItemNameToDisplay.getItemNameToDisplay(o.toString()), itemImage);
-        }
-
-        return loadedImages;
-    }
-
-    /**
-     * Method to load images for all game interactable objects
-     * @return Map where key is name of game interactable object and value is corresponding image
-     */
-    private Map<String, Image> loadGameInteractableObjectsImages() {
-        Map<String, Image> loadedImages = new HashMap<>();
-
-        Object[] interactableObjectNames = InteractableObjectName.values();
-        for(Object o : interactableObjectNames) {
-            String interactableObjectName = o.toString().toLowerCase();
-
-            InputStream imageStream = getClass().getClassLoader().getResourceAsStream(interactableObjectName + ".png");
-            Image itemImage = new Image(imageStream);
-
-            loadedImages.put(InteractableObjectNameToDisplay.getInteractableObjectNameToDisplay(o.toString()), itemImage);
-        }
-
-        return loadedImages;
-    }
-
-    /**
-     * Method to load images for all game non player characters
-     * @return Map where key is name of game non player character object and value is corresponding image
-     */
-    private Map<String, Image> loadGameNonPlayerCharactersImages() {
-        Map<String, Image> loadedImages = new HashMap<>();
-
-        Object[] nonPlayerCharacterNames = NonPlayerCharacterName.values();
-        for(Object npc : nonPlayerCharacterNames) {
-            String nonPlayerCharacterName = npc.toString().toLowerCase();
-
-            InputStream imageStream = getClass().getClassLoader().getResourceAsStream(nonPlayerCharacterName + ".png");
-            Image itemImage = new Image(imageStream);
-
-            loadedImages.put(NonPlayerCharacterNameToDisplay.getNonPlayerCharacterNameToDisplay(npc.toString()), itemImage);
-        }
-
-        return loadedImages;
-    }
-
-    /**
-     * Method to load images for all minimaps of game rooms and one big game map with all rooms in it
-     */
-    private Map<String, Image> loadGameRoomMapsImages() {
-        Map<String, Image> loadedImages = new HashMap<>();
-        Object[] gameRoomNames = RoomName.values();
-        for(Object r : gameRoomNames) {
-            String gameRoomName = r.toString().toLowerCase();
-
-            //there is no minimap for game room with name street as game ends after reaching this room
-            if (!gameRoomName.equals("street")) {
-                InputStream imageStream = getClass().getClassLoader().getResourceAsStream(gameRoomName + "_map.png");
-                Image gameRoomMapImage = new Image(imageStream);
-                loadedImages.put(gameRoomName, gameRoomMapImage);
-            }
-        }
-
-        //insert image for whole game map
-        InputStream imageStream = getClass().getClassLoader().getResourceAsStream("game_map.png");
-        Image gameRoomMapImage = new Image(imageStream);
-        loadedImages.put("game_map", gameRoomMapImage);
-
-        return loadedImages;
-    }
-
-    /**
-     * Method to load images for all game rooms
-     */
-    private Map<String, Image> loadGameRoomsImages() {
-        Map<String, Image> loadedImages = new HashMap<>();
-
-        Object[] roomNames = RoomName.values();
-        for(Object room : roomNames) {
-            String roomName = room.toString().toLowerCase();
-
-            InputStream imageStream = getClass().getClassLoader().getResourceAsStream(roomName + ".png");
-            Image itemImage = new Image(imageStream);
-
-            loadedImages.put(RoomNameToDisplay.getRoomNameToDisplay(room.toString()), itemImage);
-        }
-
-        return loadedImages;
-    }
-
-    /**
      * Method update game's right panel (ListView with room items, interactable objects and NPCs) after player
      * moves to another room
      */
@@ -548,19 +447,21 @@ public class MainSceneController {
      * Method to update inventoryItemsListView with items which are currently placed in player's inventory.
      */
     private void updateInventoryItemsListView() {
-        Set<String> inventoryItemsNames = game.getGamePlan().getPlayer().getInventory().getInventoryItemsNames();
-        ObservableList<String> inventoryItems = FXCollections.observableArrayList();
-
+        //Set<String> inventoryItemsNames = game.getGamePlan().getPlayer().getInventory().getInventoryItemsNames();
+        //ObservableList<String> inventoryItems = FXCollections.observableArrayList();
+/*
         for (String s : inventoryItemsNames) {
             // following line get item name which will be displayed in GUI from item name in format used for game command execution, e.g.:
             // (item name for game command execution) "flasa" --(Enum value)--> "BOTTLE" --(item name to display in GUI)--> "Fľaša s vodou"
             inventoryItems.add(ItemNameToDisplay.getItemNameToDisplay(ItemName.getEnumValueForItemName(s)));
         }
+*/
+        inventoryItemsListView.getItems().clear();
+        inventoryItemsListView.getItems().addAll(itemsInPlayerInventory);
+        //inventoryItemsListView.setItems(inventoryItems);
+        inventoryItemsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        roomItemsListView.setItems(inventoryItems);
-        roomItemsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-        roomItemsListView.setCellFactory(param -> new ListCell<>() {
+        inventoryItemsListView.setCellFactory(param -> new ListCell<>() {
             private ImageView displayImage = new ImageView();
 
             @Override
@@ -583,17 +484,17 @@ public class MainSceneController {
      * Method is used when player is looking around the room in order to examine it
      */
     private void updateRoomItemsListView() {
-        Set<String> roomItemsNames = game.getGamePlan().getActualRoom().getRoomItemsNames();
-        ObservableList<String> roomItems = FXCollections.observableArrayList();
-
+        //Set<String> roomItemsNames = game.getGamePlan().getActualRoom().getRoomItemsNames();
+        //ObservableList<String> roomItems = game.getGamePlan().getActualRoom().getRoomItemsObservableList();
+/*
         for (String s : roomItemsNames) {
             // following line get item name which will be displayed in GUI from item name in format used for game command execution, e.g.:
             // (item name for game command execution) "flasa" --(Enum value)--> "BOTTLE" --(item name to display in GUI)--> "Fľaša s vodou"
             roomItems.add(ItemNameToDisplay.getItemNameToDisplay(ItemName.getEnumValueForItemName(s)));
         }
-
+*/
         roomItemsListView.getItems().clear();
-        roomItemsListView.setItems(roomItems);
+        roomItemsListView.getItems().addAll(itemsInActualRoom);
         roomItemsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         roomItemsListView.setCellFactory(param -> new ListCell<>() {

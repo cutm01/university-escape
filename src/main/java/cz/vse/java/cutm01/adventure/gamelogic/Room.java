@@ -1,6 +1,9 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
 import cz.vse.java.cutm01.adventure.main.SystemInfo;
+import cz.vse.java.cutm01.adventure.ui.ItemNameToDisplay;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -30,6 +33,11 @@ public class Room {
     private boolean isRoomLocked;
     // is shown to player when he tries to enter locked room
     private final String lockedRoomDescription;
+    private ObservableList<String> roomItemsObservableList = FXCollections.observableArrayList();
+
+    public ObservableList<String> getRoomItemsObservableList() {
+        return roomItemsObservableList;
+    }
 
     // region Constructors
     // --------------------------------------------------------------------------------
@@ -264,10 +272,16 @@ public class Room {
 
     public void addItemToRoom(Item item) {
         items.put(item.getName(), item);
+
+        String itemNameToDisplay = ItemNameToDisplay.getItemNameToDisplay(ItemName.getEnumValueForItemName(item.getName()));
+        roomItemsObservableList.add(itemNameToDisplay);
     }
 
     public void removeItemFromRoom(Item item) {
         items.remove(item.getName());
+
+        String itemNameToDisplay = ItemNameToDisplay.getItemNameToDisplay(ItemName.getEnumValueForItemName(item.getName()));
+        roomItemsObservableList.remove(itemNameToDisplay);
     }
 
     /**
