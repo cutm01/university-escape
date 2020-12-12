@@ -86,13 +86,10 @@ public class MainSceneControllerUtils {
         Object[] gameRoomNames = RoomName.values();
         for(Object r : gameRoomNames) {
             String gameRoomName = r.toString().toLowerCase();
-
-            //there is no minimap for game room with name street as game ends after reaching this room
-            if (!gameRoomName.equals("street")) {
-                InputStream imageStream = getClass().getClassLoader().getResourceAsStream(gameRoomName + "_map.png");
-                Image gameRoomMapImage = new Image(imageStream);
-                loadedImages.put(gameRoomName, gameRoomMapImage);
-            }
+            
+            InputStream imageStream = getClass().getClassLoader().getResourceAsStream(gameRoomName + "_map.png");
+            Image gameRoomMapImage = new Image(imageStream);
+            loadedImages.put(gameRoomName, gameRoomMapImage);
         }
 
         //insert image for whole game map
