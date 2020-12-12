@@ -48,6 +48,10 @@
                <font>
                   <Font size="14.0" />
                </font></Label>
+            <Label fx:id="playerActuallyStandsBy" alignment="CENTER" contentDisplay="CENTER" text="Aktuálne stojíš pri objekte (osobe):">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font></Label>
             <Separator prefWidth="200.0" />
             <Button fx:id="lookAroundButton" mnemonicParsing="false" onAction="#lookAroundRoom" text="Rozhliadnúť sa po miestnosti" />
             </children>

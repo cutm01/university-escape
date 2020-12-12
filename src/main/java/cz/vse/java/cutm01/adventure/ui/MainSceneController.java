@@ -41,6 +41,7 @@ public class MainSceneController {
     // --------------------------------------------------------------------------------
     private Game game;
     private StringProperty actualGameRoomProperty;
+    private StringProperty playerActuallyStandsByProperty;
     private MainSceneControllerUtils controllerUtils = new MainSceneControllerUtils();
     private final Map<String, Image> gameItemsImages = controllerUtils.loadGameItemsImages();
     private final Map<String, Image>  gameInteractableObjectsImages = controllerUtils.loadGameInteractableObjectsImages();
@@ -63,6 +64,7 @@ public class MainSceneController {
     public ImageView actualRoomMiniMap;
     public Label actualGameRoomName;
     public Label actualGameRoomDescription;
+    public Label playerActuallyStandsBy;
     public ListView<String> inventoryItemsListView;
     public ListView<String> roomItemsListView;
     public ListView<String> roomInteractableObjectsListView;
@@ -101,6 +103,7 @@ public class MainSceneController {
     private void initialGameSetUp() {
         updateActualGameRoomNameLabel();
         updateActualGameRoomDescriptionLabel();
+        updatePlayerActuallyStandsByLabel();
         updateRoomExitsScrollPane();
         updateActualRoomMiniMap();
         updateGameInteractionOutput(game.getPrologueInGraphicalGameVersion());
@@ -129,6 +132,15 @@ public class MainSceneController {
                 updateActualRoomMiniMap();
                 updateRoomExitsScrollPane();
                 updateRightPanel();
+            }
+        });
+
+        //listener for updating GUI when player approaches new interactable object or NPC in room
+        playerActuallyStandsByProperty = game.getGamePlan().playerActuallyStandsBy();
+        playerActuallyStandsByProperty.addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                updatePlayerActuallyStandsByLabel();
             }
         });
 
@@ -417,6 +429,17 @@ public class MainSceneController {
      * @param actionEvent
      */
     public void approachInteractableObject(ActionEvent actionEvent) {
+        ObservableList<String> selectedInteractableObjectFromRoom = roomInteractableObjectsListView.getSelectionModel().getSelectedItems();
+        //used to store item names in format which can be used as game command argument
+        List<String> gameCommandArguments = new ArrayList<>();
+
+        for (String s : selectedInteractableObjectFromRoom) {
+            // following line get interactable object name which is used as argument for game commands from interactable object name which is displayed
+            // in game GUI (e.q. "Lavička" --(Enum value)--> "BENCH" --(interactable object name to execute command)--> "lavicka"
+            gameCommandArguments.add(InteractableObjectName.getInteractableObjectName(InteractableObjectNameToDisplay.getEnumValueForInteractableObjectName(s)));
+        }
+
+        updateGameInteractionOutput(executeGameCommand("pristup_k", gameCommandArguments));
     }
 
     /**
@@ -489,6 +512,17 @@ public class MainSceneController {
         // (room name to execute command) "toalety" --(Enum value)--> "TOILETS" --(room description displayed in GUI)--> "Trochu to tu zapácha, ale na to si si už za tie roky zvykol"
         String actualRoomNameDescriptionToDisplay = RoomDescriptionToDisplay.getRoomDescriptionToDisplay(RoomName.getEnumValueForRoomName(actualRoomName));
         actualGameRoomDescription.setText(actualRoomNameDescriptionToDisplay);
+    }
+
+    /**
+     * Method updates playerActuallyStandsBy Label after player approach new interactable object
+     * or NPC in room
+     */
+    private void updatePlayerActuallyStandsByLabel() {
+        String text = "Aktuálne stojíš vedľa objektu (osoby):   ";
+        text += game.getGamePlan().getPlayerActuallyStandsBy();
+
+        playerActuallyStandsBy.setText(text);
     }
 
     /**
@@ -623,7 +657,7 @@ public class MainSceneController {
 
         roomInteractableObjectsListView.getItems().clear();
         roomInteractableObjectsListView.getItems().addAll(roomInteractableObjects);
-        roomInteractableObjectsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        roomInteractableObjectsListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
         roomInteractableObjectsListView.setCellFactory(param -> new ListCell<>() {
             private ImageView displayImage = new ImageView();
@@ -659,7 +693,7 @@ public class MainSceneController {
 
         roomNonPlayerCharactersListView.getItems().clear();
         roomNonPlayerCharactersListView.getItems().addAll(roomNonPlayerCharacters);
-        roomNonPlayerCharactersListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        roomNonPlayerCharactersListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
         roomNonPlayerCharactersListView.setCellFactory(param -> new ListCell<>() {
             private ImageView displayImage = new ImageView();
