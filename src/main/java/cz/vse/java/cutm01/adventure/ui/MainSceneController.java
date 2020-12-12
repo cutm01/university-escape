@@ -4,6 +4,8 @@ import cz.vse.java.cutm01.adventure.gamelogic.*;
 import cz.vse.java.cutm01.adventure.main.Start;
 import cz.vse.java.cutm01.adventure.main.SystemInfo;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -38,7 +40,7 @@ public class MainSceneController {
     // region Controller variables
     // --------------------------------------------------------------------------------
     private Game game;
-    private SimpleObjectProperty actualGameRoomProperty;
+    private StringProperty actualGameRoomProperty;
     private MainSceneControllerUtils controllerUtils = new MainSceneControllerUtils();
     private final Map<String, Image> gameItemsImages = controllerUtils.loadGameItemsImages();
     private final Map<String, Image>  gameInteractableObjectsImages = controllerUtils.loadGameInteractableObjectsImages();
@@ -108,13 +110,34 @@ public class MainSceneController {
      * Method initialize all necessary change listeners which are used to handle changes in game's GUI
      */
     private void initializeChangeListeners() {
+        //listener for updating GUI when player moves to another room
+        actualGameRoomProperty = game.getGamePlan().actualRoomNameProperty();
+        actualGameRoomProperty.addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                //get ObservableList with room items for actual game room
+                itemsInActualRoom = game.getGamePlan().getActualRoom().getRoomItemsObservableList();
+                itemsInActualRoom.addListener(new ListChangeListener<String>() {
+                    @Override
+                    public void onChanged(Change<? extends String> change) {
+                        updateRoomItemsListView();
+                    }
+                });
+
+                updateActualGameRoomNameLabel();
+                updateActualGameRoomDescriptionLabel();
+                updateActualRoomMiniMap();
+                updateRoomExitsScrollPane();
+                updateRightPanel();
+            }
+        });
+
         //listener to handle later changes in ListView with room items
         itemsInActualRoom = game.getGamePlan().getActualRoom().getRoomItemsObservableList();
         itemsInActualRoom.addListener(new ListChangeListener<String>() {
             @Override
             public void onChanged(Change<? extends String> change) {
                 updateRoomItemsListView();
-                //roomItemsListView.refresh();
             }
         });
 
@@ -124,28 +147,6 @@ public class MainSceneController {
             @Override
             public void onChanged(Change<? extends String> change) {
                 updateInventoryItemsListView();
-            }
-        });
-
-        //listener for updating GUI when player moves to another room
-        game.getGamePlan().actualRoomNameProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                updateActualGameRoomNameLabel();
-                updateActualGameRoomDescriptionLabel();
-                updateActualRoomMiniMap();
-                updateRoomExitsScrollPane();
-                updateRightPanel();
-
-                //get ObservableList with room items for actual game room
-                itemsInActualRoom = game.getGamePlan().getActualRoom().getRoomItemsObservableList();
-                itemsInActualRoom.addListener(new ListChangeListener<String>() {
-                    @Override
-                    public void onChanged(Change<? extends String> change) {
-                        updateRoomItemsListView();
-                        //roomItemsListView.refresh();
-                    }
-                });
             }
         });
     }
@@ -541,9 +542,14 @@ public class MainSceneController {
         }
         //clear right panel if actual game room was not examined yet
         else {
+            roomItemsListView.getItems().clear();
+            roomInteractableObjectsListView.getItems().clear();
+            roomNonPlayerCharactersListView.getItems().clear();
+            /*
             roomItemsListView.setItems(null);
             roomInteractableObjectsListView.setItems(null);
             roomNonPlayerCharactersListView.setItems(null);
+            */
         }
     }
 
@@ -551,15 +557,6 @@ public class MainSceneController {
      * Method to update inventoryItemsListView with items which are currently placed in player's inventory.
      */
     private void updateInventoryItemsListView() {
-        //Set<String> inventoryItemsNames = game.getGamePlan().getPlayer().getInventory().getInventoryItemsNames();
-        //ObservableList<String> inventoryItems = FXCollections.observableArrayList();
-/*
-        for (String s : inventoryItemsNames) {
-            // following line get item name which will be displayed in GUI from item name in format used for game command execution, e.g.:
-            // (item name for game command execution) "flasa" --(Enum value)--> "BOTTLE" --(item name to display in GUI)--> "Fľaša s vodou"
-            inventoryItems.add(ItemNameToDisplay.getItemNameToDisplay(ItemName.getEnumValueForItemName(s)));
-        }
-*/
         inventoryItemsListView.getItems().clear();
         inventoryItemsListView.getItems().addAll(itemsInPlayerInventory);
         //inventoryItemsListView.setItems(inventoryItems);
@@ -588,15 +585,6 @@ public class MainSceneController {
      * Method is used when player is looking around the room in order to examine it
      */
     private void updateRoomItemsListView() {
-        //Set<String> roomItemsNames = game.getGamePlan().getActualRoom().getRoomItemsNames();
-        //ObservableList<String> roomItems = game.getGamePlan().getActualRoom().getRoomItemsObservableList();
-/*
-        for (String s : roomItemsNames) {
-            // following line get item name which will be displayed in GUI from item name in format used for game command execution, e.g.:
-            // (item name for game command execution) "flasa" --(Enum value)--> "BOTTLE" --(item name to display in GUI)--> "Fľaša s vodou"
-            roomItems.add(ItemNameToDisplay.getItemNameToDisplay(ItemName.getEnumValueForItemName(s)));
-        }
-*/
         roomItemsListView.getItems().clear();
         roomItemsListView.getItems().addAll(itemsInActualRoom);
         roomItemsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -633,7 +621,8 @@ public class MainSceneController {
             roomInteractableObjects.add(InteractableObjectNameToDisplay.getInteractableObjectNameToDisplay(InteractableObjectName.getEnumValueForInteractableObjectName(s)));
         }
 
-        roomInteractableObjectsListView.setItems(roomInteractableObjects);
+        roomInteractableObjectsListView.getItems().clear();
+        roomInteractableObjectsListView.getItems().addAll(roomInteractableObjects);
         roomInteractableObjectsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         roomInteractableObjectsListView.setCellFactory(param -> new ListCell<>() {
@@ -668,7 +657,8 @@ public class MainSceneController {
             roomNonPlayerCharacters.add(NonPlayerCharacterNameToDisplay.getNonPlayerCharacterNameToDisplay(NonPlayerCharacterName.getEnumValueForNonPlayerCharacterName(npc)));
         }
 
-        roomNonPlayerCharactersListView.setItems(roomNonPlayerCharacters);
+        roomNonPlayerCharactersListView.getItems().clear();
+        roomNonPlayerCharactersListView.getItems().addAll(roomNonPlayerCharacters);
         roomNonPlayerCharactersListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         roomNonPlayerCharactersListView.setCellFactory(param -> new ListCell<>() {
