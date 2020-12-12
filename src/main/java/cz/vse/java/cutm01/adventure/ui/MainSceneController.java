@@ -1037,6 +1037,10 @@ public class MainSceneController {
         if (commandToExecute.equals("napoveda")) {
             showHelpForTextVersionOfGame();
         }
+        else if (commandToExecute.equals("koniec")){
+            Stage currentStage = (Stage) rootBorderPane.getScene().getWindow();
+            currentStage.close();
+        }
         else {
             String commandExecutionOutput = game.parseUserInput(commandToExecute);
             updateGameInteractionOutput(commandExecutionOutput);
