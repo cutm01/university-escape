@@ -512,7 +512,17 @@ public class MainSceneController {
      * @param actionEvent
      */
     public void talkToNonPlayerCharacter(ActionEvent actionEvent) {
+        ObservableList<String> selectedNonPlayerCharacterFromRoom = roomNonPlayerCharactersListView.getSelectionModel().getSelectedItems();
+        //used to store item names in format which can be used as game command argument
+        List<String> gameCommandArguments = new ArrayList<>();
 
+        for (String s : selectedNonPlayerCharacterFromRoom) {
+            // following line get non player character name which is used as argument for game commands from non player character name which is displayed
+            // in game GUI (e.q. "Upratovačka" --(Enum value)--> "CLEANING_LADY" --(non player character object name to execute command)--> "upratovacka"
+            gameCommandArguments.add(NonPlayerCharacterName.getNonPlayerCharacterName(NonPlayerCharacterNameToDisplay.getEnumValueForNonPlayerCharacterName(s)));
+        }
+
+        updateGameInteractionOutput(executeGameCommand("prihovor_sa", gameCommandArguments));
     }
 
     /**
