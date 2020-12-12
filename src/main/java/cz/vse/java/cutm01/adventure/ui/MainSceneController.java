@@ -366,7 +366,19 @@ public class MainSceneController {
      * Some items can be used in game to perform hidden action (e.g. unlocking door)
      * @param actionEvent
      */
-    public void useItemFromInventory(ActionEvent actionEvent) {}
+    public void useItemFromInventory(ActionEvent actionEvent) {
+        ObservableList<String> selectedItemsFromInventory = inventoryItemsListView.getSelectionModel().getSelectedItems();
+        //used to store item names in format which can be used as game command argument
+        List<String> gameCommandArguments = new ArrayList<>();
+
+        for (String s : selectedItemsFromInventory) {
+            // following line get item name which is used as argument for game commands from item name which is displayed
+            // in game GUI (e.q. "Fľaša s vodou" --(Enum value)--> "BOTTLE" --(item name to execute command)--> "flasa"
+            gameCommandArguments.add(ItemName.getItemName(ItemNameToDisplay.getEnumValueForItemName(s)));
+        }
+
+        updateGameInteractionOutput(executeGameCommand("pouzi", gameCommandArguments));
+    }
 
     /**
      * Method remove item(s) from player's inventory and add it (them) to actual game room
