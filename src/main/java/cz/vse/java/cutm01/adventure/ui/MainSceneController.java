@@ -899,6 +899,49 @@ public class MainSceneController {
     }
 
     /**
+     * Method shows help pop up window for text version of game.
+     * This window contains text game commands with their format and usage,
+     * actual game room and map
+     */
+    private void showHelpForTextVersionOfGame() {
+        Alert helpWindow = new Alert(AlertType.INFORMATION);
+        helpWindow.setTitle("Nápoveda");
+        helpWindow.getDialogPane().setPrefSize(910.0, 500.0);
+
+        //disable header of pop-up alert and confirmation button
+        helpWindow.setHeaderText(null);
+        helpWindow.setGraphic(null);
+        helpWindow.getDialogPane().lookupButton(ButtonType.OK).setVisible(false);
+
+        //set content
+        Label gameGoal = new Label("Tvojou úlohou je dostať sa von na ulicu a zachrániť si tak život!");
+        Label possibleCommandsTitle = new Label("Počas hry môžeš zadávať nasledovné príkazy:");
+
+        //label containing all possible text commands which player can use during the game
+        ScrollPane textCommandsScrollPane = new ScrollPane();
+        CommandsList gameTextCommandsList = ((GameImpl)game).getCommandsList();
+        Label textCommands = new Label(gameTextCommandsList.getCommandsWithTheirUsage());
+        textCommandsScrollPane.setContent(textCommands);
+        textCommandsScrollPane.setMinViewportHeight(120.0);
+
+        //get actual game room name in format with diacritics (defined in RoomNameToDisplay)
+        String actualGameRoomName = RoomNameToDisplay.getRoomNameToDisplay(RoomName.getEnumValueForRoomName(game.getGamePlan().getActualRoom().getName()));
+        Label actualGameRoom = new Label("Aktuálne sa nachádzaš v miestnosti: " + actualGameRoomName);
+
+        //game map
+        ImageView gameMapImage = new ImageView(gameRoomMapsImages.get("game_map"));
+        gameMapImage.setPreserveRatio(true);
+        gameMapImage.setFitWidth(500.0);
+
+        VBox content = new VBox(10, gameGoal, possibleCommandsTitle, textCommandsScrollPane, actualGameRoom, gameMapImage);
+        content.setPadding(new Insets(10));
+        content.setAlignment(Pos.CENTER);
+        helpWindow.getDialogPane().setContent(content);
+
+        helpWindow.showAndWait();
+    }
+
+    /**
      * Method to execute one of game commands. Command execution will perform all necessary changes in actual state
      * of game (e.g. insert item to inventory in case of TakeCommand execution)
      * @param commandName command to execute
@@ -998,8 +1041,5 @@ public class MainSceneController {
             String commandExecutionOutput = game.parseUserInput(commandToExecute);
             updateGameInteractionOutput(commandExecutionOutput);
         }
-    }
-
-    private void showHelpForTextVersionOfGame() {
     }
 }
