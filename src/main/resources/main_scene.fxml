@@ -86,7 +86,7 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="94.0" maxWidth="1.7976931348623157E308">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#takeItemsFromRoom" prefWidth="90.0" text="Vziať" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#takeItemsFromRoom" prefWidth="90.0" text="Vziať" />
                      </children>
                      <VBox.margin>
                         <Insets top="5.0" />
@@ -120,7 +120,7 @@
                   </HBox>
                   <HBox alignment="CENTER" maxWidth="1.7976931348623157E308">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#approachAndExamineInteractableObject" prefWidth="150.0" text="Pristúpiť a preskúmať" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#approachAndExamineInteractableObject" prefWidth="150.0" text="Pristúpiť a preskúmať" />
                      </children>
                      <VBox.margin>
                         <Insets top="5.0" />
@@ -156,7 +156,7 @@
                   </HBox>
                   <HBox alignment="CENTER" maxWidth="1.7976931348623157E308">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#approachAndTalkToNonPlayerCharacter" prefWidth="150.0" text="Pristúpiť a prihovoriť sa" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#approachAndTalkToNonPlayerCharacter" prefWidth="150.0" text="Pristúpiť a prihovoriť sa" />
                      </children>
                      <VBox.margin>
                         <Insets top="5.0" />
