@@ -103,12 +103,12 @@
                   <ListView fx:id="roomInteractableObjectsListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                   <VBox alignment="CENTER">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="150.0" text="Pristúpiť">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#approachInteractableObject" prefWidth="150.0" text="Pristúpiť">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="150.0" text="Pristúpiť a preskúmať">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#approachAndExamineInteractableObject" prefWidth="150.0" text="Pristúpiť a preskúmať">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
@@ -132,12 +132,12 @@
                   <ListView fx:id="roomNonPlayerCharactersListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                   <VBox alignment="CENTER">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="150.0" text="Pristúpiť">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#approachNonPlayerCharacter" prefWidth="150.0" text="Pristúpiť">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="150.0" text="Pristúpiť a prihovoriť sa">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#approachAndTalkToNonPlayerCharacter" prefWidth="150.0" text="Pristúpiť a prihovoriť sa">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
@@ -204,12 +204,12 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="114.0">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#useInventoryItem" prefWidth="90.0" text="Použiť">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#useItemFromInventory" prefWidth="90.0" text="Použiť">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#dropInventoryItem" prefWidth="90.0" text="Odhodiť" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#dropItemsFromInventory" prefWidth="90.0" text="Odhodiť" />
                      </children>
                      <VBox.margin>
                         <Insets top="5.0" />
