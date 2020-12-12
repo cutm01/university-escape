@@ -237,7 +237,7 @@ public class MainSceneController {
                 + "môžu skrývať mnohé ďalšie užitočné predmety!" + SystemInfo.LINE_SEPARATOR
                 + "V niektorých miestnotiach nie si sám a sú to okrem tebe ďalšie osoby, skús sa s nimi porozprávať alebo v ich blízkosti využiť " + SystemInfo.LINE_SEPARATOR
                 + "nejaký zo svojich predmetov z batohu, možno sa ti odmenia!" + SystemInfo.LINE_SEPARATOR
-                + "Veľa štastia!";
+                + "Veľa šťastia!";
         helpWindow.setContentText(helpText);
 
         helpWindow.showAndWait();
@@ -347,7 +347,19 @@ public class MainSceneController {
      * Player can find new items which are hidden in another game item this way
      * @param actionEvent
      */
-    public void showInventoryItemExaminationResult(ActionEvent actionEvent) {}
+    public void showInventoryItemExaminationResult(ActionEvent actionEvent) {
+        ObservableList<String> selectedItemsFromInventory = inventoryItemsListView.getSelectionModel().getSelectedItems();
+        //used to store item names in format which can be used as game command argument
+        List<String> gameCommandArguments = new ArrayList<>();
+
+        for (String s : selectedItemsFromInventory) {
+            // following line get item name which is used as argument for game commands from item name which is displayed
+            // in game GUI (e.q. "Fľaša s vodou" --(Enum value)--> "BOTTLE" --(item name to execute command)--> "flasa"
+            gameCommandArguments.add(ItemName.getItemName(ItemNameToDisplay.getEnumValueForItemName(s)));
+        }
+
+        updateGameInteractionOutput(executeGameCommand("preskumaj_predmet", gameCommandArguments));
+    }
 
     /**
      * Method updates GUI with text output from usage of inventory item.
@@ -531,6 +543,20 @@ public class MainSceneController {
      * @param actionEvent
      */
     public void approachAndTalkToNonPlayerCharacter(ActionEvent actionEvent) {
+        ObservableList<String> selectedNonPlayerCharacterFromRoom = roomNonPlayerCharactersListView.getSelectionModel().getSelectedItems();
+        //used to store item names in format which can be used as game command argument
+        List<String> gameCommandArguments = new ArrayList<>();
+
+        for (String s : selectedNonPlayerCharacterFromRoom) {
+            // following line get non player character name which is used as argument for game commands from non player character name which is displayed
+            // in game GUI (e.q. "Upratovačka" --(Enum value)--> "CLEANING_LADY" --(non player character object name to execute command)--> "upratovacka"
+            gameCommandArguments.add(NonPlayerCharacterName.getNonPlayerCharacterName(NonPlayerCharacterNameToDisplay.getEnumValueForNonPlayerCharacterName(s)));
+        }
+
+        //two game commands will be executed
+        updateGameInteractionOutput(executeGameCommand("pristup_k", gameCommandArguments)
+                                            + SystemInfo.LINE_SEPARATOR
+                                            + executeGameCommand("prihovor_sa", gameCommandArguments));
     }
     // --------------------------------------------------------------------------------
     // endregion Room NPCs buttons actions
