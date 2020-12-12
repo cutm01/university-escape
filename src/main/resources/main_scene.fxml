@@ -112,7 +112,7 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="90.0" text="Preskúmať" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#examineInteractableObject" prefWidth="90.0" text="Preskúmať" />
                      </children>
                      <VBox.margin>
                         <Insets top="5.0" />
@@ -148,7 +148,7 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="90.0" text="Prihovoriť sa" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#talkToNonPlayerCharacter" prefWidth="90.0" text="Prihovoriť sa" />
                      </children>
                      <VBox.margin>
                         <Insets top="5.0" />

@@ -444,6 +444,25 @@ public class MainSceneController {
     }
 
     /**
+     * Method is used to examine interactable object which player currently stands by.
+     * Player can find new hidden items this way
+     * @param actionEvent
+     */
+    public void examineInteractableObject(ActionEvent actionEvent) {
+        ObservableList<String> selectedInteractableObjectFromRoom = roomInteractableObjectsListView.getSelectionModel().getSelectedItems();
+        //used to store item names in format which can be used as game command argument
+        List<String> gameCommandArguments = new ArrayList<>();
+
+        for (String s : selectedInteractableObjectFromRoom) {
+            // following line get interactable object name which is used as argument for game commands from interactable object name which is displayed
+            // in game GUI (e.q. "Lavička" --(Enum value)--> "BENCH" --(interactable object name to execute command)--> "lavicka"
+            gameCommandArguments.add(InteractableObjectName.getInteractableObjectName(InteractableObjectNameToDisplay.getEnumValueForInteractableObjectName(s)));
+        }
+
+        updateGameInteractionOutput(executeGameCommand("preskumaj_objekt", gameCommandArguments));
+    }
+
+    /**
      * Method is used to approach and examine interactable object chosen by player.
      * Player can find object's hidden items this way
      * @param actionEvent
@@ -485,6 +504,15 @@ public class MainSceneController {
         }
 
         updateGameInteractionOutput(executeGameCommand("pristup_k", gameCommandArguments));
+    }
+
+    /**
+     * Method is uset to talk with NPC which player currently stands by.
+     * NPC can give player usefull hint in order to finish game
+     * @param actionEvent
+     */
+    public void talkToNonPlayerCharacter(ActionEvent actionEvent) {
+
     }
 
     /**
