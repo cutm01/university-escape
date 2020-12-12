@@ -35,6 +35,8 @@ import java.util.*;
  * @version 1.0.0
  */
 public class MainSceneController {
+    // region Controller variables
+    // --------------------------------------------------------------------------------
     private Game game;
     private SimpleObjectProperty actualGameRoomProperty;
     private MainSceneControllerUtils controllerUtils = new MainSceneControllerUtils();
@@ -43,8 +45,15 @@ public class MainSceneController {
     private final Map<String, Image>  gameNonPlayerCharactersImages = controllerUtils.loadGameNonPlayerCharactersImages();
     private final Map<String, Image> gameRoomMapsImages = controllerUtils.loadGameRoomMapsImages();
     private final Map<String, Image> gameRoomsImages = controllerUtils.loadGameRoomsImages();
+    //observable lists which are used to update GUI
+    private ObservableList<String> itemsInActualRoom;
+    private ObservableList<String> itemsInPlayerInventory;
+    // --------------------------------------------------------------------------------
+    // endregion Controller variables
 
-    //TextField to input game commands which player wants to execute
+    // region Scene elements
+    // --------------------------------------------------------------------------------
+    // text field to input game commands which player wants to execute
     public TextField gameConsole;
 
     //scene elements
@@ -62,58 +71,26 @@ public class MainSceneController {
     public Menu helpMenu;
     public Menu textCommandsMenu;
 
-    //text shown to user after his interaction with game (i.e. clicking on button)
+    // text shown to user after his interaction with game (i.e. clicking on button)
     public Text gameInteractionOutput;
+    // --------------------------------------------------------------------------------
+    // endregion Scene elements
 
-    //observable lists which are used to update GUI
-    private ObservableList<String> itemsInActualRoom;
-    private ObservableList<String> itemsInPlayerInventory;
-
-
+    // region Game initialization
+    // --------------------------------------------------------------------------------
+    /**
+     *  Method init main scene to start new game session
+     * @param game Game instanc containing all data about current game session
+     */
     public void init(Game game) {
         this.game = game;
+        initialGameSetUp();
+        initializeChangeListeners(); //used to handle changes in game GUI during playing the game
+
+        //JavaFX Menu element does not contain MenuItem elements and fire action on its own
         makeMenuElementFireAction(newGameMenu);
         makeMenuElementFireAction(helpMenu);
         makeMenuElementFireAction(textCommandsMenu);
-
-        itemsInActualRoom = game.getGamePlan().getActualRoom().getRoomItemsObservableList();
-        itemsInActualRoom.addListener(new ListChangeListener<String>() {
-            @Override
-            public void onChanged(Change<? extends String> change) {
-                updateRoomItemsListView();
-                //roomItemsListView.refresh();
-            }
-        });
-
-        itemsInPlayerInventory = game.getGamePlan().getPlayer().getInventory().getItemsInPlayerInventoryObservableList();
-        itemsInPlayerInventory.addListener(new ListChangeListener<String>() {
-            @Override
-            public void onChanged(Change<? extends String> change) {
-                updateInventoryItemsListView();
-            }
-        });
-
-        initialGameSetUp();
-
-        game.getGamePlan().actualRoomNameProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                updateActualGameRoomNameLabel();
-                updateActualGameRoomDescriptionLabel();
-                updateActualRoomMiniMap();
-                updateRoomExitsScrollPane();
-                //updateRightPanel();
-
-                itemsInActualRoom = game.getGamePlan().getActualRoom().getRoomItemsObservableList();
-                itemsInActualRoom.addListener(new ListChangeListener<String>() {
-                    @Override
-                    public void onChanged(Change<? extends String> change) {
-                        updateRoomItemsListView();
-                        //roomItemsListView.refresh();
-                    }
-                });
-            }
-        });
     }
 
     /**
@@ -127,20 +104,50 @@ public class MainSceneController {
         updateGameInteractionOutput(game.getPrologueInGraphicalGameVersion());
     }
 
-    private void updateActualRoomMiniMap() {
-        String actualRoomName = getActualRoomName();
-        String actualRoomNameAsEnum = RoomName.getEnumValueForRoomName(actualRoomName);
-        //keys in gameRoomMapsImages are inserted in lowercase during loading of these images
-        actualRoomMiniMap.setImage(gameRoomMapsImages.get(actualRoomNameAsEnum.toLowerCase()));
-    }
-
     /**
-     * Method updates gameInteractionOutput Text. This text are is used to inform user about
-     * performed changes in game after he executes one of game command
-     * @param newValue value to set
+     * Method initialize all necessary change listeners which are used to handle changes in game's GUI
      */
-    private void updateGameInteractionOutput(String newValue) {
-        gameInteractionOutput.setText(newValue);
+    private void initializeChangeListeners() {
+        //listener to handle later changes in ListView with room items
+        itemsInActualRoom = game.getGamePlan().getActualRoom().getRoomItemsObservableList();
+        itemsInActualRoom.addListener(new ListChangeListener<String>() {
+            @Override
+            public void onChanged(Change<? extends String> change) {
+                updateRoomItemsListView();
+                //roomItemsListView.refresh();
+            }
+        });
+
+        //listener to handle later changes in ListView with inventory items
+        itemsInPlayerInventory = game.getGamePlan().getPlayer().getInventory().getItemsInPlayerInventoryObservableList();
+        itemsInPlayerInventory.addListener(new ListChangeListener<String>() {
+            @Override
+            public void onChanged(Change<? extends String> change) {
+                updateInventoryItemsListView();
+            }
+        });
+
+        //listener for updating GUI when player moves to another room
+        game.getGamePlan().actualRoomNameProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                updateActualGameRoomNameLabel();
+                updateActualGameRoomDescriptionLabel();
+                updateActualRoomMiniMap();
+                updateRoomExitsScrollPane();
+                updateRightPanel();
+
+                //get ObservableList with room items for actual game room
+                itemsInActualRoom = game.getGamePlan().getActualRoom().getRoomItemsObservableList();
+                itemsInActualRoom.addListener(new ListChangeListener<String>() {
+                    @Override
+                    public void onChanged(Change<? extends String> change) {
+                        updateRoomItemsListView();
+                        //roomItemsListView.refresh();
+                    }
+                });
+            }
+        });
     }
 
     /**
@@ -164,45 +171,11 @@ public class MainSceneController {
             );
         }
     }
+    // --------------------------------------------------------------------------------
+    // endregion Game initialization
 
-    /**
-     * Method updates actualGameRoomName Label after player moves to another room
-     */
-    private void updateActualGameRoomNameLabel() {
-        String actualRoomName = getActualRoomName();
-        // following line get room name which is which is displayed in game GUI from room name used as argument for game commands, e.g.:
-        // (room name to execute command) "toalety" --(Enum value)--> "TOILETS" --(room name displayed in GUI)--> "Toalety"
-        String actualRoomNameToDisplay = RoomNameToDisplay.getRoomNameToDisplay(RoomName.getEnumValueForRoomName(actualRoomName));
-        actualGameRoomName.setText(actualRoomNameToDisplay);
-    }
-
-    /**
-     * Method updates actualGameRoomDescription Label after player moves to another room
-     */
-    private void updateActualGameRoomDescriptionLabel() {
-        String actualRoomName = getActualRoomName();
-        // following line get room description which is which is displayed in game GUI from room name used as argument for game commands, e.g.:
-        // (room name to execute command) "toalety" --(Enum value)--> "TOILETS" --(room description displayed in GUI)--> "Trochu to tu zapácha, ale na to si si už za tie roky zvykol"
-        String actualRoomNameDescriptionToDisplay = RoomDescriptionToDisplay.getRoomDescriptionToDisplay(RoomName.getEnumValueForRoomName(actualRoomName));
-        actualGameRoomDescription.setText(actualRoomNameDescriptionToDisplay);
-    }
-
-    /**
-     * Methods get actual room name
-     * @return String representing actual room name in format defined in RoomName Enum
-     */
-    private String getActualRoomName() {
-        return game.getGamePlan().getActualRoom().getName();
-    }
-
-    /**
-     * Method returns boolean value based on whether actual game room was already examined or not
-     * @return true if actual game room was already examined, false otherwise
-     */
-    private boolean wasActualRoomAlreadyExamined() {
-        return game.getGamePlan().getActualRoom().wasRoomAlreadyExamined();
-    }
-
+    // region Menu methods
+    // --------------------------------------------------------------------------------
     /**
      * Method shows confirmation dialog to user where he can choose
      * if he wants to start a new game or continue in the actual one
@@ -246,11 +219,11 @@ public class MainSceneController {
 
         //set content
         String helpText = "Tvojou úlohou je dostať sa z areálu školy von na ulicu a zachrániť si tak život!" + SystemInfo.LINE_SEPARATOR
-                            + "V miestnostiach môžeš nájsť rôzne predmety či objekty. Nezabudni ich poriadne prehľadať,"
-                            + "môžu skrývať mnohé ďalšie užitočné predmety!" + SystemInfo.LINE_SEPARATOR
-                            + "V niektorých miestnotiach nie si sám a sú to okrem tebe ďalšie osoby, skús sa s nimi porozprávať alebo v ich blízkosti využiť " + SystemInfo.LINE_SEPARATOR
-                            + "nejaký zo svojich predmetov z batohu, možno sa ti odmenia!" + SystemInfo.LINE_SEPARATOR
-                            + "Veľa štastia!";
+                + "V miestnostiach môžeš nájsť rôzne predmety či objekty. Nezabudni ich poriadne prehľadať,"
+                + "môžu skrývať mnohé ďalšie užitočné predmety!" + SystemInfo.LINE_SEPARATOR
+                + "V niektorých miestnotiach nie si sám a sú to okrem tebe ďalšie osoby, skús sa s nimi porozprávať alebo v ich blízkosti využiť " + SystemInfo.LINE_SEPARATOR
+                + "nejaký zo svojich predmetov z batohu, možno sa ti odmenia!" + SystemInfo.LINE_SEPARATOR
+                + "Veľa štastia!";
         helpWindow.setContentText(helpText);
 
         helpWindow.showAndWait();
@@ -283,9 +256,31 @@ public class MainSceneController {
 
         textCommandsWindow.showAndWait();
     }
+    // --------------------------------------------------------------------------------
+    // endregion Menu methods
 
+    // region Room buttons actions
+    // --------------------------------------------------------------------------------
     /**
-     * Method shows big game map after user clicks on button
+     * Method is used when player wants to look around actual game room in order to find items, interactable objects
+     * and NPCs currently placed in game room
+     * @param actionEvent
+     */
+    public void lookAroundRoom(ActionEvent actionEvent) {
+        updateGameInteractionOutput(executeGameCommand("rozhliadnut_sa", null));
+        if (game.getGamePlan().getActualRoom().wasRoomAlreadyExamined()) {
+            updateRoomItemsListView();
+            updateRoomInteractableObjectsListView();
+            updateRoomNonPlayerCharactersListView();
+        }
+    }
+    // --------------------------------------------------------------------------------
+    // endregion Room buttons actions
+
+    // region Map buttons actions
+    // --------------------------------------------------------------------------------
+    /**
+     * Method shows big game map in new pop-up window
      * @param actionEvent
      */
     public void showGameMap(ActionEvent actionEvent) {
@@ -310,16 +305,15 @@ public class MainSceneController {
 
         gameMapDialogWindow.showAndWait();
     }
+    // --------------------------------------------------------------------------------
+    // endregion Scene buttons actions
 
-    public void lookAroundRoom(ActionEvent actionEvent) {
-        updateGameInteractionOutput(executeGameCommand("rozhliadnut_sa", null));
-        if (game.getGamePlan().getActualRoom().wasRoomAlreadyExamined()) {
-            updateRoomItemsListView();
-            updateRoomInteractableObjectsListView();
-            updateRoomNonPlayerCharactersListView();
-        }
-    }
-
+    // region Inventory buttons actions
+    // --------------------------------------------------------------------------------
+    /**
+     * Method updates GUI with text description of inventory item chosen by player
+     * @param actionEvent
+     */
     public void showInventoryItemDescription(ActionEvent actionEvent) {
         ObservableList<String> selectedItemsFromInventory = inventoryItemsListView.getSelectionModel().getSelectedItems();
         //used to store item names in format which can be used as game command argument
@@ -334,6 +328,34 @@ public class MainSceneController {
         updateGameInteractionOutput(executeGameCommand("prehliadnut_si", gameCommandArguments));
     }
 
+    /**
+     * Method updates GUI with text output from inventory item examination.
+     * Player can find new items which are hidden in another game item this way
+     * @param actionEvent
+     */
+    public void showInventoryItemExaminationResult(ActionEvent actionEvent) {}
+
+    /**
+     * Method updates GUI with text output from usage of inventory item.
+     * Some items can be used in game to perform hidden action (e.g. unlocking door)
+     * @param actionEvent
+     */
+    public void useItemFromInventory(ActionEvent actionEvent) {}
+
+    /**
+     * Method remove item(s) from player's inventory and add it (them) to actual game room
+     * @param actionEvent
+     */
+    public void dropItemsFromInventory(ActionEvent actionEvent) {}
+    // --------------------------------------------------------------------------------
+    // endregion Inventory buttons actions
+
+    // region Room items buttons actions
+    // --------------------------------------------------------------------------------
+    /**
+     * Method updates GUI with text description of room item chosen by player
+     * @param actionEvent
+     */
     public void showRoomItemDescription(ActionEvent actionEvent) {
         ObservableList<String> selectedItemsFromRoom = roomItemsListView.getSelectionModel().getSelectedItems();
         //used to store item names in format which can be used as game command argument
@@ -348,6 +370,11 @@ public class MainSceneController {
         updateGameInteractionOutput(executeGameCommand("prehliadnut_si", gameCommandArguments));
     }
 
+    /**
+     * Method updates GUI with text output from room item examination.
+     * Player can find new items which are hidden in another game item this way
+     * @param actionEvent
+     */
     public void showRoomItemExaminationResult(ActionEvent actionEvent) {
         ObservableList<String> selectedItemsFromRoom = roomItemsListView.getSelectionModel().getSelectedItems();
         //used to store item names in format which can be used as game command argument
@@ -379,50 +406,127 @@ public class MainSceneController {
 
         updateGameInteractionOutput(executeGameCommand("vezmi", gameCommandArguments));
     }
+    // --------------------------------------------------------------------------------
+    // endregion Room items buttons actions
 
-    public void showInventoryItemExaminationResult(ActionEvent actionEvent) {
-
-    }
-
-    public void useInventoryItem(ActionEvent actionEvent) {
-    }
-
-    public void dropInventoryItem(ActionEvent actionEvent) {
-    }
-
+    // region Room interactable object buttons actions
+    // --------------------------------------------------------------------------------
     /**
-     * Method takes user input from gameConsole TextField and execute this text input as game command
+     * Method is used to approach interactable object chosen by player
      * @param actionEvent
      */
-    public void executeTypedInGameCommand(ActionEvent actionEvent) {
-        String commandExecutionOutput = game.parseUserInput(gameConsole.getText());
-        updateGameInteractionOutput(commandExecutionOutput);
+    public void approachInteractableObject(ActionEvent actionEvent) {
     }
 
     /**
-     * Method to execute one of game commands. Command execution will perform all necessary changes in actual state
-     * of game (e.g. insert item to inventory in case of TakeCommand execution)
-     * @param commandName command to execute
-     * @param commandParameters parameters (arguments) to execute command with
-     * @return String output of command execution which is later displayed to user to notify him about performed changes
-     * in game
+     * Method is used to approach and examine interactable object chosen by player.
+     * Player can find object's hidden items this way
+     * @param actionEvent
      */
-    private String executeGameCommand(String commandName, List<String> commandParameters) {
-        //when user tries to execute HelpCommand (i.e. write "napoveda" to text field in the bottom of GUI)
-        //game shows pop-up window containing help info rather than displaying command execution output in bottom of screen
-        if (commandName.equals("napoveda")) {
-            //TODO: implement to show new pop up window with help to user instead of updating GUI with command output
-            return "text napovedy";
+    public void approachAndExamineInteractableObject(ActionEvent actionEvent) {
+    }
+    // --------------------------------------------------------------------------------
+    // endregion Room interactable object buttons actions
+
+    // region Room NPCs buttons actions
+    // --------------------------------------------------------------------------------
+    /**
+     * Method is used to approach NPC chosen by player
+     * @param actionEvent
+     */
+    public void approachNonPlayerCharacter(ActionEvent actionEvent) {
+    }
+
+    /**
+     * Method is used to approach and talk to NPC chosen by player.
+     * NPC can give player useful hint
+     * @param actionEvent
+     */
+    public void approachAndTalkToNonPlayerCharacter(ActionEvent actionEvent) {
+    }
+    // --------------------------------------------------------------------------------
+    // endregion Room NPCs buttons actions
+
+    // region Methods for updating game scene
+    // --------------------------------------------------------------------------------
+    /**
+     * Method updates room mini map placed in top left corner based on actual game room
+     */
+    private void updateActualRoomMiniMap() {
+        String actualRoomName = getActualRoomName();
+        String actualRoomNameAsEnum = RoomName.getEnumValueForRoomName(actualRoomName);
+        //keys in gameRoomMapsImages are inserted in lowercase during loading of these images
+        actualRoomMiniMap.setImage(gameRoomMapsImages.get(actualRoomNameAsEnum.toLowerCase()));
+    }
+
+    /**
+     * Method updates gameInteractionOutput Text. This text are is used to inform user about
+     * performed changes in game after he executes one of game command
+     * @param newValue value to set
+     */
+    private void updateGameInteractionOutput(String newValue) {
+        gameInteractionOutput.setText(newValue);
+    }
+
+    /**
+     * Method updates actualGameRoomName Label after player moves to another room
+     */
+    private void updateActualGameRoomNameLabel() {
+        String actualRoomName = getActualRoomName();
+        // following line get room name which is which is displayed in game GUI from room name used as argument for game commands, e.g.:
+        // (room name to execute command) "toalety" --(Enum value)--> "TOILETS" --(room name displayed in GUI)--> "Toalety"
+        String actualRoomNameToDisplay = RoomNameToDisplay.getRoomNameToDisplay(RoomName.getEnumValueForRoomName(actualRoomName));
+        actualGameRoomName.setText(actualRoomNameToDisplay);
+    }
+
+    /**
+     * Method updates actualGameRoomDescription Label after player moves to another room
+     */
+    private void updateActualGameRoomDescriptionLabel() {
+        String actualRoomName = getActualRoomName();
+        // following line get room description which is which is displayed in game GUI from room name used as argument for game commands, e.g.:
+        // (room name to execute command) "toalety" --(Enum value)--> "TOILETS" --(room description displayed in GUI)--> "Trochu to tu zapácha, ale na to si si už za tie roky zvykol"
+        String actualRoomNameDescriptionToDisplay = RoomDescriptionToDisplay.getRoomDescriptionToDisplay(RoomName.getEnumValueForRoomName(actualRoomName));
+        actualGameRoomDescription.setText(actualRoomNameDescriptionToDisplay);
+    }
+
+    /**
+     * Method to update ScrollPane with all possible exits from actual game room
+     */
+    private void updateRoomExitsScrollPane(){
+        List<VBox> content = new LinkedList();
+        Set<String> roomExitsNames = game.getGamePlan().getActualRoom().getNeighboringRoomsNames();
+        String roomNameToDisplay;
+        //TODO: move to separate CSS file later
+        String cssLayout = "-fx-border-color: black;\n"
+                /*+ "-fx-border-insets: 5;\n"*/
+                + "-fx-border-width: 1;\n"
+                + "-fx-border-style: solid;\n"
+                + "";
+
+        for(String s : roomExitsNames) {
+            roomNameToDisplay = RoomNameToDisplay.getRoomNameToDisplay(RoomName.getEnumValueForRoomName(s));
+            Label roomName = new Label(roomNameToDisplay);
+            ImageView roomImage = new ImageView(gameRoomsImages.get(roomNameToDisplay));
+            VBox roomExit = new VBox(10, roomName, roomImage);
+            roomExit.setMinWidth(130.0);
+            roomExit.setMaxHeight(130.0);
+            roomExit.setPadding(new Insets(5.0));
+            roomExit.setStyle(cssLayout);
+            roomExit.setAlignment(Pos.CENTER);
+            roomExit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    updateGameInteractionOutput(executeGameCommand("chod", new ArrayList<>(){{ add(s); }}));
+                }
+            });
+
+            content.add(roomExit);
         }
 
-        //get command execution output for commands with parameters (such as "vezmi predmet1 predmet2")
-        if (commandParameters != null && commandParameters.size() > 0) {
-            String parameters = String.join(" ", commandParameters);
-            return game.parseUserInput(commandName + " " + parameters);
-        }
-
-        //get command execution output for commands without parameters
-        return game.parseUserInput(commandName);
+        roomExits.getChildren().clear();
+        roomExits.getChildren().addAll(content);
+        roomExits.setAlignment(Pos.CENTER);
     }
 
     /**
@@ -584,66 +688,61 @@ public class MainSceneController {
             }
         });
     }
+    // --------------------------------------------------------------------------------
+    // endregion Methods for updating game scene
 
+    // region Help methods used in another controller's methods
+    // --------------------------------------------------------------------------------
     /**
-     * Method to update ScrollPane with all possible exits from actual game room
+     * Methods get actual room name
+     * @return String representing actual room name in format defined in RoomName Enum
      */
-    private void updateRoomExitsScrollPane(){
-        List<VBox> content = new LinkedList();
-        Set<String> roomExitsNames = game.getGamePlan().getActualRoom().getNeighboringRoomsNames();
-        String roomNameToDisplay;
-        //TODO: move to separate CSS file later
-        String cssLayout = "-fx-border-color: black;\n"
-                            /*+ "-fx-border-insets: 5;\n"*/
-                            + "-fx-border-width: 1;\n"
-                            + "-fx-border-style: solid;\n"
-                            + "";
-
-        for(String s : roomExitsNames) {
-            roomNameToDisplay = RoomNameToDisplay.getRoomNameToDisplay(RoomName.getEnumValueForRoomName(s));
-            Label roomName = new Label(roomNameToDisplay);
-            ImageView roomImage = new ImageView(gameRoomsImages.get(roomNameToDisplay));
-            VBox roomExit = new VBox(10, roomName, roomImage);
-            roomExit.setMinWidth(130.0);
-            roomExit.setMaxHeight(130.0);
-            roomExit.setPadding(new Insets(5.0));
-            roomExit.setStyle(cssLayout);
-            roomExit.setAlignment(Pos.CENTER);
-            roomExit.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    updateGameInteractionOutput(executeGameCommand("chod", new ArrayList<>(){{ add(s); }}));
-                }
-            });
-
-            content.add(roomExit);
-        }
-
-        roomExits.getChildren().clear();
-        roomExits.getChildren().addAll(content);
-        roomExits.setAlignment(Pos.CENTER);
+    private String getActualRoomName() {
+        return game.getGamePlan().getActualRoom().getName();
     }
 
     /**
-     * Method is used to center pop-up Alert elements in game window
-     * @param alert element to center
-     * @param width desired width of element to center
-     * @param height desired height of element to center
+     * Method returns boolean value based on whether actual game room was already examined or not
+     * @return true if actual game room was already examined, false otherwise
      */
-    private void centerAlert(Alert alert, double width, double height) {
-        double applicationWindowXCoordinate = rootBorderPane.getScene().getWindow().getX();
-        double applicationWindowYCoordinate = rootBorderPane.getScene().getWindow().getY();
-        double applicationWindowWidth = rootBorderPane.getScene().getWindow().getWidth();
-        double applicationWindowHeight = rootBorderPane.getScene().getWindow().getHeight();
+    private boolean wasActualRoomAlreadyExamined() {
+        return game.getGamePlan().getActualRoom().wasRoomAlreadyExamined();
+    }
 
-        //get X and Y coordinates which ensures that alert window will be centered in current application window
-        double alertXCoordinate = applicationWindowXCoordinate + ((applicationWindowWidth - width) / 2);
-        double alertYCoordinate = applicationWindowYCoordinate + ((applicationWindowHeight - height) / 2);
+    /**
+     * Method to execute one of game commands. Command execution will perform all necessary changes in actual state
+     * of game (e.g. insert item to inventory in case of TakeCommand execution)
+     * @param commandName command to execute
+     * @param commandParameters parameters (arguments) to execute command with
+     * @return String output of command execution which is later displayed to user to notify him about performed changes
+     * in game
+     */
+    private String executeGameCommand(String commandName, List<String> commandParameters) {
+        //when user tries to execute HelpCommand (i.e. write "napoveda" to text field in the bottom of GUI)
+        //game shows pop-up window containing help info rather than displaying command execution output in bottom of screen
+        if (commandName.equals("napoveda")) {
+            //TODO: implement to show new pop up window with help to user instead of updating GUI with command output
+            return "text napovedy";
+        }
 
-       alert.setResizable(true);
-       alert.getDialogPane().setPrefSize(width, height);
+        //get command execution output for commands with parameters (such as "vezmi predmet1 predmet2")
+        if (commandParameters != null && commandParameters.size() > 0) {
+            String parameters = String.join(" ", commandParameters);
+            return game.parseUserInput(commandName + " " + parameters);
+        }
 
-        alert.setX(alertXCoordinate);
-        alert.setY(alertYCoordinate);
+        //get command execution output for commands without parameters
+        return game.parseUserInput(commandName);
+    }
+    // --------------------------------------------------------------------------------
+    // endregion Help methods used in another controller's methods
+
+    /**
+     * Method takes user input from gameConsole TextField and execute this text input as game command
+     * @param actionEvent
+     */
+    public void executeTypedInGameCommand(ActionEvent actionEvent) {
+        String commandExecutionOutput = game.parseUserInput(gameConsole.getText());
+        updateGameInteractionOutput(commandExecutionOutput);
     }
 }

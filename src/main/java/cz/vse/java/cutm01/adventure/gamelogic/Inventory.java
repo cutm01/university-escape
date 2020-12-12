@@ -22,12 +22,7 @@ public class Inventory {
     private final Map<String, Item> items;
     private int inventoryCapacity;
     private int inventoryWeight;
-
     private ObservableList<String> itemsInPlayerInventoryObservableList = FXCollections.observableArrayList();
-
-    public ObservableList<String> getItemsInPlayerInventoryObservableList() {
-        return itemsInPlayerInventoryObservableList;
-    }
 
     // region Constructor
     // --------------------------------------------------------------------------------
@@ -41,6 +36,14 @@ public class Inventory {
 
     // region Getters and Setters
     // --------------------------------------------------------------------------------
+    /**
+     * Method returns ObservableList which is used in game's GUI to handle changes in main scene
+     * @return ObservableList containing all items which are currently in player's inventory
+     */
+    public ObservableList<String> getItemsInPlayerInventoryObservableList() {
+        return itemsInPlayerInventoryObservableList;
+    }
+
     public int getInventoryCapacity() {
         return inventoryCapacity;
     }

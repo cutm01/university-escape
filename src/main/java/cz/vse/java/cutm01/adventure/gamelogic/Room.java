@@ -35,9 +35,6 @@ public class Room {
     private final String lockedRoomDescription;
     private ObservableList<String> roomItemsObservableList = FXCollections.observableArrayList();
 
-    public ObservableList<String> getRoomItemsObservableList() {
-        return roomItemsObservableList;
-    }
 
     // region Constructors
     // --------------------------------------------------------------------------------
@@ -59,6 +56,13 @@ public class Room {
 
     // region Getters and Setters
     // --------------------------------------------------------------------------------
+    /**
+     * Method return ObservableList which is used in game's GUI to handle changes in main scene
+     * @return ObservableList containing all items which are currently in room
+     */
+    public ObservableList<String> getRoomItemsObservableList() {
+        return roomItemsObservableList;
+    }
 
     /**
      * Vrací název prostoru (byl zadán při vytváření prostoru jako parametr konstruktoru)
