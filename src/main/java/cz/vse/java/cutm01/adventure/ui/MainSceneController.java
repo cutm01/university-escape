@@ -240,9 +240,10 @@ public class MainSceneController {
     /**
      * Method shows user pop-up window with tips how to finish adventure
      */
-    public void showHelp() {
+    public void showHelpForGraphicalVersionOfGame() {
         Alert helpWindow = new Alert(AlertType.INFORMATION);
         helpWindow.setTitle("Nápoveda");
+        helpWindow.getDialogPane().setPrefSize(910.0, 500.0);
 
         //disable header of pop-up alert and confirmation button
         helpWindow.setHeaderText(null);
@@ -250,13 +251,29 @@ public class MainSceneController {
         helpWindow.getDialogPane().lookupButton(ButtonType.OK).setVisible(false);
 
         //set content
-        String helpText = "Tvojou úlohou je dostať sa z areálu školy von na ulicu a zachrániť si tak život!" + SystemInfo.LINE_SEPARATOR
-                + "V miestnostiach môžeš nájsť rôzne predmety či objekty. Nezabudni ich poriadne prehľadať,"
-                + "môžu skrývať mnohé ďalšie užitočné predmety!" + SystemInfo.LINE_SEPARATOR
-                + "V niektorých miestnotiach nie si sám a sú to okrem tebe ďalšie osoby, skús sa s nimi porozprávať alebo v ich blízkosti využiť " + SystemInfo.LINE_SEPARATOR
-                + "nejaký zo svojich predmetov z batohu, možno sa ti odmenia!" + SystemInfo.LINE_SEPARATOR
-                + "Veľa šťastia!";
-        helpWindow.setContentText(helpText);
+        String textToShow = "Tvojou úlohou je dostať sa z areálu školy von na ulicu a zachrániť si tak život!" + SystemInfo.LINE_SEPARATOR
+                            + "V miestnostiach môžeš nájsť rôzne predmety či objekty. Nezabudni ich poriadne prehľadať,"
+                            + "môžu skrývať mnohé ďalšie užitočné predmety!" + SystemInfo.LINE_SEPARATOR
+                            + "V niektorých miestnotiach nie si sám a sú to okrem tebe ďalšie osoby, skús sa s nimi porozprávať alebo v ich blízkosti využiť " + SystemInfo.LINE_SEPARATOR
+                            + "nejaký zo svojich predmetov z batohu, možno sa ti odmenia!" + SystemInfo.LINE_SEPARATOR
+                            + "Veľa šťastia!"
+                            + SystemInfo.LINE_SEPARATOR;
+        Label helpText = new Label(textToShow);
+        helpText.setContentDisplay(ContentDisplay.CENTER);
+        helpText.setTextAlignment(TextAlignment.CENTER);
+
+        //get actual game room name in format with diacritics (defined in RoomNameToDisplay)
+        String actualGameRoomName = RoomNameToDisplay.getRoomNameToDisplay(RoomName.getEnumValueForRoomName(game.getGamePlan().getActualRoom().getName()));
+        Label actualGameRoom = new Label("Aktuálne sa nachádzaš v miestnosti: " + actualGameRoomName);
+
+        ImageView gameMapImage = new ImageView(gameRoomMapsImages.get("game_map"));
+        gameMapImage.setPreserveRatio(true);
+        gameMapImage.setFitWidth(650.0);
+
+        VBox content = new VBox(10, helpText, actualGameRoom, gameMapImage);
+        content.setPadding(new Insets(10));
+        content.setAlignment(Pos.CENTER);
+        helpWindow.getDialogPane().setContent(content);
 
         helpWindow.showAndWait();
     }
@@ -973,7 +990,16 @@ public class MainSceneController {
      * @param actionEvent
      */
     public void executeTypedInGameCommand(ActionEvent actionEvent) {
-        String commandExecutionOutput = game.parseUserInput(gameConsole.getText());
-        updateGameInteractionOutput(commandExecutionOutput);
+        String commandToExecute = gameConsole.getText();
+        if (commandToExecute.equals("napoveda")) {
+            showHelpForTextVersionOfGame();
+        }
+        else {
+            String commandExecutionOutput = game.parseUserInput(commandToExecute);
+            updateGameInteractionOutput(commandExecutionOutput);
+        }
+    }
+
+    private void showHelpForTextVersionOfGame() {
     }
 }

@@ -30,7 +30,7 @@
                         </Menu>
                         <Menu fx:id="helpMenu" mnemonicParsing="false" text="Nápoveda">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#showHelp" />
+                        <MenuItem mnemonicParsing="false" onAction="#showHelpForGraphicalVersionOfGame" />
                      </items>
                         </Menu>
                   <Menu fx:id="textCommandsMenu" mnemonicParsing="false" text="Textové príkazy">
