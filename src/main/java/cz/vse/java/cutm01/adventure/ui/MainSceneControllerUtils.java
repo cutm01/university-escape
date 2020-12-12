@@ -86,7 +86,7 @@ public class MainSceneControllerUtils {
         Object[] gameRoomNames = RoomName.values();
         for(Object r : gameRoomNames) {
             String gameRoomName = r.toString().toLowerCase();
-            
+
             InputStream imageStream = getClass().getClassLoader().getResourceAsStream(gameRoomName + "_map.png");
             Image gameRoomMapImage = new Image(imageStream);
             loadedImages.put(gameRoomName, gameRoomMapImage);

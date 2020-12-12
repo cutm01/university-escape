@@ -1041,6 +1041,9 @@ public class MainSceneController {
             Stage currentStage = (Stage) rootBorderPane.getScene().getWindow();
             currentStage.close();
         }
+        else if (commandToExecute.equals("rozhliadnut_sa")) {
+            lookAroundRoom(new ActionEvent());
+        }
         else {
             String commandExecutionOutput = game.parseUserInput(commandToExecute);
             updateGameInteractionOutput(commandExecutionOutput);
