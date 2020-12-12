@@ -46,6 +46,7 @@ public class MainSceneController {
     private StringProperty actualGameRoomProperty;
     private StringProperty playerActuallyStandsByProperty;
     private BooleanProperty playerFinishedGame;
+    private int inventoryWeightCapacity;
     private MainSceneControllerUtils controllerUtils = new MainSceneControllerUtils();
     private final Map<String, Image> gameItemsImages = controllerUtils.loadGameItemsImages();
     private final Map<String, Image>  gameInteractableObjectsImages = controllerUtils.loadGameInteractableObjectsImages();
@@ -69,6 +70,7 @@ public class MainSceneController {
     public Label actualGameRoomName;
     public Label actualGameRoomDescription;
     public Label playerActuallyStandsBy;
+    public Label inventoryCapacity;
     public ListView<String> inventoryItemsListView;
     public ListView<String> roomItemsListView;
     public ListView<String> roomInteractableObjectsListView;
@@ -105,6 +107,9 @@ public class MainSceneController {
      * Method set up all necessary MainScene elements which are needed to start playing new game
      */
     private void initialGameSetUp() {
+        inventoryWeightCapacity = game.getGamePlan().getPlayer().getInventory().getInventoryCapacity();
+        updateInventoryCapacityLabel();
+
         updateActualGameRoomNameLabel();
         updateActualGameRoomDescriptionLabel();
         updatePlayerActuallyStandsByLabel();
@@ -172,6 +177,7 @@ public class MainSceneController {
             @Override
             public void onChanged(Change<? extends String> change) {
                 updateInventoryItemsListView();
+                updateInventoryCapacityLabel();
             }
         });
     }
@@ -652,6 +658,14 @@ public class MainSceneController {
     }
 
     /**
+     * Method updates information about actual weight of items in inventory
+     * and inventory capacity
+     */
+    private void updateInventoryCapacityLabel() {
+        inventoryCapacity.setText("Kapacita batohu: " + getActualInventoryWeight() + "/" + inventoryWeightCapacity);
+    }
+
+    /**
      * Method to update ScrollPane with all possible exits from actual game room
      */
     private void updateRoomExitsScrollPane(){
@@ -857,6 +871,14 @@ public class MainSceneController {
      */
     private boolean wasActualRoomAlreadyExamined() {
         return game.getGamePlan().getActualRoom().wasRoomAlreadyExamined();
+    }
+
+    /**
+     * Method returns total weight of items which are currently in player's inventory
+     * @return int representing total weight of items in inventory
+     */
+    private int getActualInventoryWeight() {
+        return game.getGamePlan().getPlayer().getInventory().getInventoryWeight();
     }
 
     /**

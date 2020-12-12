@@ -202,6 +202,7 @@
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Label>
+                  <Label fx:id="inventoryCapacity" text="Kapacita batohu:" />
                   <Separator maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                      <VBox.margin>
                         <Insets bottom="5.0" />
