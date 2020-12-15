@@ -53,6 +53,7 @@ public class MainSceneController {
     private final Map<String, Image>  gameNonPlayerCharactersImages = controllerUtils.loadGameNonPlayerCharactersImages();
     private final Map<String, Image> gameRoomMapsImages = controllerUtils.loadGameRoomMapsImages();
     private final Map<String, Image> gameRoomsImages = controllerUtils.loadGameRoomsImages();
+    private final Map<String, Image>  gameRoomsBackgroundImages = controllerUtils.loadGameBackgroundImages();
     //observable lists which are used to update GUI
     private ObservableList<String> itemsInActualRoom;
     private ObservableList<String> itemsInPlayerInventory;
@@ -622,6 +623,14 @@ public class MainSceneController {
 
     // region Methods for updating game scene
     // --------------------------------------------------------------------------------
+    /**
+     * Method updates background of root element depending on which room the player
+     * is currently in
+     */
+    private void updateBackground() {
+
+    }
+
     /**
      * Method updates room mini map placed in top left corner based on actual game room
      */

@@ -50,9 +50,9 @@ public class MainSceneControllerUtils {
             String interactableObjectName = o.toString().toLowerCase();
 
             InputStream imageStream = getClass().getClassLoader().getResourceAsStream(interactableObjectName + ".png");
-            Image itemImage = new Image(imageStream);
+            Image interactableObjectImage = new Image(imageStream);
 
-            loadedImages.put(InteractableObjectNameToDisplay.getInteractableObjectNameToDisplay(o.toString()), itemImage);
+            loadedImages.put(InteractableObjectNameToDisplay.getInteractableObjectNameToDisplay(o.toString()), interactableObjectImage);
         }
 
         return loadedImages;
@@ -70,9 +70,9 @@ public class MainSceneControllerUtils {
             String nonPlayerCharacterName = npc.toString().toLowerCase();
 
             InputStream imageStream = getClass().getClassLoader().getResourceAsStream(nonPlayerCharacterName + ".png");
-            Image itemImage = new Image(imageStream);
+            Image nonPlayerCharacterImage = new Image(imageStream);
 
-            loadedImages.put(NonPlayerCharacterNameToDisplay.getNonPlayerCharacterNameToDisplay(npc.toString()), itemImage);
+            loadedImages.put(NonPlayerCharacterNameToDisplay.getNonPlayerCharacterNameToDisplay(npc.toString()), nonPlayerCharacterImage);
         }
 
         return loadedImages;
@@ -80,6 +80,7 @@ public class MainSceneControllerUtils {
 
     /**
      * Method to load images for all minimaps of game rooms and one big game map with all rooms in it
+     * @return Map where key is name of the game room and value is corresponding image
      */
     public Map<String, Image> loadGameRoomMapsImages() {
         Map<String, Image> loadedImages = new HashMap<>();
@@ -101,7 +102,8 @@ public class MainSceneControllerUtils {
     }
 
     /**
-     * Method to load images for all game rooms
+     * Method to load images (i.e. small icons which are used in bottom of screen as possible exits) for all game rooms
+     * @return Map where key is name of the game room and value is corresponding image
      */
     public Map<String, Image> loadGameRoomsImages() {
         Map<String, Image> loadedImages = new HashMap<>();
@@ -111,9 +113,29 @@ public class MainSceneControllerUtils {
             String roomName = room.toString().toLowerCase();
 
             InputStream imageStream = getClass().getClassLoader().getResourceAsStream(roomName + ".png");
-            Image itemImage = new Image(imageStream);
+            Image roomImage = new Image(imageStream);
 
-            loadedImages.put(RoomNameToDisplay.getRoomNameToDisplay(room.toString()), itemImage);
+            loadedImages.put(RoomNameToDisplay.getRoomNameToDisplay(room.toString()), roomImage);
+        }
+
+        return loadedImages;
+    }
+
+    /**
+     * Method to load background images for all game rooms
+     * @return Map where key is name of the game room and value is corresponding image
+     */
+    public Map<String, Image> loadGameBackgroundImages() {
+        Map<String, Image> loadedImages = new HashMap<>();
+
+        Object[] roomNames = RoomName.values();
+        for(Object room : roomNames) {
+            String roomName = room.toString().toLowerCase();
+
+            InputStream imageStream = getClass().getClassLoader().getResourceAsStream(roomName + "_background.png");
+            Image roomImage = new Image(imageStream);
+
+            loadedImages.put(RoomNameToDisplay.getRoomNameToDisplay(room.toString()), roomImage);
         }
 
         return loadedImages;
