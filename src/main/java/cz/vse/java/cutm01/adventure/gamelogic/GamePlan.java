@@ -131,7 +131,7 @@ public class GamePlan {
      */
     public void setActualRoom(Room room) {
         actualRoom = room;
-        actualRoomName.setValue(room.getName());
+        actualRoomName.setValue(RoomName.getEnumValueForRoomName(room.getName()));
         playerActuallyStandsBy.setValue(getNameOfGameObjectPlayerStandsBy());
     }
 

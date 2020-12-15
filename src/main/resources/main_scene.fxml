@@ -19,7 +19,7 @@
 
 <BorderPane fx:id="rootBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.java.cutm01.adventure.ui.MainSceneController">
     <top>
-        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="960.0" BorderPane.alignment="CENTER">
+        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="960.0" style="-fx-background-color: rgba(255, 255, 255, 0.5);" BorderPane.alignment="CENTER">
             <children>
                 <MenuBar maxWidth="1.7976931348623157E308">
                     <menus>
@@ -43,7 +43,10 @@
                 <Label fx:id="actualGameRoomName" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="Názov aktuálnej miestnosti" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="16.0" />
-               </font></Label>
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></Label>
                 <Label fx:id="actualGameRoomDescription" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Popis aktuálnej miestnosti" textAlignment="CENTER">
                <font>
                   <Font size="14.0" />
@@ -53,12 +56,15 @@
                   <Font name="System Italic" size="12.0" />
                </font></Label>
             <Separator prefWidth="200.0" />
-            <Button fx:id="lookAroundButton" mnemonicParsing="false" onAction="#lookAroundRoom" text="Rozhliadnúť sa po miestnosti" />
+            <Button fx:id="lookAroundButton" mnemonicParsing="false" onAction="#lookAroundRoom" text="Rozhliadnúť sa po miestnosti">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin></Button>
             </children>
         </VBox>
     </top>
    <right>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="300.0" BorderPane.alignment="CENTER">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="300.0" style="-fx-background-color: rgba(255, 255, 255, 0.5);" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
@@ -93,6 +99,9 @@
                      </VBox.margin>
                   </HBox>
                </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
@@ -129,7 +138,10 @@
                </children>
                <VBox.margin>
                   <Insets top="10.0" />
-               </VBox.margin></VBox>
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding></VBox>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
                   <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Postavy" VBox.vgrow="ALWAYS">
@@ -165,14 +177,17 @@
                </children>
                <VBox.margin>
                   <Insets top="10.0" />
-               </VBox.margin></VBox>
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding></VBox>
          </children>
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin></VBox>
    </right>
    <left>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="300.0" BorderPane.alignment="CENTER">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="300.0" style="-fx-background-color: rgba(255,255,255,0.5);" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="SOMETIMES">
                <children>
@@ -195,6 +210,9 @@
                      </VBox.margin>
                   </Button>
                </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
             </VBox>
             <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                <children>
@@ -207,7 +225,7 @@
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin></Separator>
-                  <ListView fx:id="inventoryItemsListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+                  <ListView fx:id="inventoryItemsListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgba(255, 255, 255, 0.5);" VBox.vgrow="ALWAYS" />
                   <HBox alignment="CENTER" maxWidth="1.7976931348623157E308">
                      <children>
                         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showInventoryItemDescription" prefWidth="90.0" text="Prehliadnúť si">
@@ -238,6 +256,9 @@
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
             </VBox>
          </children>
          <BorderPane.margin>
@@ -246,14 +267,14 @@
       </VBox>
    </left>
    <bottom>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="960.0" BorderPane.alignment="CENTER">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="960.0" style="-fx-background-color: rgba(255, 255, 255, 0.5);" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgba(255, 255, 255, 0.5);" VBox.vgrow="ALWAYS">
                <children>
                   <Separator prefWidth="200.0" />
-                  <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                  <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
                      <content>
-                        <VBox alignment="CENTER">
+                        <VBox alignment="CENTER" style="-fx-background-color: rgba(255, 255, 255, 0.8);">
                            <children>
                                 <Text fx:id="gameInteractionOutput" text="Tento text sa bude zobrazovať hráčovi po vykonaní príkazu a bude ho informovať o zmenách v hre" textAlignment="CENTER" VBox.vgrow="ALWAYS">Nasledovný text sa bude zobrazovať hráčovi po vykonaní príkazu a bude ho informovať o zmenách v hre</Text>
                            </children>
@@ -283,13 +304,13 @@
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </Separator>
-                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="150.0" VBox.vgrow="ALWAYS">
+                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="150.0" style="-fx-background-color: rgba(255, 255, 255, 0.5);" VBox.vgrow="ALWAYS">
                      <children>
-                        <ScrollPane fx:id="roomExitsScrollPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
+                        <ScrollPane fx:id="roomExitsScrollPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgba(255, 255, 255, 0.5);" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
                            <content>
-                              <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="${roomExitsScrollPane.viewportBounds.width}">
+                              <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="${roomExitsScrollPane.viewportBounds.width}" style="-fx-background-color: rgba(255, 255, 255, 0.5);">
                                  <children>
-                                    <HBox fx:id="roomExits" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="${roomExitsScrollPane.viewportBounds.height}" minWidth="${roomExitsScrollPane.viewportBounds.width}" VBox.vgrow="NEVER" />
+                                    <HBox fx:id="roomExits" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="${roomExitsScrollPane.viewportBounds.height}" minWidth="${roomExitsScrollPane.viewportBounds.width}" style="-fx-background-color: rgba(255, 255, 255, 0.5);" VBox.vgrow="NEVER" />
                                  </children></VBox>
                            </content>
                         </ScrollPane>

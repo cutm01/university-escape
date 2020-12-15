@@ -111,6 +111,7 @@ public class MainSceneController {
         inventoryWeightCapacity = game.getGamePlan().getPlayer().getInventory().getInventoryCapacity();
         updateInventoryCapacityLabel();
 
+        updateBackground();
         updateActualGameRoomNameLabel();
         updateActualGameRoomDescriptionLabel();
         updatePlayerActuallyStandsByLabel();
@@ -146,6 +147,7 @@ public class MainSceneController {
                     }
                 });
 
+                updateBackground();
                 updateActualGameRoomNameLabel();
                 updateActualGameRoomDescriptionLabel();
                 updateActualRoomMiniMap();
@@ -628,7 +630,11 @@ public class MainSceneController {
      * is currently in
      */
     private void updateBackground() {
-
+        String actualGameRoom = game.getGamePlan().getActualRoomName().toLowerCase();
+        rootBorderPane.setStyle("-fx-background-image: url(\""
+                                + actualGameRoom
+                                + "_background.png"
+                                + "\");");
     }
 
     /**
