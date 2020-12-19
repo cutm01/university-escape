@@ -634,7 +634,8 @@ public class MainSceneController {
         rootBorderPane.setStyle("-fx-background-image: url(\""
                                 + actualGameRoom
                                 + "_background.png"
-                                + "\");");
+                                + "\");"
+                                + "-fx-background-size: cover; -fx-background-repeat: no-repeat; -fx-background-position: center center;");
     }
 
     /**
@@ -704,22 +705,13 @@ public class MainSceneController {
         List<VBox> content = new LinkedList();
         Set<String> roomExitsNames = game.getGamePlan().getActualRoom().getNeighboringRoomsNames();
         String roomNameToDisplay;
-        //TODO: move to separate CSS file later
-        String cssLayout = "-fx-border-color: black;\n"
-                /*+ "-fx-border-insets: 5;\n"*/
-                + "-fx-border-width: 1;\n"
-                + "-fx-border-style: solid;\n"
-                + "";
 
         for(String s : roomExitsNames) {
             roomNameToDisplay = RoomNameToDisplay.getRoomNameToDisplay(RoomName.getEnumValueForRoomName(s));
             Label roomName = new Label(roomNameToDisplay);
             ImageView roomImage = new ImageView(gameRoomsImages.get(roomNameToDisplay));
             VBox roomExit = new VBox(10, roomName, roomImage);
-            roomExit.setMinWidth(130.0);
-            roomExit.setMaxHeight(130.0);
             roomExit.setPadding(new Insets(5.0));
-            roomExit.setStyle(cssLayout);
             roomExit.setAlignment(Pos.CENTER);
             roomExit.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override

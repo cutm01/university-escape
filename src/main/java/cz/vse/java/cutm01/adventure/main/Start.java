@@ -97,6 +97,9 @@ public class Start extends Application {
         Game newGame = new GameImpl();
         mainSceneController.init(newGame);
 
+        //stylesheet(s)
+        mainScene.getStylesheets().add(Start.class.getClassLoader().getResource("main_scene_styles.css").toExternalForm());
+
         primaryStage.show();
     }
 }

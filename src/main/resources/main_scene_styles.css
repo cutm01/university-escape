@@ -1,0 +1,38 @@
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.separator *.line {
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 1 0; /* one-pixel-border */
+    -fx-border-color: rgba(0,0,0,0.5);
+}
+
+.list-view {
+    -fx-background-color: rgba(255, 255, 255, 0.5);
+}
+
+.list-cell {
+    -fx-control-inner-background: transparent;
+    -fx-text-fill: black;
+}
+
+.list-cell:filled {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: rgba(0,0,0,0.5);
+    -fx-border-padding: 0 5 0 5;
+}
+
+/* VBoxes are representing exit rooms from actual game room*/
+#roomExits > VBox {
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+    -fx-background-color: rgba(255, 255, 255, 0.5);
+    -fx-min-width: 130;
+    -fx-max-height: 130;
+}
