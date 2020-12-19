@@ -239,7 +239,6 @@ public class GameImpl implements Game {
      *
      * @param isGameOver hodnota false= konec hry, true = hra pokračuje
      */
-    @SuppressWarnings("SameParameterValue")
     void setIsGameOver(boolean isGameOver) {
         this.isGameOver = isGameOver;
     }

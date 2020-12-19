@@ -42,8 +42,7 @@ class LookAroundCommand implements Command {
         return DESCRIPTION;
     }
 
-    // TODO: zobrazovat veci aj s hmotnostami
-
+    // TODO: show room items also with their weights and not jst names
     /**
      * Method returns names of all interactable objects in actual room
      *

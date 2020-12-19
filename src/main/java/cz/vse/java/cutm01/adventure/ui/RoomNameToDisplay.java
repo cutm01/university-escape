@@ -9,7 +9,7 @@ import java.util.Map;
  * in pop-up Alert dialog window
  *
  * @author Cúth Michal (xname: cutm01)
- * @version fall semester 2020/2021
+ * @version 1.0.0
  */
 public enum RoomNameToDisplay {
     RB_201("RB 201"),

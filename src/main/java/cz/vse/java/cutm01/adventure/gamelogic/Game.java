@@ -58,7 +58,4 @@ public interface Game {
     GamePlan getGamePlan();
 
     boolean wasGameTerminatedUsingEndGameCommand();
-
-    // == ZDĚDĚNÉ METODY ========================================================
-    // == INTERNÍ DATOVÉ TYPY ===================================================
 }

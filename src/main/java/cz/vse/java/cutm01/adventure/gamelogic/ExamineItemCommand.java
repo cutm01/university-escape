@@ -12,8 +12,7 @@ import cz.vse.java.cutm01.adventure.main.SystemInfo;
 class ExamineItemCommand implements Command {
 
     private static final String NAME = CommandName.EXAMINE_ITEM.getCommandName();
-    private static final String DESCRIPTION = CommandDescription.EXAMINE_ITEM
-        .getCommandDescription();
+    private static final String DESCRIPTION = CommandDescription.EXAMINE_ITEM.getCommandDescription();
     private final GamePlan gamePlan;
 
     public ExamineItemCommand(GamePlan gamePlan) {

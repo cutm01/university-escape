@@ -8,7 +8,7 @@ import java.util.Map;
  * to player in game GUI
  *
  * @author Cúth Michal (xname: cutm01)
- * @version fall semester 2020/2021
+ * @version 1.0.0
  */
 public enum NonPlayerCharacterNameToDisplay {
     CLEANING_LADY("Upratovačka"),

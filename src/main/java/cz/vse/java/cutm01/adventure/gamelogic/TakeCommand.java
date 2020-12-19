@@ -39,7 +39,7 @@ class TakeCommand implements Command {
      * @return item names which were (un)successfully taken from room and actual inventory weight
      * and its capacity
      */
-    @Override // TODO: split it into several methods
+    @Override // TODO: split into several methods
     public String executeCommand(String... commandParameters) {
         if (commandParameters.length == 0) {
             return "Hm...nezabudol si na niečo? Napríklad uviesť aspoň 1 predmet, ktorý si chceš z miestnosti vziať";

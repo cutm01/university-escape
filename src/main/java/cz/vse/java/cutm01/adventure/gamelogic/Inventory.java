@@ -72,6 +72,11 @@ public class Inventory {
         return items.containsKey(itemName);
     }
 
+    /**
+     * Method returns Item instance from player's inventory by its name
+     * @param itemName name of item whose instance we want to obtain from player's inventory
+     * @return Item instance with name which was used to call this method
+     */
     public Item getItemByName(String itemName) {
         if (!isItemInInventory(itemName) || itemName == null) {
             return null;
@@ -80,6 +85,10 @@ public class Inventory {
         return items.get(itemName);
     }
 
+    /**
+     * Method adds item to player's inventory and update inventory actual weight
+     * @param item Item instance we want to add to player's inventory
+     */
     public void addItemToInventory(Item item) {
         if (item != null) {
             items.put(item.getName(), item);
@@ -90,6 +99,10 @@ public class Inventory {
         }
     }
 
+    /**
+     * Method removes item from player's inventory and update inventory actual weight
+     * @param itemName name of item we want to remove from player's inventory
+     */
     public void removeItemFromInventory(String itemName) {
         if (itemName != null && isItemInInventory(itemName)) {
             inventoryWeight -= items.get(itemName).getWeight();
