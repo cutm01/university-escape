@@ -297,7 +297,7 @@ public class MainSceneController {
         textCommandsWindow.getDialogPane().lookupButton(ButtonType.OK).setVisible(false);
 
         //set content
-        Label header = new Label("Počas hry môžeš zadávať nasledovné príkazy:" + SystemInfo.LINE_SEPARATOR);
+        Label header = new Label("Názov miestnosti či iného herného objektu sa ti zobrazí pokiaľ naň prejdeš myškou, tento názov následne môžeš využiť v jednom z nasledovných príkazov:" + SystemInfo.LINE_SEPARATOR);
 
         CommandsList gameTextCommandsList = ((GameImpl)game).getCommandsList();
         Label textCommands = new Label(gameTextCommandsList.getCommandsWithTheirUsage());
@@ -717,7 +717,7 @@ public class MainSceneController {
                 }
             });
 
-            Tooltip.install(roomExit, new Tooltip("prejsť do miestnosti " + s));
+            Tooltip.install(roomExit, new Tooltip("Prejsť do miestnosti " + s));
             content.add(roomExit);
         }
 
@@ -957,7 +957,7 @@ public class MainSceneController {
 
         //set content
         Label gameGoal = new Label("Tvojou úlohou je dostať sa von na ulicu a zachrániť si tak život!");
-        Label possibleCommandsTitle = new Label("Počas hry môžeš zadávať nasledovné príkazy:");
+        Label possibleCommandsTitle = new Label("Názov miestnosti či iného herného objektu sa ti zobrazí pokiaľ naň prejdeš myškou, tento názov následne môžeš využiť v jednom z nasledovných príkazov:");
 
         //label containing all possible text commands which player can use during the game
         ScrollPane textCommandsScrollPane = new ScrollPane();

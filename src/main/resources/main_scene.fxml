@@ -17,6 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.Tooltip?>
 <BorderPane id="root-border-pane" fx:id="rootBorderPane" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.java.cutm01.adventure.ui.MainSceneController">
     <top>
         <VBox id="top-panel" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="960.0" BorderPane.alignment="CENTER">
@@ -62,7 +63,9 @@
             <Button fx:id="lookAroundButton" mnemonicParsing="false" onAction="#lookAroundRoom" text="Rozhliadnúť sa po miestnosti">
                <VBox.margin>
                   <Insets bottom="10.0" top="10.0" />
-               </VBox.margin></Button>
+               </VBox.margin>
+               <tooltip><Tooltip text="Rozhliadni sa po miestnosti a nájdi v nej predmety či iné herné objekty" /></tooltip>
+            </Button>
             </children>
          <BorderPane.margin>
             <Insets />
@@ -89,8 +92,11 @@
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
+                           <tooltip><Tooltip text="Prehliadni si v rýchlosti predmet a získaj jeho stručnú charakteristiku" /></tooltip>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showRoomItemExaminationResult" prefWidth="90.0" text="Preskúmať" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showRoomItemExaminationResult" prefWidth="90.0" text="Preskúmať">
+                           <tooltip><Tooltip text="Preskúmaj podrobne predmet v snahe nájsť ďalšie skryté predmety" /></tooltip>
+                        </Button>
                      </children>
                      <VBox.margin>
                         <Insets top="5.0" />
@@ -98,7 +104,9 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="94.0" maxWidth="1.7976931348623157E308">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#takeItemsFromRoom" prefWidth="90.0" text="Vziať" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#takeItemsFromRoom" prefWidth="90.0" text="Vziať">
+                           <tooltip><Tooltip text="Vlož vybrané predmety do svojho batohu" /></tooltip>
+                        </Button>
                      </children>
                      <VBox.margin>
                         <Insets top="5.0" />
@@ -126,8 +134,11 @@
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
+                           <tooltip><Tooltip text="Pristúp bližšie k vybranému objektu aby si ho mohol preskúmať" /></tooltip>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#examineInteractableObject" prefWidth="90.0" text="Preskúmať" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#examineInteractableObject" prefWidth="90.0" text="Preskúmať">
+                           <tooltip><Tooltip text="Preskúmaj objekt v snahe nájsť skryté predmety" /></tooltip>
+                        </Button>
                      </children>
                      <VBox.margin>
                         <Insets top="5.0" />
@@ -135,7 +146,9 @@
                   </HBox>
                   <HBox alignment="CENTER" maxWidth="1.7976931348623157E308">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#approachAndExamineInteractableObject" prefWidth="150.0" text="Pristúpiť a preskúmať" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#approachAndExamineInteractableObject" prefWidth="150.0" text="Pristúpiť a preskúmať">
+                           <tooltip><Tooltip text="Pristúp bližšie k vybranému objektu a preskúmaj ho v snahe nájsť skryté predmety" /></tooltip>
+                        </Button>
                      </children>
                      <VBox.margin>
                         <Insets top="5.0" />
@@ -165,8 +178,11 @@
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
+                           <tooltip><Tooltip text="Pristúp bližšie k vybranej osobe aby si sa jej mohol prihovoriť alebo použiť v jej blízkosti jeden z predmetov" /></tooltip>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#talkToNonPlayerCharacter" prefWidth="90.0" text="Prihovoriť sa" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#talkToNonPlayerCharacter" prefWidth="90.0" text="Prihovoriť sa">
+                           <tooltip><Tooltip text="Prihovor sa osobe, pri ktorej práve stojíš" /></tooltip>
+                        </Button>
                      </children>
                      <VBox.margin>
                         <Insets top="5.0" />
@@ -174,7 +190,9 @@
                   </HBox>
                   <HBox alignment="CENTER" maxWidth="1.7976931348623157E308">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#approachAndTalkToNonPlayerCharacter" prefWidth="150.0" text="Pristúpiť a prihovoriť sa" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#approachAndTalkToNonPlayerCharacter" prefWidth="150.0" text="Pristúpiť a prihovoriť sa">
+                           <tooltip><Tooltip text="Pristúp bližšie k vybranej osobe a prihovor sa jej" /></tooltip>
+                        </Button>
                      </children>
                      <VBox.margin>
                         <Insets top="5.0" />
@@ -214,6 +232,7 @@
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
+                     <tooltip><Tooltip text="Klikni pre zobrazenie celej hernej mapy v novom okne" /></tooltip>
                   </Button>
                </children>
                <padding>
@@ -238,8 +257,11 @@
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
+                           <tooltip><Tooltip text="Prehliadni si v rýchlosti predmet a získaj jeho stručnú charakteristiku" /></tooltip>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showInventoryItemExaminationResult" prefWidth="90.0" text="Preskúmať" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showInventoryItemExaminationResult" prefWidth="90.0" text="Preskúmať">
+                           <tooltip><Tooltip text="Preskúmaj podrobne predmet v snahe nájsť ďalšie skryté predmety" /></tooltip>
+                        </Button>
                      </children>
                      <VBox.margin>
                         <Insets top="5.0" />
@@ -251,8 +273,11 @@
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
+                           <tooltip><Tooltip text="Použi vybraný predmet v blízkosti osoby či objektu" /></tooltip>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#dropItemsFromInventory" prefWidth="90.0" text="Odhodiť" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#dropItemsFromInventory" prefWidth="90.0" text="Odhodiť">
+                           <tooltip><Tooltip text="Odhoď vybrané predmety z batohu naspäť do miestnosti" /></tooltip>
+                        </Button>
                      </children>
                      <VBox.margin>
                         <Insets top="5.0" />
@@ -288,7 +313,9 @@
                   <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <children>
                         <TextField fx:id="gameConsole" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#executeTypedInGameCommand" text="Hru je taktiež možné ovládať zadaním textového príkazu a potvrdením klávesou ENTER. Správny formát príkazov je možné nájsť v hornom menu v časti Textové príkazy" HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" onAction="#executeTypedInGameCommand" text="Vykonaj príkaz" HBox.hgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" onAction="#executeTypedInGameCommand" text="Vykonaj príkaz" HBox.hgrow="ALWAYS">
+                           <tooltip><Tooltip text="Príkaz je taktiež možné potvrdiť klávesou ENTER" /></tooltip>
+                        </Button>
                      </children>
                   </HBox>
                </children>
