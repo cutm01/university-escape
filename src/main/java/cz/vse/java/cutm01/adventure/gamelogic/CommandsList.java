@@ -1,6 +1,7 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
 import cz.vse.java.cutm01.adventure.main.SystemInfo;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;

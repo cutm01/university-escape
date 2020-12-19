@@ -3,6 +3,7 @@ package cz.vse.java.cutm01.adventure.ui;
 import cz.vse.java.cutm01.adventure.gamelogic.CommandName;
 import cz.vse.java.cutm01.adventure.gamelogic.Game;
 import cz.vse.java.cutm01.adventure.main.SystemInfo;
+
 import java.util.Scanner;
 
 /**
