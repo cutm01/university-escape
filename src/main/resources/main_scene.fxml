@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.control.Tooltip?>
+<BorderPane id="root-border-pane" fx:id="rootBorderPane" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.java.cutm01.adventure.ui.MainSceneController">
+    <top>
+        <VBox id="top-panel" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="960.0" BorderPane.alignment="CENTER">
+            <children>
+                <MenuBar maxWidth="1.7976931348623157E308">
+                    <menus>
+                        <Menu fx:id="newGameMenu" mnemonicParsing="false" text="Nová hra">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#startNewGame" />
+                     </items>
+                        </Menu>
+                        <Menu fx:id="helpMenu" mnemonicParsing="false" text="Nápoveda">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#showHelpForGraphicalVersionOfGame" />
+                     </items>
+                        </Menu>
+                  <Menu fx:id="textCommandsMenu" mnemonicParsing="false" text="Textové príkazy">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#showGameCommands" />
+                    </items>
+                  </Menu>
+                    </menus>
+                </MenuBar>
+                <Label fx:id="actualGameRoomName" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="Názov aktuálnej miestnosti" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></Label>
+                <Label fx:id="actualGameRoomDescription" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Popis aktuálnej miestnosti" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Label fx:id="playerActuallyStandsBy" alignment="CENTER" contentDisplay="CENTER" text="Aktuálne stojíš pri objekte (osobe):">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font></Label>
+            <Separator prefWidth="200.0">
+               <padding>
+                  <Insets left="50.0" right="50.0" />
+               </padding></Separator>
+            <Button fx:id="lookAroundButton" mnemonicParsing="false" onAction="#lookAroundRoom" text="Rozhliadnúť sa po miestnosti">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+               <tooltip><Tooltip text="Rozhliadni sa po miestnosti a nájdi v nej predmety či iné herné objekty" /></tooltip>
+            </Button>
+            </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+        </VBox>
+    </top>
+   <right>
+      <VBox id="right-panel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="300.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Predmety" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
+                  <Separator prefWidth="200.0" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin></Separator>
+                  <ListView fx:id="roomItemsListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                  <HBox alignment="CENTER" maxWidth="1.7976931348623157E308">
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showRoomItemDescription" prefWidth="90.0" text="Prehliadnúť si">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                           <tooltip><Tooltip text="Prehliadni si v rýchlosti predmet a získaj jeho stručnú charakteristiku" /></tooltip>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showRoomItemExaminationResult" prefWidth="90.0" text="Preskúmať">
+                           <tooltip><Tooltip text="Preskúmaj podrobne predmet v snahe nájsť ďalšie skryté predmety" /></tooltip>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="94.0" maxWidth="1.7976931348623157E308">
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#takeItemsFromRoom" prefWidth="90.0" text="Vziať">
+                           <tooltip><Tooltip text="Vlož vybrané predmety do svojho batohu" /></tooltip>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Objekty" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
+                  <Separator prefWidth="200.0" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin></Separator>
+                  <ListView fx:id="roomInteractableObjectsListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                  <HBox alignment="CENTER" maxWidth="1.7976931348623157E308">
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#approachInteractableObject" prefWidth="90.0" text="Pristúpiť">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                           <tooltip><Tooltip text="Pristúp bližšie k vybranému objektu aby si ho mohol preskúmať" /></tooltip>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#examineInteractableObject" prefWidth="90.0" text="Preskúmať">
+                           <tooltip><Tooltip text="Preskúmaj objekt v snahe nájsť skryté predmety" /></tooltip>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" maxWidth="1.7976931348623157E308">
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#approachAndExamineInteractableObject" prefWidth="150.0" text="Pristúpiť a preskúmať">
+                           <tooltip><Tooltip text="Pristúp bližšie k vybranému objektu a preskúmaj ho v snahe nájsť skryté predmety" /></tooltip>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding></VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Postavy" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
+                  <Separator prefWidth="200.0" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin></Separator>
+                  <ListView fx:id="roomNonPlayerCharactersListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+                  <HBox alignment="CENTER" maxWidth="1.7976931348623157E308">
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#approachNonPlayerCharacter" prefWidth="90.0" text="Pristúpiť">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                           <tooltip><Tooltip text="Pristúp bližšie k vybranej osobe aby si sa jej mohol prihovoriť alebo použiť v jej blízkosti jeden z predmetov" /></tooltip>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#talkToNonPlayerCharacter" prefWidth="90.0" text="Prihovoriť sa">
+                           <tooltip><Tooltip text="Prihovor sa osobe, pri ktorej práve stojíš" /></tooltip>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" maxWidth="1.7976931348623157E308">
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#approachAndTalkToNonPlayerCharacter" prefWidth="150.0" text="Pristúpiť a prihovoriť sa">
+                           <tooltip><Tooltip text="Pristúp bližšie k vybranej osobe a prihovor sa jej" /></tooltip>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding></VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin></VBox>
+   </right>
+   <left>
+      <VBox id="left-panel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="300.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="SOMETIMES">
+               <children>
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Mapa" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
+                  <Separator maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin></Separator>
+                  <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                     <children>
+                        <ImageView fx:id="actualRoomMiniMap" fitHeight="150.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#showGameMap" text="Zväčšiť mapu" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                     <tooltip><Tooltip text="Klikni pre zobrazenie celej hernej mapy v novom okne" /></tooltip>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Batoh" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
+                  <Label fx:id="inventoryCapacity" text="Kapacita batohu:" />
+                  <Separator maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin></Separator>
+                  <ListView fx:id="inventoryItemsListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+                  <HBox alignment="CENTER" maxWidth="1.7976931348623157E308">
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showInventoryItemDescription" prefWidth="90.0" text="Prehliadnúť si">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                           <tooltip><Tooltip text="Prehliadni si v rýchlosti predmet a získaj jeho stručnú charakteristiku" /></tooltip>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showInventoryItemExaminationResult" prefWidth="90.0" text="Preskúmať">
+                           <tooltip><Tooltip text="Preskúmaj podrobne predmet v snahe nájsť ďalšie skryté predmety" /></tooltip>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="114.0">
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#useItemFromInventory" prefWidth="90.0" text="Použiť">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                           <tooltip><Tooltip text="Použi vybraný predmet v blízkosti osoby či objektu" /></tooltip>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#dropItemsFromInventory" prefWidth="90.0" text="Odhodiť">
+                           <tooltip><Tooltip text="Odhoď vybrané predmety z batohu naspäť do miestnosti" /></tooltip>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+   <bottom>
+      <VBox id="bottom-panel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="960.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+               <children>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                     <content>
+                        <VBox alignment="CENTER" style="-fx-background-color: transparent;">
+                           <children>
+                                <Text fx:id="gameInteractionOutput" text="Tento text sa bude zobrazovať hráčovi po vykonaní príkazu a bude ho informovať o zmenách v hre" textAlignment="CENTER" VBox.vgrow="ALWAYS">Nasledovný text sa bude zobrazovať hráčovi po vykonaní príkazu a bude ho informovať o zmenách v hre</Text>
+                           </children>
+                        </VBox>
+                     </content></ScrollPane>
+                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                     <children>
+                        <TextField fx:id="gameConsole" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#executeTypedInGameCommand" text="Hru je taktiež možné ovládať zadaním textového príkazu a potvrdením klávesou ENTER. Správny formát príkazov je možné nájsť v hornom menu v časti Textové príkazy" HBox.hgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" onAction="#executeTypedInGameCommand" text="Vykonaj príkaz" HBox.hgrow="ALWAYS">
+                           <tooltip><Tooltip text="Príkaz je taktiež možné potvrdiť klávesou ENTER" /></tooltip>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin></VBox>
+   </bottom>
+   <center>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox id="room-exits-header" alignment="CENTER">
+                     <children>
+                        <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Východy z miestnosti">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Separator maxWidth="1.7976931348623157E308" />
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox id="room-exits" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="150.0" style="-fx-background-color: rgba(255, 255, 255, 0.5);" VBox.vgrow="ALWAYS">
+                     <children>
+                        <ScrollPane fx:id="roomExitsScrollPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
+                           <content>
+                              <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="${roomExitsScrollPane.viewportBounds.width}">
+                                 <children>
+                                    <HBox id="room-exits-content" fx:id="roomExits" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="${roomExitsScrollPane.viewportBounds.height}" minWidth="${roomExitsScrollPane.viewportBounds.width}" VBox.vgrow="NEVER" />
+                                 </children></VBox>
+                           </content>
+                        </ScrollPane>
+                     </children></HBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+</BorderPane>

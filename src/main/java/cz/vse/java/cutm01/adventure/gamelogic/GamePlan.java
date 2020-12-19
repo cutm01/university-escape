@@ -1,5 +1,12 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
+import cz.vse.java.cutm01.adventure.ui.InteractableObjectNameToDisplay;
+import cz.vse.java.cutm01.adventure.ui.NonPlayerCharacterNameToDisplay;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +30,9 @@ public class GamePlan {
     private final Player player;
     // game ends after player reaches room Street
     private boolean hasPlayerReachedFinalRoom;
-
+    private StringProperty actualRoomName = new SimpleStringProperty();
+    private StringProperty playerActuallyStandsBy = new SimpleStringProperty();
+    private BooleanProperty playerFinishedGame = new SimpleBooleanProperty();
     // region Constructor
     // --------------------------------------------------------------------------------
 
@@ -34,14 +43,69 @@ public class GamePlan {
     public GamePlan() {
         player = new Player();
         hasPlayerReachedFinalRoom = false;
+        playerActuallyStandsBy.setValue(getNameOfGameObjectPlayerStandsBy());
         setUpGamePlan();
     }
     // --------------------------------------------------------------------------------
     // endregion Constructor
 
+    // region JavaFX beans getters and setters
+    // --------------------------------------------------------------------------------
+    /**
+     * Getter for the property's value
+     * @return value of actualRoomName StringProperty
+     */
+    public final String getActualRoomName(){return actualRoomName.get();}
+
+    /**
+     * Setter for the property's value
+     */
+    public final void setActualRoomName(String value){actualRoomName.set(value);}
+
+    /**
+     * Getter for the property itself
+     * @return StringProperty actualRoomName
+     */
+    public StringProperty actualRoomNameProperty() {return actualRoomName;}
+
+    /**
+     * Getter for the property's value
+     * @return value of playerActuallyStandsBy StringProperty
+     */
+    public final String getPlayerActuallyStandsBy(){return playerActuallyStandsBy.get();}
+
+    /**
+     * Setter for the property's value
+     */
+    public final void setPlayerActuallyStandsBy(String value){playerActuallyStandsBy.set(value);}
+
+    /**
+     * Getter for the property itself
+     * @return StringProperty playerActuallyStandsBy
+     */
+    public StringProperty playerActuallyStandsBy() {return playerActuallyStandsBy;}
+
+    /**
+     * Getter for the property's value
+     * @return value of playerFinishedGame BooleanProperty
+     */
+    public final boolean getPlayerFinishedGame(){return playerFinishedGame.get();}
+
+    /**
+     * Setter for the property's value
+     */
+    public final void setPlayerFinishedGame(boolean value){playerFinishedGame.set(value);}
+
+    /**
+     * Getter for the property itself
+     * @return BooleanProperty playerFinishedGame
+     */
+    public BooleanProperty playerFinishedGame() {return playerFinishedGame;}
+    // --------------------------------------------------------------------------------
+    // endregion JavaFX beans getters and setters
+
     // region Getters and Setters
     // --------------------------------------------------------------------------------
-
     /**
      * Metoda vrací odkaz na aktuální prostor, ve ktetém se hráč právě nachází.
      *
@@ -57,6 +121,7 @@ public class GamePlan {
 
     public void setHasPlayerReachedFinalRoom(boolean hasPlayerReachedFinalRoom) {
         this.hasPlayerReachedFinalRoom = hasPlayerReachedFinalRoom;
+        playerFinishedGame.setValue(hasPlayerReachedFinalRoom);
     }
 
     /**
@@ -66,6 +131,8 @@ public class GamePlan {
      */
     public void setActualRoom(Room room) {
         actualRoom = room;
+        actualRoomName.setValue(RoomName.getEnumValueForRoomName(room.getName()));
+        playerActuallyStandsBy.setValue(getNameOfGameObjectPlayerStandsBy());
     }
 
     /**
@@ -90,6 +157,7 @@ public class GamePlan {
      */
     public void setActualInteractableObject(InteractableObject interactableObject) {
         actualInteractableObject = interactableObject;
+        playerActuallyStandsBy.setValue(getNameOfGameObjectPlayerStandsBy());
     }
 
     /**
@@ -136,6 +204,7 @@ public class GamePlan {
         addNonPlayerCharacterToEachRoom(gameRooms);
 
         actualRoom = gameRooms.get("RB_201"); // game begin in this room
+        setActualRoomName("RB_201");
     }
 
     /**
@@ -253,4 +322,26 @@ public class GamePlan {
     }
     // endregion Methods used to set up game plan
     // --------------------------------------------------------------------------------
+
+    /**
+     * Method returns name of NonPlayerCharacter or InteractableObject which player
+     * currently stands by
+     * @return name of NonPlayerCharacter or InteractableObject player currently stands by and which will be shown in GUI,
+     * String "---" if player does not currently stands by any of it
+     */
+    private String getNameOfGameObjectPlayerStandsBy() {
+        if (actualInteractableObject != null) {
+            // following line get interactable object name which will be displayed in GUI from interactable object name in format used for game command execution, e.g.:
+            // (interactable object name for game command execution) "lavicka" --(Enum value)--> "BENCH" --(item name to display in GUI)--> "Lavička"
+            return InteractableObjectNameToDisplay.getInteractableObjectNameToDisplay(InteractableObjectName.getEnumValueForInteractableObjectName(actualInteractableObject.getName()));
+        }
+
+        if (actualNonPlayerCharacter != null) {
+            // following line get non-player character name which will be displayed in GUI from non-player character object name in format used for game command execution, e.g.:
+            // (non-player character name for game command execution) "upratovacka" --(Enum value)--> "CLEANING_LADY" --(item name to display in GUI)--> "Upratovačka"
+            return NonPlayerCharacterNameToDisplay.getNonPlayerCharacterNameToDisplay(NonPlayerCharacterName.getEnumValueForNonPlayerCharacterName(actualNonPlayerCharacter.getName()));
+        }
+
+        return "---";
+    }
 }

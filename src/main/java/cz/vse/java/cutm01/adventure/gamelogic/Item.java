@@ -10,6 +10,7 @@ package cz.vse.java.cutm01.adventure.gamelogic;
  */
 class Item {
 
+    private final String nameDefinedInEnum; //see ItemName Enum
     private final String name;
     private final String description;
     // following items will be revealed when player uses ExamineCommand
@@ -20,6 +21,7 @@ class Item {
     // region Constructor
     // --------------------------------------------------------------------------------
     public Item(String nameDefinedInEnum, HiddenItems hiddenItems) {
+        this.nameDefinedInEnum = nameDefinedInEnum;
         this.name = ItemName.getItemName(nameDefinedInEnum);
         this.description = ItemDescription.getItemDescription(nameDefinedInEnum);
         this.hiddenItems = hiddenItems;
@@ -32,6 +34,10 @@ class Item {
 
     // region Getters and Setters
     // --------------------------------------------------------------------------------
+    public String getNameDefinedInEnum() {
+        return nameDefinedInEnum;
+    }
+
     public String getName() {
         return name;
     }

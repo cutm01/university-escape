@@ -177,7 +177,7 @@ class RoomTest {
             testRoom.addItemToRoom(testItem);
 
             String expectedOutput = testItem.getName();
-            String actualOutput = testRoom.getItemNames();
+            String actualOutput = testRoom.getItemNamesAsString();
 
             assertEquals(expectedOutput, actualOutput);
             assertEquals(1, testRoom.getNumberOfItemsInRoom());
@@ -236,7 +236,7 @@ class RoomTest {
             testRoom.addInteractableObjectToRoom(testObject);
 
             String expectedOutput = testObject.getName();
-            String actualOutput = testRoom.getInteractableObjectNames();
+            String actualOutput = testRoom.getInteractableObjectNamesAsString();
 
             assertEquals(expectedOutput, actualOutput);
             assertEquals(1, testRoom.getNumberOfInteractableObjectsInRoom());
@@ -295,7 +295,7 @@ class RoomTest {
             testRoom.addNonPlayerCharacterToRoom(testNPC);
 
             String expectedOutput = testNPC.getName();
-            String actualOutput = testRoom.getNonPlayerCharacterNames();
+            String actualOutput = testRoom.getNonPlayerCharacterNamesAsString();
 
             assertEquals(expectedOutput, actualOutput);
             assertEquals(1, testRoom.getNumberOfNonPlayerCharactersInRoom());

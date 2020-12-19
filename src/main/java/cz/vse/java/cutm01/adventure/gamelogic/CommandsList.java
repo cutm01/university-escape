@@ -1,6 +1,7 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
 import cz.vse.java.cutm01.adventure.main.SystemInfo;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -15,7 +16,7 @@ import java.util.Map;
  * @author Michael Kolling, Lubos Pavlicek, Jarmila Pavlickova
  * @version pro školní rok 2016/2017
  */
-class CommandsList {
+public class CommandsList {
 
     // mapa pro uložení přípustných příkazů
     private final Map<String, Command> commandsMap;

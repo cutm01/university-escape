@@ -13,11 +13,16 @@ public interface Game {
     // == DEKLAROVANÉ METODY ====================================================
 
     /**
-     * Vrátí úvodní zprávu pro hráče.
-     *
-     * @return vrací se řetězec, který se má vypsat na obrazovku
+     * Method returns game prologue displayed in text version of game
+     * @return String representing game prologue showed in text version of game
      */
-    String getPrologue();
+    String getPrologueInTextGameVersion();
+
+    /**
+     * Method returns game prologue displayed in graphical version of game
+     * @return String representing game prologue showed in graphical version of game
+     */
+    public String getPrologueInGraphicalGameVersion();
 
     /**
      * Vrátí závěrečnou zprávu pro hráče.
@@ -53,7 +58,4 @@ public interface Game {
     GamePlan getGamePlan();
 
     boolean wasGameTerminatedUsingEndGameCommand();
-
-    // == ZDĚDĚNÉ METODY ========================================================
-    // == INTERNÍ DATOVÉ TYPY ===================================================
 }

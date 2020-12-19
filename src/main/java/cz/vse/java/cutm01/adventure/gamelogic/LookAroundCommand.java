@@ -1,6 +1,7 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
 import cz.vse.java.cutm01.adventure.main.SystemInfo;
+
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -42,8 +43,7 @@ class LookAroundCommand implements Command {
         return DESCRIPTION;
     }
 
-    // TODO: zobrazovat veci aj s hmotnostami
-
+    // TODO: show room items also with their weights and not jst names
     /**
      * Method returns names of all interactable objects in actual room
      *
@@ -59,14 +59,14 @@ class LookAroundCommand implements Command {
         // get names of items, object, NPCs and exits for game actual room
         Room actualRoom = gamePlan.getActualRoom();
         String itemNames =
-            (actualRoom.getNumberOfItemsInRoom() > 0) ? actualRoom.getItemNames() : null;
+            (actualRoom.getNumberOfItemsInRoom() > 0) ? actualRoom.getItemNamesAsString() : null;
         String objectNames =
             (actualRoom.getNumberOfInteractableObjectsInRoom() > 0)
-            ? actualRoom.getInteractableObjectNames()
+            ? actualRoom.getInteractableObjectNamesAsString()
             : null;
         String characterNames =
             (actualRoom.getNumberOfNonPlayerCharactersInRoom() > 0)
-            ? actualRoom.getNonPlayerCharacterNames()
+            ? actualRoom.getNonPlayerCharacterNamesAsString()
             : null;
         String exits =
             (actualRoom.getNeighboringRooms().size() > 0) ? actualRoom.getNeighboringRoomNames()

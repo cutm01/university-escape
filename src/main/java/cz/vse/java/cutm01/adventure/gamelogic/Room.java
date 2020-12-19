@@ -1,14 +1,11 @@
 package cz.vse.java.cutm01.adventure.gamelogic;
 
 import cz.vse.java.cutm01.adventure.main.SystemInfo;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import cz.vse.java.cutm01.adventure.ui.ItemNameToDisplay;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -23,7 +20,7 @@ import java.util.stream.Collectors;
  * @author Michael Kolling, Lubos Pavlicek, Jarmila Pavlickova
  * @version pro školní rok 2016/2017
  */
-class Room {
+public class Room {
 
     private final String name;
     private final String description;
@@ -36,6 +33,8 @@ class Room {
     private boolean isRoomLocked;
     // is shown to player when he tries to enter locked room
     private final String lockedRoomDescription;
+    private ObservableList<String> roomItemsObservableList = FXCollections.observableArrayList();
+
 
     // region Constructors
     // --------------------------------------------------------------------------------
@@ -57,6 +56,13 @@ class Room {
 
     // region Getters and Setters
     // --------------------------------------------------------------------------------
+    /**
+     * Method return ObservableList which is used in game's GUI to handle changes in main scene
+     * @return ObservableList containing all items which are currently in room
+     */
+    public ObservableList<String> getRoomItemsObservableList() {
+        return roomItemsObservableList;
+    }
 
     /**
      * Vrací název prostoru (byl zadán při vytváření prostoru jako parametr konstruktoru)
@@ -229,11 +235,29 @@ class Room {
             return rooms.get(0);
         }
     }
+
+    /**
+     * Method returns names of all neighboring rooms, i.e. possible exits from actual room
+     * @return Set of neighboring rooms names, names are returned in format from RoomName Enum
+     * and therefore they can be used as game command argument
+     */
+    public Set<String> getNeighboringRoomsNames() {
+        Set<String> neighboringRoomsNames = new LinkedHashSet<>();
+        for(Room r : neighboringRooms) {
+            neighboringRoomsNames.add(r.getName());
+        }
+
+        return neighboringRoomsNames;
+    }
     // --------------------------------------------------------------------------------
     // endregion Methods related to neighboringRooms
 
     // region Methods related to items in room
     // --------------------------------------------------------------------------------
+    public List<Item> getItemsInRoom() {
+        return new ArrayList<>(items.values());
+    }
+
     public boolean isItemInRoom(String itemName) {
         return items.containsKey(itemName);
     }
@@ -252,10 +276,25 @@ class Room {
 
     public void addItemToRoom(Item item) {
         items.put(item.getName(), item);
+
+        String itemNameToDisplay = ItemNameToDisplay.getItemNameToDisplay(ItemName.getEnumValueForItemName(item.getName()));
+        roomItemsObservableList.add(itemNameToDisplay);
     }
 
     public void removeItemFromRoom(Item item) {
         items.remove(item.getName());
+
+        String itemNameToDisplay = ItemNameToDisplay.getItemNameToDisplay(ItemName.getEnumValueForItemName(item.getName()));
+        roomItemsObservableList.remove(itemNameToDisplay);
+    }
+
+    /**
+     * Method returns names of all items which are currently placed in room
+     * @return Set of game item names currently placed in room, names are returned in format from ItemName Enum
+     * and therefore they can be used as game command argument
+     */
+    public Set<String> getRoomItemsNames() {
+        return items.keySet();
     }
 
     /**
@@ -264,7 +303,7 @@ class Room {
      *
      * @return names of items which player can take
      */
-    public String getItemNames() {
+    public String getItemNamesAsString() {
         StringBuilder itemNames = new StringBuilder();
         Iterator<String> itemIterator = items.keySet().iterator();
 
@@ -304,12 +343,21 @@ class Room {
     }
 
     /**
+     * Method returns names of all interactable objects which are currently placed in room
+     * @return Set of interactable object names currently placed in room, names are returned in format from InteractableObjectName Enum
+     * and therefore they can be used as game command arguments
+     */
+    public Set<String> getRoomInteractableObjectsNames() {
+        return interactableObjects.keySet();
+    }
+
+    /**
      * Method return names of all interactable object inside the room which player can use<br> Names
      * of objects are returned as one String, where each one is separated by comma
      *
      * @return names of interactable objects which player can interact with
      */
-    public String getInteractableObjectNames() {
+    public String getInteractableObjectNamesAsString() {
         StringBuilder objectNames = new StringBuilder();
         Iterator<String> objectIterator = interactableObjects.keySet().iterator();
 
@@ -349,12 +397,21 @@ class Room {
     }
 
     /**
+     * Method returns names of all non-player characters which are currently placed in room
+     * @return Set of non-player characterst names currently placed in room, names are returned in format from NonPlayerCharacterName Enum
+     * and therefore they can be used as game command arguments
+     */
+    public Set<String> getRoomNonPlayerCharactersNames() {
+        return nonPlayerCharacters.keySet();
+    }
+
+    /**
      * Method return names of all non-player characters inside the room the player can talk to<br>
      * Names of characters are returned as one String, where each one is separated by comma
      *
      * @return names of non-player characters the player can talk to
      */
-    public String getNonPlayerCharacterNames() {
+    public String getNonPlayerCharacterNamesAsString() {
         StringBuilder nonPlayerCharacterNames = new StringBuilder();
         Iterator<String> characterIterator = nonPlayerCharacters.keySet().iterator();
 

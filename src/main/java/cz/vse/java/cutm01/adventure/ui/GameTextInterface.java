@@ -3,6 +3,7 @@ package cz.vse.java.cutm01.adventure.ui;
 import cz.vse.java.cutm01.adventure.gamelogic.CommandName;
 import cz.vse.java.cutm01.adventure.gamelogic.Game;
 import cz.vse.java.cutm01.adventure.main.SystemInfo;
+
 import java.util.Scanner;
 
 /**
@@ -32,7 +33,7 @@ public class GameTextInterface {
      * epilogu.
      */
     public void play() {
-        System.out.println(game.getPrologue());
+        System.out.println(game.getPrologueInTextGameVersion());
 
         // základní cyklus programu - opakovaně se čtou příkazy a poté
         // se provádějí do konce hry.

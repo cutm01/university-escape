@@ -1,0 +1,72 @@
+/********************************************************************************
+ * CSS for all JavaFX elements with same type (e.q. ListView, ScrollPane, etc.) *
+ ********************************************************************************/
+.list-view {
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+}
+
+.list-cell {
+    -fx-control-inner-background: transparent;
+    -fx-text-fill: black;
+}
+
+.list-cell:filled {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: rgba(0,0,0,0.6);
+}
+
+.list-view .placeholder .label {
+    -fx-text-alignment: center;
+    -fx-wrap-text: true;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.separator *.line {
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 1 0; /* one-pixel-border */
+    -fx-border-color: rgba(0,0,0,0.6);
+}
+
+.tooltip {
+    -fx-show-delay: 250ms;
+}
+
+/*********************************************************
+ * CSS for specific JavaFX elements defined by their IDs *
+ *********************************************************/
+#top-panel, #right-panel, #bottom-panel, #left-panel {
+    -fx-background-color: rgba(255, 255, 255, 0.6);
+}
+
+#root-border-pane {
+  -fx-background-size: cover;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center center;
+}
+
+/* Hbox containing Label representing room exits title (i.e. "Východy z miestnosti") and seperator */
+#room-exits-header {
+    -fx-background-color: rgba(255, 255, 255, 0.6);
+}
+
+/* HBox containing ScrollPane used to display exits from actual game room */
+#room-exits {
+    -fx-background-color: rgba(255, 255, 255, 0.6);
+}
+
+/* VBoxes are representing exit rooms from actual game room */
+#room-exits-content > VBox {
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+    -fx-background-color: rgba(255, 255, 255, 0.6);
+    -fx-min-width: 130;
+    -fx-max-height: 130;
+}

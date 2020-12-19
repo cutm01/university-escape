@@ -7,7 +7,7 @@ package cz.vse.java.cutm01.adventure.gamelogic;
  * @author Cúth Michal (xname: cutm01)
  * @version spring semester 2019/2020
  */
-class Player {
+public class Player {
 
     private final Inventory inventory;
     // following variables are used to show different endings to player after he reaches final room

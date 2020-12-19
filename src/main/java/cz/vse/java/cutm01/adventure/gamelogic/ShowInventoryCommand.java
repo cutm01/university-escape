@@ -30,6 +30,11 @@ class ShowInventoryCommand implements Command {
         return DESCRIPTION;
     }
 
+    /**
+     * Method shows iventory items together with their weights
+     * @param commandParameters this command should be run without any parameter
+     * @return String representing inventory content (i.e. name of items followed by their weight)
+     */
     @Override
     public String executeCommand(String... commandParameters) {
         if (commandParameters.length > 0) {
