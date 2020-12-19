@@ -95,8 +95,8 @@ public class MainSceneController {
      */
     public void init(Game game) {
         this.game = game;
-        initialGameSetUp();
         initializeChangeListeners(); //used to handle changes in game GUI during playing the game
+        initialGameSetUp();
 
         //JavaFX Menu element does not contain MenuItem elements and fire action on its own
         makeMenuElementFireAction(newGameMenu);
@@ -117,6 +117,8 @@ public class MainSceneController {
         updatePlayerActuallyStandsByLabel();
         updateRoomExitsScrollPane();
         updateActualRoomMiniMap();
+        updateRightPanel();
+        updateInventoryItemsListView();
         updateGameInteractionOutput(game.getPrologueInGraphicalGameVersion());
     }
 
@@ -631,11 +633,7 @@ public class MainSceneController {
      */
     private void updateBackground() {
         String actualGameRoom = game.getGamePlan().getActualRoomName().toLowerCase();
-        rootBorderPane.setStyle("-fx-background-image: url(\""
-                                + actualGameRoom
-                                + "_background.png"
-                                + "\");"
-                                + "-fx-background-size: cover; -fx-background-repeat: no-repeat; -fx-background-position: center center;");
+        rootBorderPane.setStyle("-fx-background-image: url(\"" + actualGameRoom + "_background.png" + "\");");
     }
 
     /**
@@ -738,16 +736,18 @@ public class MainSceneController {
             updateRoomInteractableObjectsListView();
             updateRoomNonPlayerCharactersListView();
         }
-        //clear right panel if actual game room was not examined yet
+        //clear right panel if actual game room was not examined yet and set placeholders for ListViews above
         else {
             roomItemsListView.getItems().clear();
             roomInteractableObjectsListView.getItems().clear();
             roomNonPlayerCharactersListView.getItems().clear();
-            /*
-            roomItemsListView.setItems(null);
-            roomInteractableObjectsListView.setItems(null);
-            roomNonPlayerCharactersListView.setItems(null);
-            */
+
+            Label itemsListViewPlaceholder = new Label("Najprv sa poriadne rozhliadni po miestnosti pokiaľ v nej chceš nájsť nejaké predmety");
+            Label interactableObjectsListViewPlaceholder = new Label("Najprv sa poriadne rozhliadni po miestnosti aby si objavil objekty, ktoré sa v nej nachádzajú");
+            Label nonPlayerCharactersListViewPlaceholder = new Label("Najprv sa poriadne rozhliadni po miestnosti aby si zistil, či tu nie si sám");
+            roomItemsListView.setPlaceholder(itemsListViewPlaceholder);
+            roomInteractableObjectsListView.setPlaceholder(interactableObjectsListViewPlaceholder);
+            roomNonPlayerCharactersListView.setPlaceholder(nonPlayerCharactersListViewPlaceholder);
         }
     }
 
@@ -756,26 +756,31 @@ public class MainSceneController {
      */
     private void updateInventoryItemsListView() {
         inventoryItemsListView.getItems().clear();
-        inventoryItemsListView.getItems().addAll(itemsInPlayerInventory);
-        //inventoryItemsListView.setItems(inventoryItems);
-        inventoryItemsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        inventoryItemsListView.setCellFactory(param -> new ListCell<>() {
-            private ImageView displayImage = new ImageView();
+        if (itemsInPlayerInventory.size() == 0) {
+            inventoryItemsListView.setPlaceholder(new Label("Tvoj batoh zíva prázdnotou"));
+        }
+        else {
+            inventoryItemsListView.getItems().addAll(itemsInPlayerInventory);
+            inventoryItemsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-            @Override
-            public void updateItem(String itemNameToDisplay, boolean empty) {
-                super.updateItem(itemNameToDisplay, empty);
-                if (empty) {
-                    setText(null);
-                    setGraphic(null);
-                } else {
-                    displayImage.setImage(gameItemsImages.get(itemNameToDisplay));
-                    setText(itemNameToDisplay);
-                    setGraphic(displayImage);
+            inventoryItemsListView.setCellFactory(param -> new ListCell<>() {
+                private ImageView displayImage = new ImageView();
+
+                @Override
+                public void updateItem(String itemNameToDisplay, boolean empty) {
+                    super.updateItem(itemNameToDisplay, empty);
+                    if (empty) {
+                        setText(null);
+                        setGraphic(null);
+                    } else {
+                        displayImage.setImage(gameItemsImages.get(itemNameToDisplay));
+                        setText(itemNameToDisplay);
+                        setGraphic(displayImage);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     /**
@@ -784,25 +789,31 @@ public class MainSceneController {
      */
     private void updateRoomItemsListView() {
         roomItemsListView.getItems().clear();
-        roomItemsListView.getItems().addAll(itemsInActualRoom);
-        roomItemsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        roomItemsListView.setCellFactory(param -> new ListCell<>() {
-            private ImageView displayImage = new ImageView();
+        if (itemsInActualRoom.size() == 0) {
+            roomItemsListView.setPlaceholder(new Label("V miestnosti sa aktuálne nenachádza žiadny predmet"));
+        }
+        else {
+            roomItemsListView.getItems().addAll(itemsInActualRoom);
+            roomItemsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-            @Override
-            public void updateItem(String itemNameToDisplay, boolean empty) {
-                super.updateItem(itemNameToDisplay, empty);
-                if (empty) {
-                    setText(null);
-                    setGraphic(null);
-                } else {
-                    displayImage.setImage(gameItemsImages.get(itemNameToDisplay));
-                    setText(itemNameToDisplay);
-                    setGraphic(displayImage);
+            roomItemsListView.setCellFactory(param -> new ListCell<>() {
+                private ImageView displayImage = new ImageView();
+
+                @Override
+                public void updateItem(String itemNameToDisplay, boolean empty) {
+                    super.updateItem(itemNameToDisplay, empty);
+                    if (empty) {
+                        setText(null);
+                        setGraphic(null);
+                    } else {
+                        displayImage.setImage(gameItemsImages.get(itemNameToDisplay));
+                        setText(itemNameToDisplay);
+                        setGraphic(displayImage);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     /**
@@ -810,35 +821,41 @@ public class MainSceneController {
      * Method is used when player is looking around the room in order to examine it
      */
     private void updateRoomInteractableObjectsListView() {
-        Set<String> roomInteractableObjectNames = game.getGamePlan().getActualRoom().getRoomInteractableObjectsNames();
-        ObservableList<String> roomInteractableObjects = FXCollections.observableArrayList();
-
-        for (String s : roomInteractableObjectNames) {
-            // following line get interactable object name which will be displayed in GUI from interactable object name in format used for game command execution, e.g.:
-            // (interactable object name for game command execution) "lavicka" --(Enum value)--> "BENCH" --(item name to display in GUI)--> "Lavička"
-            roomInteractableObjects.add(InteractableObjectNameToDisplay.getInteractableObjectNameToDisplay(InteractableObjectName.getEnumValueForInteractableObjectName(s)));
-        }
-
         roomInteractableObjectsListView.getItems().clear();
-        roomInteractableObjectsListView.getItems().addAll(roomInteractableObjects);
-        roomInteractableObjectsListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-        roomInteractableObjectsListView.setCellFactory(param -> new ListCell<>() {
-            private ImageView displayImage = new ImageView();
+        if (getNumberOfInteractableObjectsInRoom() == 0) {
+            roomInteractableObjectsListView.setPlaceholder(new Label("V miestnosti sa nenachádza žiadny objekt, ktorý by šiel využiť alebo preskúmať"));
+        }
+        else {
+            Set<String> roomInteractableObjectNames = game.getGamePlan().getActualRoom().getRoomInteractableObjectsNames();
+            ObservableList<String> roomInteractableObjects = FXCollections.observableArrayList();
 
-            @Override
-            public void updateItem(String itemNameToDisplay, boolean empty) {
-                super.updateItem(itemNameToDisplay, empty);
-                if (empty) {
-                    setText(null);
-                    setGraphic(null);
-                } else {
-                    displayImage.setImage(gameInteractableObjectsImages.get(itemNameToDisplay));
-                    setText(itemNameToDisplay);
-                    setGraphic(displayImage);
-                }
+            for (String s : roomInteractableObjectNames) {
+                // following line get interactable object name which will be displayed in GUI from interactable object name in format used for game command execution, e.g.:
+                // (interactable object name for game command execution) "lavicka" --(Enum value)--> "BENCH" --(item name to display in GUI)--> "Lavička"
+                roomInteractableObjects.add(InteractableObjectNameToDisplay.getInteractableObjectNameToDisplay(InteractableObjectName.getEnumValueForInteractableObjectName(s)));
             }
-        });
+
+            roomInteractableObjectsListView.getItems().addAll(roomInteractableObjects);
+            roomInteractableObjectsListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+            roomInteractableObjectsListView.setCellFactory(param -> new ListCell<>() {
+                private ImageView displayImage = new ImageView();
+
+                @Override
+                public void updateItem(String itemNameToDisplay, boolean empty) {
+                    super.updateItem(itemNameToDisplay, empty);
+                    if (empty) {
+                        setText(null);
+                        setGraphic(null);
+                    } else {
+                        displayImage.setImage(gameInteractableObjectsImages.get(itemNameToDisplay));
+                        setText(itemNameToDisplay);
+                        setGraphic(displayImage);
+                    }
+                }
+            });
+        }
     }
 
     /**
@@ -846,35 +863,41 @@ public class MainSceneController {
      * Method is used when player is looking around the room in order to examine it
      */
     private void updateRoomNonPlayerCharactersListView() {
-        Set<String> roomNonPlayerCharacterNames = game.getGamePlan().getActualRoom().getRoomNonPlayerCharactersNames();
-        ObservableList<String> roomNonPlayerCharacters = FXCollections.observableArrayList();
-
-        for (String npc : roomNonPlayerCharacterNames) {
-            // following line get non-player character name which will be displayed in GUI from non-player character object name in format used for game command execution, e.g.:
-            // (non-player character name for game command execution) "upratovacka" --(Enum value)--> "CLEANING_LADY" --(item name to display in GUI)--> "Upratovačka"
-            roomNonPlayerCharacters.add(NonPlayerCharacterNameToDisplay.getNonPlayerCharacterNameToDisplay(NonPlayerCharacterName.getEnumValueForNonPlayerCharacterName(npc)));
-        }
-
         roomNonPlayerCharactersListView.getItems().clear();
-        roomNonPlayerCharactersListView.getItems().addAll(roomNonPlayerCharacters);
-        roomNonPlayerCharactersListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-        roomNonPlayerCharactersListView.setCellFactory(param -> new ListCell<>() {
-            private ImageView displayImage = new ImageView();
+        if (getNumberOfNonPlayerCharactersInRoom() == 0) {
+            roomNonPlayerCharactersListView.setPlaceholder(new Label("V miestnosti okrem teba nie je nikto iný"));
+        }
+        else {
+            Set<String> roomNonPlayerCharacterNames = game.getGamePlan().getActualRoom().getRoomNonPlayerCharactersNames();
+            ObservableList<String> roomNonPlayerCharacters = FXCollections.observableArrayList();
 
-            @Override
-            public void updateItem(String itemNameToDisplay, boolean empty) {
-                super.updateItem(itemNameToDisplay, empty);
-                if (empty) {
-                    setText(null);
-                    setGraphic(null);
-                } else {
-                    displayImage.setImage(gameNonPlayerCharactersImages.get(itemNameToDisplay));
-                    setText(itemNameToDisplay);
-                    setGraphic(displayImage);
-                }
+            for (String npc : roomNonPlayerCharacterNames) {
+                // following line get non-player character name which will be displayed in GUI from non-player character object name in format used for game command execution, e.g.:
+                // (non-player character name for game command execution) "upratovacka" --(Enum value)--> "CLEANING_LADY" --(item name to display in GUI)--> "Upratovačka"
+                roomNonPlayerCharacters.add(NonPlayerCharacterNameToDisplay.getNonPlayerCharacterNameToDisplay(NonPlayerCharacterName.getEnumValueForNonPlayerCharacterName(npc)));
             }
-        });
+
+            roomNonPlayerCharactersListView.getItems().addAll(roomNonPlayerCharacters);
+            roomNonPlayerCharactersListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+            roomNonPlayerCharactersListView.setCellFactory(param -> new ListCell<>() {
+                private ImageView displayImage = new ImageView();
+
+                @Override
+                public void updateItem(String itemNameToDisplay, boolean empty) {
+                    super.updateItem(itemNameToDisplay, empty);
+                    if (empty) {
+                        setText(null);
+                        setGraphic(null);
+                    } else {
+                        displayImage.setImage(gameNonPlayerCharactersImages.get(itemNameToDisplay));
+                        setText(itemNameToDisplay);
+                        setGraphic(displayImage);
+                    }
+                }
+            });
+        }
     }
     // --------------------------------------------------------------------------------
     // endregion Methods for updating game scene
@@ -972,6 +995,24 @@ public class MainSceneController {
 
         //get command execution output for commands without parameters
         return game.parseUserInput(commandName);
+    }
+
+    /**
+     * Method returns number of interactable objects which are placed in actual game room
+     * and player can interact with them
+     * @return number of interactable objects which are placed in actual game room
+     */
+    private int getNumberOfInteractableObjectsInRoom() {
+        return game.getGamePlan().getActualRoom().getRoomInteractableObjectsNames().size();
+    }
+
+    /**
+     * Method returns number of non-player characters which are in actual game room
+     * and player can interact with them
+     * @return number of non-player characters which are in actual game room
+     */
+    private int getNumberOfNonPlayerCharactersInRoom() {
+        return game.getGamePlan().getActualRoom().getRoomNonPlayerCharactersNames().size();
     }
     // --------------------------------------------------------------------------------
     // endregion Help methods used in another controller's methods
