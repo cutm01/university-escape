@@ -53,7 +53,6 @@ public class MainSceneController {
     private final Map<String, Image>  gameNonPlayerCharactersImages = controllerUtils.loadGameNonPlayerCharactersImages();
     private final Map<String, Image> gameRoomMapsImages = controllerUtils.loadGameRoomMapsImages();
     private final Map<String, Image> gameRoomsImages = controllerUtils.loadGameRoomsImages();
-    private final Map<String, Image>  gameRoomsBackgroundImages = controllerUtils.loadGameBackgroundImages();
     //observable lists which are used to update GUI
     private ObservableList<String> itemsInActualRoom;
     private ObservableList<String> itemsInPlayerInventory;
@@ -718,6 +717,7 @@ public class MainSceneController {
                 }
             });
 
+            Tooltip.install(roomExit, new Tooltip("prejsť do miestnosti " + s));
             content.add(roomExit);
         }
 
@@ -777,6 +777,10 @@ public class MainSceneController {
                         displayImage.setImage(gameItemsImages.get(itemNameToDisplay));
                         setText(itemNameToDisplay);
                         setGraphic(displayImage);
+                        setTooltip(new Tooltip("váha predmetu: "
+                                               + ItemWeight.getItemWeight(ItemNameToDisplay.getEnumValueForItemName(itemNameToDisplay))
+                                               + ", pre využitie v textovom príkaze použi názov: "
+                                               + ItemName.getItemName(ItemNameToDisplay.getEnumValueForItemName(itemNameToDisplay))));
                     }
                 }
             });
@@ -810,6 +814,10 @@ public class MainSceneController {
                         displayImage.setImage(gameItemsImages.get(itemNameToDisplay));
                         setText(itemNameToDisplay);
                         setGraphic(displayImage);
+                        setTooltip(new Tooltip("váha predmetu: "
+                                                       + ItemWeight.getItemWeight(ItemNameToDisplay.getEnumValueForItemName(itemNameToDisplay))
+                                                       + ", pre využitie v textovom príkaze použi názov: "
+                                                       + ItemName.getItemName(ItemNameToDisplay.getEnumValueForItemName(itemNameToDisplay))));
                     }
                 }
             });
@@ -843,15 +851,17 @@ public class MainSceneController {
                 private ImageView displayImage = new ImageView();
 
                 @Override
-                public void updateItem(String itemNameToDisplay, boolean empty) {
-                    super.updateItem(itemNameToDisplay, empty);
+                public void updateItem(String interactableObjectNameToDisplay, boolean empty) {
+                    super.updateItem(interactableObjectNameToDisplay, empty);
                     if (empty) {
                         setText(null);
                         setGraphic(null);
                     } else {
-                        displayImage.setImage(gameInteractableObjectsImages.get(itemNameToDisplay));
-                        setText(itemNameToDisplay);
+                        displayImage.setImage(gameInteractableObjectsImages.get(interactableObjectNameToDisplay));
+                        setText(interactableObjectNameToDisplay);
                         setGraphic(displayImage);
+                        setTooltip(new Tooltip("pre využitie v textovom príkaze použi názov: "
+                                               + InteractableObjectName.getInteractableObjectName(InteractableObjectNameToDisplay.getEnumValueForInteractableObjectName(interactableObjectNameToDisplay))));
                     }
                 }
             });
@@ -885,15 +895,17 @@ public class MainSceneController {
                 private ImageView displayImage = new ImageView();
 
                 @Override
-                public void updateItem(String itemNameToDisplay, boolean empty) {
-                    super.updateItem(itemNameToDisplay, empty);
+                public void updateItem(String nonPlayerCharacterNameToDisplay, boolean empty) {
+                    super.updateItem(nonPlayerCharacterNameToDisplay, empty);
                     if (empty) {
                         setText(null);
                         setGraphic(null);
                     } else {
-                        displayImage.setImage(gameNonPlayerCharactersImages.get(itemNameToDisplay));
-                        setText(itemNameToDisplay);
+                        displayImage.setImage(gameNonPlayerCharactersImages.get(nonPlayerCharacterNameToDisplay));
+                        setText(nonPlayerCharacterNameToDisplay);
                         setGraphic(displayImage);
+                        setTooltip(new Tooltip("pre využitie v textovom príkaze použi názov: "
+                                               + NonPlayerCharacterName.getNonPlayerCharacterName(NonPlayerCharacterNameToDisplay.getEnumValueForNonPlayerCharacterName(nonPlayerCharacterNameToDisplay))));
                     }
                 }
             });

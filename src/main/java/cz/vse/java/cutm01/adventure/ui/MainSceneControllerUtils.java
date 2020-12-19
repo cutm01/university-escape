@@ -120,24 +120,4 @@ public class MainSceneControllerUtils {
 
         return loadedImages;
     }
-
-    /**
-     * Method to load background images for all game rooms
-     * @return Map where key is name of the game room and value is corresponding image
-     */
-    public Map<String, Image> loadGameBackgroundImages() {
-        Map<String, Image> loadedImages = new HashMap<>();
-
-        Object[] roomNames = RoomName.values();
-        for(Object room : roomNames) {
-            String roomName = room.toString().toLowerCase();
-
-            InputStream imageStream = getClass().getClassLoader().getResourceAsStream(roomName + "_background.png");
-            Image roomImage = new Image(imageStream);
-
-            loadedImages.put(RoomNameToDisplay.getRoomNameToDisplay(room.toString()), roomImage);
-        }
-
-        return loadedImages;
-    }
 }
