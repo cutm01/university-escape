@@ -1,19 +1,8 @@
-.scroll-pane > .viewport {
-    -fx-background-color: transparent;
-}
-
-.scroll-pane {
-    -fx-background-color: transparent;
-}
-
-.separator *.line {
-    -fx-border-style: solid;
-    -fx-border-width: 0 0 1 0; /* one-pixel-border */
-    -fx-border-color: rgba(0,0,0,0.5);
-}
-
+/********************************************************************************
+ * CSS for all JavaFX elements with same type (e.q. ListView, ScrollPane, etc.) *
+ ********************************************************************************/
 .list-view {
-    -fx-background-color: rgba(255, 255, 255, 0.5);
+    -fx-background-color: rgba(255, 255, 255, 0.8);
 }
 
 .list-cell {
@@ -23,16 +12,46 @@
 
 .list-cell:filled {
     -fx-border-width: 0 0 1 0;
-    -fx-border-color: rgba(0,0,0,0.5);
-    -fx-border-padding: 0 5 0 5;
+    -fx-border-color: rgba(0,0,0,0.6);
 }
 
-/* VBoxes are representing exit rooms from actual game room*/
-#roomExits > VBox {
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.separator *.line {
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 1 0; /* one-pixel-border */
+    -fx-border-color: rgba(0,0,0,0.6);
+}
+
+/*********************************************************
+ * CSS for specific JavaFX elements defined by their IDs *
+ *********************************************************/
+#top-panel, #right-panel, #bottom-panel, #left-panel {
+    -fx-background-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Hbox containing Label representing room exits title (i.e. "Východy z miestnosti") and seperator */
+#room-exits-header {
+    -fx-background-color: rgba(255, 255, 255, 0.6);
+}
+
+/* HBox containing ScrollPane used to display exits from actual game room */
+#room-exits {
+    -fx-background-color: rgba(255, 255, 255, 0.6);
+}
+
+/* VBoxes are representing exit rooms from actual game room */
+#room-exits-content > VBox {
     -fx-border-color: black;
     -fx-border-width: 1;
     -fx-border-style: solid;
-    -fx-background-color: rgba(255, 255, 255, 0.5);
+    -fx-background-color: rgba(255, 255, 255, 0.6);
     -fx-min-width: 130;
     -fx-max-height: 130;
 }

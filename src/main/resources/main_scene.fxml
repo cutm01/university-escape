@@ -17,9 +17,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="rootBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.java.cutm01.adventure.ui.MainSceneController">
+<BorderPane id="root-border-pane" fx:id="rootBorderPane" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.java.cutm01.adventure.ui.MainSceneController">
     <top>
-        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="960.0" style="-fx-background-color: rgba(255, 255, 255, 0.5);" BorderPane.alignment="CENTER">
+        <VBox id="top-panel" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="960.0" BorderPane.alignment="CENTER">
             <children>
                 <MenuBar maxWidth="1.7976931348623157E308">
                     <menus>
@@ -70,7 +70,7 @@
         </VBox>
     </top>
    <right>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="300.0" style="-fx-background-color: rgba(255, 255, 255, 0.5);" BorderPane.alignment="CENTER">
+      <VBox id="right-panel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
@@ -193,7 +193,7 @@
          </BorderPane.margin></VBox>
    </right>
    <left>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="300.0" style="-fx-background-color: rgba(255,255,255,0.5);" BorderPane.alignment="CENTER">
+      <VBox id="left-panel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="SOMETIMES">
                <children>
@@ -273,7 +273,7 @@
       </VBox>
    </left>
    <bottom>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="960.0" style="-fx-background-color: rgba(255, 255, 255, 0.5);" BorderPane.alignment="CENTER">
+      <VBox id="bottom-panel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="960.0" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
                <children>
@@ -303,32 +303,43 @@
          <children>
             <VBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
                <children>
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Východy z miestnosti" VBox.vgrow="ALWAYS">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font></Label>
-                  <Separator maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                  <HBox id="room-exits-header" alignment="CENTER">
+                     <children>
+                        <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Východy z miestnosti">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Separator maxWidth="1.7976931348623157E308" />
+                           </children>
+                        </VBox>
+                     </children>
                      <VBox.margin>
-                        <Insets bottom="5.0" />
+                        <Insets />
                      </VBox.margin>
-                  </Separator>
-                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="150.0" style="-fx-background-color: rgba(255, 255, 255, 0.5);" VBox.vgrow="ALWAYS">
+                  </HBox>
+                  <HBox id="room-exits" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="150.0" style="-fx-background-color: rgba(255, 255, 255, 0.5);" VBox.vgrow="ALWAYS">
                      <children>
                         <ScrollPane fx:id="roomExitsScrollPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vbarPolicy="NEVER" HBox.hgrow="ALWAYS">
                            <content>
-                              <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="${roomExitsScrollPane.viewportBounds.width}" style="-fx-background-color: transparent;">
+                              <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="${roomExitsScrollPane.viewportBounds.width}">
                                  <children>
-                                    <HBox id="roomExits" fx:id="roomExits" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="${roomExitsScrollPane.viewportBounds.height}" minWidth="${roomExitsScrollPane.viewportBounds.width}" style="-fx-background-color: transparent;" VBox.vgrow="NEVER" />
+                                    <HBox id="room-exits-content" fx:id="roomExits" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="${roomExitsScrollPane.viewportBounds.height}" minWidth="${roomExitsScrollPane.viewportBounds.width}" VBox.vgrow="NEVER" />
                                  </children></VBox>
                            </content>
                         </ScrollPane>
                      </children></HBox>
                </children>
                <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
+                  <Insets bottom="10.0" />
                </VBox.margin>
             </VBox>
          </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </VBox>
    </center>
 </BorderPane>
