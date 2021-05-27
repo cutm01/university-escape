@@ -1,11 +1,11 @@
 # University Escape
-Java where the main goal is to escape from the Prague University of Economics and Business after bomb explosion
+adventure written Java where the main goal is to escape from the Prague University of Economics and Business after bomb explosion
 
 ### Author
 Michal Cúth <cutm01@vse.cz>
 
 ### Version: 1.0.0
-* game can be run in CLI or GUI
+* game can be run in CLI or GUI (use -text or -gui command line argument respectively)
 * game contains items, non-player characters and interactable objects
 * some items can be used to perform special actions such as opening door to next room
 * game has several alternative endings

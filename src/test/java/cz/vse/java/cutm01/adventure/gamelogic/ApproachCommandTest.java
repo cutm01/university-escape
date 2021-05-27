@@ -72,16 +72,14 @@ class ApproachCommandTest {
             assertEquals(expectedOutput, actualOutput);
         }
 
-    /*
-    @Test
-    @DisplayName("null as parameter")
-    void approachWithNullAsParameter() {
-        String expectedOutput = "Niečo sa pokazilo, zadaj, prosím ťa, ten príkaz ešte raz";
-        String actualOutput = approachCommand.executeCommand(null);
+        @Test
+        @DisplayName("null as parameter")
+        void approachWithNullAsParameter() {
+            String expectedOutput = "Niečo sa pokazilo, zadaj, prosím ťa, ten príkaz ešte raz";
+            String actualOutput = approachCommand.executeCommand(null);
 
-        assertEquals(expectedOutput, actualOutput);
-    }
-    */
+            assertEquals(expectedOutput, actualOutput);
+        }
 
         @Test
         @DisplayName("room was not examined yet")
